@@ -1,3 +1,99 @@
 .header {
-  background-color: antiquewhite;
+  display: block;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  border-bottom: 1px solid #fff;
+  &__container {
+    max-width: 1140px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    &__body {
+      display: flex;
+      align-items: center;
+      &__logo {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 24px;
+        letter-spacing: 1px;
+        font-weight: 800;
+        width: 215px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        a {
+          color: #ffffff;
+          background-color: transparent;
+          span {
+            color: #e41a1a !important;
+          }
+        }
+      }
+      &__menu {
+        width: calc(100% - 215px);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        &__nav {
+          font-family: 'Poppins', sans-serif;
+          &__list {
+            &__ul {
+              &__li {
+                display: inline-block;
+                position: relative;
+                margin-bottom: 0;
+                line-height: 36px;
+                color: #777;
+                font-size: 14px;
+                padding: 0;
+                a {
+                  color: #fff;
+                  line-height: 80px;
+                  display: inline-block;
+                  padding: 0 20px;
+                  font-size: 15px;
+                  text-transform: capitalize;
+                  font-weight: 500;
+                  &:hover {
+                    color: #e41a1a;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &__login {
+          a {
+            color: #fff !important;
+            background-color: #e41a1a;
+            border-color: #e41a1a;
+            font-size: 14px;
+            padding: 10px 30px;
+            margin-left: 1rem !important;
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+              border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            &:hover {
+              background-color: #da3535;
+              border-color: #da3535;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+body {
+  background-color: #777;
 }
