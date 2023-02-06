@@ -27,7 +27,7 @@
         "react/react-in-jsx-scope": "off",
         "quotes": ["error", "single"],
         "arrow-body-style": ["error", "as-needed",{ "requireReturnForObjectLiteral": true }],
-        "max-len": ["warn", { "code": 80 }],
+        "max-len": ["warn", { "code": 100 }],
         "camelcase": "error",
         "spaced-comment": "error",
         "no-duplicate-imports": "error",
