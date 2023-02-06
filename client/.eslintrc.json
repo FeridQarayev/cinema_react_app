@@ -31,7 +31,20 @@
         "camelcase": "error",
         "spaced-comment": "error",
         "no-duplicate-imports": "error",
-        "jsx-quotes": ["error", "prefer-double"]
+        "jsx-quotes": ["error", "prefer-double"],
+        "import/newline-after-import": ["error", { "count": 1 }],
+        "import/prefer-default-export": 0,
+        "import/no-unresolved": 0,
+        "import/order": [
+          "error",
+          {
+            "newlines-between": "never",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
+          }
+        ]
     },
     "settings":{
         "react": {
