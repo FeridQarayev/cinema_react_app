@@ -128,6 +128,7 @@
       width: 22px;
       margin-top: 3px;
       box-sizing: content-box;
+      transition: 0.5s ease-in-out;
     }
   }
   &__nav {
@@ -213,6 +214,20 @@
 
 .active {
   display: block;
+  .mobile_bar__link {
+    &__sp1 {
+      background-color: #444;
+      transform: translateY(200%) rotate(50deg);
+    }
+    &__sp2 {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+    &__sp3 {
+      background-color: #444;
+      transform: translateY(-200%) rotate(-50deg);
+    }
+  }
 }
 
 // Responsive
