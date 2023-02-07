@@ -1,8 +1,13 @@
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from './navbar.module.scss';
 
 function Navbar(): JSX.Element {
+  const list = useRef<HTMLUListElement>(null);
+  const openBurger = (): void => {
+    if (list.current != null) list.current.classList.toggle(styled.active);
+  };
+
   return (
     <Fragment>
       <header className={styled.header}>
@@ -51,13 +56,18 @@ function Navbar(): JSX.Element {
       </header>
 
       <div className={styled.mobile_bar}>
-        <Link className={styled.mobile_bar__link} to={'home'}>
+        <button
+          className={styled.mobile_bar__link}
+          onClick={() => {
+            openBurger();
+          }}
+        >
           <span></span>
           <span></span>
           <span></span>
-        </Link>
+        </button>
         <nav className={styled.mobile_bar__nav}>
-          <ul className={styled.mobile_bar__nav__ul}>
+          <ul ref={list} className={styled.mobile_bar__nav__ul}>
             <li className={styled.mobile_bar__nav__ul__li}>
               <Link to={'home'}>Demos</Link>
             </li>
