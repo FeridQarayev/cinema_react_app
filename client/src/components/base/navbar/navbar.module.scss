@@ -94,7 +94,6 @@
 }
 .mobile_bar {
   display: none;
-  position: relative;
   background: #ffffff;
   padding: 4px 0;
   height: 42px !important;
@@ -121,6 +120,7 @@
     text-align: center;
     text-indent: 0px;
     font-size: 18px;
+    z-index: 999999;
     span {
       background: #e41a1a;
       display: block !important;
@@ -137,8 +137,9 @@
     width: 100%;
     margin-top: 44px;
     &__ul {
-      display: none;
-      transition: 3s all;
+      visibility: hidden;
+      transform: translateY(-372px);
+      transition: 0.6s ease-in-out;
       list-style-type: none;
       margin: 0px 0px;
       padding: 0;
@@ -213,15 +214,17 @@
 }
 
 .active {
-  display: block;
+  transform: translateY(0px);
+  visibility: visible;
   .mobile_bar__link {
     &__sp1 {
       background-color: #444;
       transform: translateY(200%) rotate(50deg);
     }
     &__sp2 {
+      background-color: #444;
       opacity: 0;
-      transform: translateX(-60px);
+      transform: translateX(-40px);
     }
     &__sp3 {
       background-color: #444;
@@ -250,7 +253,7 @@
     }
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 992px) {
   .header {
     display: block;
     &__container__body {
@@ -274,7 +277,7 @@
     }
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .header {
     display: none;
   }
