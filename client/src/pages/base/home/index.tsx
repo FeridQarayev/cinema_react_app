@@ -20,6 +20,7 @@ function Home(): JSX.Element {
               <div className={styled.home__slider__container__slide__body__row}>
                 <div className={styled.home__slider__container__slide__body__row__col}>
                   <div className={styled.home__slider__container__slide__body__row__col__text}>
+                    <span>New</span>
                     <h2>Deadpool: No Good Deed</h2>
                     <div
                       className={styled.home__slider__container__slide__body__row__col__text__cast}
