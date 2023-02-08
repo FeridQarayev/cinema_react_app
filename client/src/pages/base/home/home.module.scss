@@ -176,14 +176,10 @@
 }
 
 .sliderTextAnimate {
-  //   animation-name: sliderText;
-  //   animation-duration: 3s;
-  //   animation-delay: 1s;
   .home__slider__container__slide__body__row__col__text {
     animation-name: sliderArea;
     animation-duration: 7s;
     animation-delay: 1s;
-    // animation-delay: -3s;
     animation-play-state: running;
     span {
       animation-name: sliderText;
@@ -249,5 +245,99 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+// Responsive
+
+@media (min-width: 280px) and (max-width: 576px) {
+  .home__slider {
+    margin-top: 50px;
+  }
+  .home__slider__container__slide {
+    flex: 0 0 100%;
+    width: 766px;
+    height: 400px;
+  }
+  .home__slider__container__slide__body {
+    max-width: 140px;
+    height: 400px;
+    &__row__col__text {
+      padding: 30px 0px;
+    }
+  }
+  .home__slider__container__slide__body__row {
+    margin: 0;
+    &__col {
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      flex: none;
+      max-width: none;
+    }
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .home__slider {
+    margin-top: 50px;
+  }
+  .home__slider__container__slide {
+    flex: 0 0 100%;
+    width: 766px;
+    height: 570px;
+  }
+  .home__slider__container__slide__body {
+    max-width: 720px;
+    height: 570px;
+    &__row__col__text {
+      padding: 50px 0px;
+    }
+  }
+  .home__slider__container__slide__body__row {
+    margin: 0;
+    &__col {
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      flex: none;
+      max-width: none;
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .home__slider__container__slide {
+    height: 680px;
+    &__body {
+      max-width: 1140px;
+      &__row__col__text {
+        padding: 100px 0px;
+      }
+    }
+  }
+  .home__slider__container__slide__body__row {
+    margin: 0;
+    &__col {
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      flex: none;
+      max-width: none;
+    }
+  }
+}
+@media (min-width: 991px) and (max-width: 1200px) {
+  .home__slider__container__slide__body__row {
+    margin: 0;
+  }
+  .home__slider__container__slide__body__row__col {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: none;
+    max-width: none;
   }
 }
