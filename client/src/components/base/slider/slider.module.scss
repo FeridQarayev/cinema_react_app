@@ -1,6 +1,5 @@
 .slider {
   overflow: hidden;
-  //   max-width: 1502px;
   height: 758.6px;
   background-color: #fff;
   box-sizing: content-box;
@@ -11,6 +10,10 @@
     height: 100%;
     z-index: 1;
     box-sizing: content-box;
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
     &__slide {
       position: relative;
       flex: 0 0 100%;
