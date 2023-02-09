@@ -52,11 +52,9 @@
               padding-right: 15px;
               padding-left: 15px;
               &__text {
-                // transition: all 0.5s ease-in-out;
                 padding: 200px 0px;
                 text-align: left !important;
                 font-size: 18px;
-                opacity: 0;
                 span {
                   color: #222;
                   display: inline-block;
@@ -71,6 +69,9 @@
                   border-radius: 0.25rem;
                   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
                     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                  transition: all 1s;
+                  opacity: 0;
+                  transform: translateY(20px);
                 }
                 h2 {
                   font-size: 70px;
@@ -79,12 +80,19 @@
                   margin-bottom: 0.5rem;
                   margin-top: 0;
                   line-height: 1.2;
+                  opacity: 0;
+                  transform: translateY(20px);
+                  transition: all 1s;
+                  transition-delay: 10s;
                 }
                 &__cast {
                   h6 {
                     font-size: 16px;
                     font-weight: 400;
                     color: #fff !important;
+                    transition: all 1s;
+                    opacity: 0;
+                    transform: translateY(20px);
                   }
                   p {
                     font-family: 'Vollkorn', serif;
@@ -94,11 +102,18 @@
                     letter-spacing: 0.5px;
                     line-height: 1.8;
                     color: #fff !important;
+                    transition: all 1s;
+                    opacity: 0;
+                    transform: translateY(20px);
                   }
                 }
                 ul {
                   margin: 0;
                   padding: 0;
+                  transition: all 1s;
+                  opacity: 0;
+                  transform: translateY(20px);
+
                   li {
                     margin-left: 7px;
                     margin-bottom: 0;
@@ -136,8 +151,14 @@
                   margin-bottom: 15px;
                   font-weight: 400;
                   letter-spacing: 0.5px;
+                  transition: all 1s;
+                  opacity: 0;
+                  transform: translateY(20px);
                 }
                 &__btn {
+                  transition: all 1s;
+                  opacity: 0;
+                  transform: translateY(20px);
                   a {
                     line-height: 1.5;
                     display: inline-block;
@@ -177,74 +198,43 @@
 
 .sliderTextAnimate {
   .home__slider__container__slide__body__row__col__text {
-    animation-name: sliderArea;
-    animation-duration: 7s;
-    animation-delay: 1s;
-    animation-play-state: running;
     span {
-      animation-name: sliderText;
-      animation-duration: 7s;
-      animation-delay: 1s;
+      opacity: 1;
+      transform: translateY(0px);
+      transition-delay: 2s;
     }
     h2 {
-      animation-name: sliderText;
-      animation-duration: 7s;
-      animation-delay: 1s;
+      opacity: 1;
+      transition-delay: 2s;
+      transform: translateY(0px);
     }
     &__cast {
       h6 {
-        animation-name: sliderText;
-        animation-duration: 7s;
-        animation-delay: 1s;
+        opacity: 1;
+        transform: translateY(0px);
+        transition-delay: 2s;
       }
       p {
-        animation-name: sliderText;
-        animation-duration: 7s;
-        animation-delay: 1s;
+        opacity: 1;
+        transform: translateY(0px);
+        transition-delay: 2s;
       }
     }
     ul {
-      animation-name: sliderText;
-      animation-duration: 7s;
-      animation-delay: 1s;
+      opacity: 1;
+      transform: translateY(0px);
+      transition-delay: 2s;
     }
     p {
-      animation-name: sliderText;
-      animation-duration: 7s;
-      animation-delay: 1s;
+      opacity: 1;
+      transform: translateY(0px);
+      transition-delay: 2s;
     }
     &__btn {
-      animation-name: sliderText;
-      animation-duration: 7s;
-      animation-delay: 1s;
+      opacity: 1;
+      transform: translateY(0px);
+      transition-delay: 2s;
     }
-  }
-}
-
-// Animations
-@keyframes sliderText {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  10% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
-@keyframes sliderArea {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
   }
 }
 
