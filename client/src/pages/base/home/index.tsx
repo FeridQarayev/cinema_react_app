@@ -6,6 +6,7 @@ import icon3 from '../../../images/constant/ru.png';
 import icon2 from '../../../images/constant/threed.png';
 import icon4 from '../../../images/constant/tr.png';
 import move1 from '../../../images/movies/quantamania.350x0.jpg';
+import svg1 from '../../../svgs/select_icon.svg';
 import styled from './home.module.scss';
 
 function Home(): JSX.Element {
@@ -23,7 +24,7 @@ function Home(): JSX.Element {
             <div className={styled.home__tab__body__container__today}>
               <div className={styled.home__tab__body__container__today__up}>
                 <div className={styled.home__tab__body__container__today__up__drop}>
-                  <select name="cinemas">
+                  <select style={{ backgroundImage: `url(${String(svg1)})` }} name="cinemas">
                     <option value="0">Cinema</option>
                     <option value="1">28 Mall</option>
                     <option value="2">Ganjlik Mall</option>
