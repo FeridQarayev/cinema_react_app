@@ -24,7 +24,7 @@ function Home(): JSX.Element {
             <div className={styled.home__tab__body__container__today}>
               <div className={styled.home__tab__body__container__today__up}>
                 <div className={styled.home__tab__body__container__today__up__drop}>
-                  <select style={{ backgroundImage: `url(${String(svg1)})` }} name="cinemas">
+                  {/* <select style={{ backgroundImage: `url(${String(svg1)})` }} name="cinemas">
                     <option value="0">Cinema</option>
                     <option value="1">28 Mall</option>
                     <option value="2">Ganjlik Mall</option>
@@ -33,7 +33,45 @@ function Home(): JSX.Element {
                     <option value="5">Ganja Mall (Ganja)</option>
                     <option value="6">Nakhchivan</option>
                     <option value="7">Shamakhy</option>
-                  </select>
+                  </select> */}
+                  <input className={styled.dark_light} type="checkbox" id="dark-light" name="dark-light" />
+                  <label htmlFor="dark-light"></label>
+
+                  <div className={styled.light_back}></div>
+
+                  <a href="home" className={styled.logo} target="_blank">
+                    <img src="https://assets.codepen.io/1462889/fcy.png" alt="ffgdg" />
+                  </a>
+
+                  <div className={styled.sec_center}>
+                    <input className={styled.dropdown} type="checkbox" id="dropdown" name="dropdown" />
+                    <label className={styled.for_dropdown} htmlFor="dropdown">
+                      Dropdown Menu <i className={[styled.uil, styled.uil_arrow_down].join(' ')}></i>
+                    </label>
+                    <div className={styled.section_dropdown}>
+                      <a href="#">
+                        Dropdown Link <i className={styled.uil}></i>
+                      </a>
+                      <input className="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub" />
+                      <label className="for-dropdown-sub" htmlFor="dropdown-sub">
+                        Dropdown Sub <i className="uil uil-plus"></i>
+                      </label>
+                      <div className="section-dropdown-sub">
+                        <a href="#">
+                          Dropdown Link <i className="uil uil-arrow-right"></i>
+                        </a>
+                        <a href="#">
+                          Dropdown Link <i className="uil uil-arrow-right"></i>
+                        </a>
+                      </div>
+                      <a href="#">
+                        Dropdown Link <i className="uil uil-arrow-right"></i>
+                      </a>
+                      <a href="#">
+                        Dropdown Link <i className="uil uil-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
                 <div className={styled.home__tab__body__container__today__up__drop}>
                   <select name="languages">
