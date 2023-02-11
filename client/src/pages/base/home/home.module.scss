@@ -139,6 +139,8 @@
                     text-align: center;
                     color: #334e9e;
                     margin-top: 5px;
+                    display: flex;
+                    justify-content: center;
                     &__icon {
                       &:hover {
                         span {
@@ -190,8 +192,8 @@
                         top: -7px;
                         display: inline-block;
                         transition: all 0.3s linear;
-                        height: 44px;
-                        width: 48px;
+                        height: 80%;
+                        width: 100%;
                       }
                     }
                   }
