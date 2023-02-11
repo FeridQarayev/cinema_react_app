@@ -138,8 +138,8 @@ function Home(): JSX.Element {
                 <img src={paralImg} alt="paralimg" />
                 <div className={styled.home__parallax__container__body__right__about__play}>
                   <a href="https://www.youtube.com/embed/TcMBFSGVi1c">
-                    <br />
                     <img src={play} alt="play" />
+                    <br />
                     <span>Play video</span>
                   </a>
                 </div>
