@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Slider from '../../../components/base/slider';
 import icon5 from '../../../images/constant/en.png';
 import icon1 from '../../../images/constant/fourdx.png';
@@ -117,6 +118,9 @@ function Home(): JSX.Element {
                           </span>
                           <img src={icon5} alt="english" />
                         </span>
+                      </div>
+                      <div className={styled.home__tab__body__container__today__middle__body__movie__content__down}>
+                        <Link to={'home'}>SESSIONS</Link>
                       </div>
                     </div>
                   </div>

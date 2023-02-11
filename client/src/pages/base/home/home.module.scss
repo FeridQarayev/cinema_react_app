@@ -1,5 +1,5 @@
 .home {
-  background-color: grey;
+  // background-color: grey;
   &__tab {
     padding-top: 50px;
     overflow-x: hidden;
@@ -165,13 +165,6 @@
                         background: -webkit-linear-gradient(top, #fff, #fff);
                         border: 1px solid #00acec;
                         b {
-                          visibility: hidden;
-                          text-align: center;
-                          line-height: 15px;
-                          font-family: 'Gotham-Medium';
-                          font-size: 13px;
-                          font-style: normal;
-
                           width: 15px;
                           height: 15px;
                           margin-left: 101px;
@@ -194,6 +187,22 @@
                         height: 44px;
                         width: 48px;
                       }
+                    }
+                  }
+                  &__down {
+                    background: #f3f3f3;
+                    padding: 20px 0;
+                    text-align: center;
+                    a {
+                      font-family: 'Gotham-Medium';
+                      font-size: 14px;
+                      color: #ffffff;
+                      line-height: 19px;
+                      background: #334e9e;
+                      padding: 12px 20px;
+                      display: inline-block;
+                      border-radius: 50px;
+                      transition: all 0.3s linear;
                     }
                   }
                 }
