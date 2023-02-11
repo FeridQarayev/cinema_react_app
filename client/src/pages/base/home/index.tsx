@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
 import paralImg from '../../../images/parallax/banner-7.jpg';
+import banner from '../../../images/slider/banner-3.png';
 import play from '../../../svgs/circle-play-solid.svg';
 import starhalfsvg from '../../../svgs/star-half-solid.svg';
 import starsvg from '../../../svgs/star-solid.svg';
@@ -91,11 +92,11 @@ function Home(): JSX.Element {
         </div>
       </div>
 
-      <section className={styled.parallax}>
-        <div className={styled.parallax__container}>
-          <div className={styled.parallax__container__body}>
-            <div className={styled.parallax__container__body__left}>
-              <div className={styled.parallax__container__body__left__content}>
+      <section style={{ backgroundImage: `url(${String(banner)}` }} className={styled.home__parallax}>
+        <div className={styled.home__parallax__container}>
+          <div className={styled.home__parallax__container__body}>
+            <div className={styled.home__parallax__container__body__left}>
+              <div className={styled.home__parallax__container__body__left__content}>
                 <h2>Avengers: Endgame</h2>
                 <ul>
                   <li>
@@ -115,27 +116,27 @@ function Home(): JSX.Element {
                   </li>
                 </ul>
                 <h6>
-                  <strong>Rating</strong>
+                  <strong>Rating: </strong>
                   9.6 (lmdb)
                 </h6>
                 <h6>
-                  <strong>Time</strong>
+                  <strong>Time: </strong>
                   2h 50 min
                 </h6>
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                   industrys standard dummy text ever since the 1500s
                 </p>
-                <div className={styled.parallax__container__body__left__content__btn}>
+                <div className={styled.home__parallax__container__body__left__content__btn}>
                   <button>Watch</button>
                   <button>+ Add To Watchlist</button>
                 </div>
               </div>
             </div>
-            <div className={styled.parallax__container__body__right}>
-              <div className={styled.parallax__container__body__right__about}>
+            <div className={styled.home__parallax__container__body__right}>
+              <div className={styled.home__parallax__container__body__right__about}>
                 <img src={paralImg} alt="paralimg" />
-                <div className={styled.parallax__container__body__right__about__play}>
+                <div className={styled.home__parallax__container__body__right__about__play}>
                   <a href="https://www.youtube.com/embed/TcMBFSGVi1c">
                     <br />
                     <img src={play} alt="play" />
