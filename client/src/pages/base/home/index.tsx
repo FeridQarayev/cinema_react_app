@@ -51,9 +51,13 @@ function Home(): JSX.Element {
                     <div className={styled.home__tab__body__container__today__middle__body__movie__presale}>
                       PRESALE
                     </div>
-                    <h2>Ant-Man and the Wasp: Quantumania</h2>
+                    <h2>
+                      <p>Ant-Man and the Wasp: Quantumania</p>
+                    </h2>
                     <div className={styled.home__tab__body__container__today__middle__body__movie__content}>
-                      <span>12+</span>
+                      <span className={styled.home__tab__body__container__today__middle__body__movie__content__age}>
+                        12+
+                      </span>
                       <div className={styled.home__tab__body__container__today__middle__body__movie__content__poster}>
                         <img src={move1} alt="movie" />
                       </div>
