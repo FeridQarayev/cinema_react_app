@@ -1,17 +1,48 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
 import styled from './home.module.scss';
 
 function Home(): JSX.Element {
+  const btns = useRef<HTMLButtonElement[]>([]);
+  const changeTab = (element: HTMLButtonElement): void => {
+    btns.current.forEach((element) => {
+      element.classList.remove(styled.tab_active);
+    });
+    element.classList.add(styled.tab_active);
+  };
   return (
     <div className={styled.home}>
       <Slider />
       <div className={styled.home__tab}>
         <div className={styled.home__tab__header}>
-          <button className={styled.home__tab__header__btn}>TODAY</button>
-          <button className={styled.home__tab__header__btn}>SCHEDULE</button>
-          <button className={styled.home__tab__header__btn}>SOON</button>
+          <button
+            onClick={(e) => {
+              changeTab(e.currentTarget);
+            }}
+            ref={(e: HTMLButtonElement) => btns.current.push(e)}
+            className={[styled.home__tab__header__btn,styled.tab_active].join(' ')}
+          >
+            TODAY
+          </button>
+          <button
+            onClick={(e) => {
+              changeTab(e.currentTarget);
+            }}
+            ref={(e: HTMLButtonElement) => btns.current.push(e)}
+            className={styled.home__tab__header__btn}
+          >
+            SCHEDULE
+          </button>
+          <button
+            onClick={(e) => {
+              changeTab(e.currentTarget);
+            }}
+            ref={(e: HTMLButtonElement) => btns.current.push(e)}
+            className={styled.home__tab__header__btn}
+          >
+            SOON
+          </button>
         </div>
         <div className={styled.home__tab__body}>
           <div className={styled.home__tab__body__container}>
@@ -42,6 +73,10 @@ function Home(): JSX.Element {
               </div>
               <div className={styled.home__tab__body__container__today__middle}>
                 <div className={styled.home__tab__body__container__today__middle__body}>
+                  <Movie />
+                  <Movie />
+                  <Movie />
+                  <Movie />
                   <Movie />
                 </div>
               </div>

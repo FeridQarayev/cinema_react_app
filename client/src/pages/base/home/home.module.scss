@@ -18,6 +18,8 @@
         display: inline-block;
         color: #000;
         background-color: #fff;
+        transition: all 0.2s linear;
+        cursor: pointer;
         &:nth-child(1),
         &:nth-child(2) {
           margin-right: 5px;
@@ -81,7 +83,7 @@
 }
 
 .tab_active {
-  // background: #334e9e;
   background: #1e2129;
   color: #fff;
+  cursor: default;
 }
