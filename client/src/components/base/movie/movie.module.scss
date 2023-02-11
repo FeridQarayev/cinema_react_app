@@ -166,3 +166,29 @@
     }
   }
 }
+
+@media (min-width: 200px) {
+  .movie {
+    width: 100%;
+  }
+}
+@media (min-width: 500px) {
+  .movie {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .movie {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .movie {
+    width: 33%;
+  }
+}
+@media (min-width: 1200px) {
+  .movie {
+    width: 25%;
+  }
+}

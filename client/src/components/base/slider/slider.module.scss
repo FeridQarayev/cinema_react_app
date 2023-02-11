@@ -69,8 +69,8 @@
                 white-space: nowrap;
                 vertical-align: baseline;
                 border-radius: 0.25rem;
-                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-                  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+                  box-shadow 0.15s ease-in-out;
                 transition: all 1s;
                 opacity: 0;
                 transform: translateY(20px);
@@ -240,27 +240,30 @@
 
 // Responsive
 @media (min-width: 280px) and (max-width: 350px) {
-  .slider__container__slide {
+  .slider {
     height: 300px !important;
-    &__body__row__col__text {
-      padding: 70px 0px !important;
-      h2 {
-        font-size: 30px !important;
-        width: 70%;
-      }
-      &__cast {
-        display: none;
-      }
-      ul {
-        display: none;
-      }
-      p {
-        display: none !important;
-      }
-      &__btn {
-        a {
-          font-size: 8px !important;
-          padding: 8px 15px !important;
+    &__container__slide {
+      height: 300px !important;
+      &__body__row__col__text {
+        padding: 70px 0px !important;
+        h2 {
+          font-size: 30px !important;
+          width: 70%;
+        }
+        &__cast {
+          display: none;
+        }
+        ul {
+          display: none;
+        }
+        p {
+          display: none !important;
+        }
+        &__btn {
+          a {
+            font-size: 8px !important;
+            padding: 8px 15px !important;
+          }
         }
       }
     }
@@ -270,6 +273,7 @@
 @media (min-width: 280px) and (max-width: 576px) {
   .slider {
     margin-top: 50px;
+    height: 400px;
     &__container__slide {
       flex: 0 0 100%;
       width: 766px;
@@ -322,6 +326,7 @@
 @media (min-width: 576px) and (max-width: 768px) {
   .slider {
     margin-top: 50px;
+    height: 500px;
     &__container__slide {
       flex: 0 0 100%;
       width: 766px;
@@ -377,21 +382,24 @@
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  .slider__container__slide {
+  .slider {
     height: 680px;
-    &__body {
-      max-width: 1140px;
-      &__row {
-        margin: 0;
-        &__col {
-          position: relative;
-          width: 100%;
-          padding-right: 15px;
-          padding-left: 15px;
-          flex: none;
-          max-width: none;
-          &__text {
-            padding: 100px 0px;
+    &__container__slide {
+      height: 680px;
+      &__body {
+        max-width: 1140px;
+        &__row {
+          margin: 0;
+          &__col {
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            flex: none;
+            max-width: none;
+            &__text {
+              padding: 100px 0px;
+            }
           }
         }
       }

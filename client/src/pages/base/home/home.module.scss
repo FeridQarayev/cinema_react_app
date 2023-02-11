@@ -64,13 +64,13 @@
             padding-right: 15px;
             margin-bottom: 100px;
             padding-top: 10px;
-            width: 1170px;
+            // width: 1170px;
             &__body {
               margin-left: -15px;
               margin-right: -15px;
+              display: flex;
+              flex-wrap: wrap;
             }
-          }
-          &__down {
           }
         }
         &__schedule {
@@ -86,4 +86,25 @@
   background: #1e2129;
   color: #fff;
   cursor: default;
+}
+
+@media (min-width: 768px) {
+  .home__tab__body__container__today__middle {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .home__tab__body__container__today__middle {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .home__tab__body__container__today__middle {
+    width: 1170px;
+  }
+}
+@media (max-width: 1023px) {
+  .home__tab__body__container__today__up {
+    display: none !important;
+  }
 }

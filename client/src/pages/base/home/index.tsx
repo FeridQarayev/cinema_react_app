@@ -21,7 +21,7 @@ function Home(): JSX.Element {
               changeTab(e.currentTarget);
             }}
             ref={(e: HTMLButtonElement) => btns.current.push(e)}
-            className={[styled.home__tab__header__btn,styled.tab_active].join(' ')}
+            className={[styled.home__tab__header__btn, styled.tab_active].join(' ')}
           >
             TODAY
           </button>
@@ -80,7 +80,6 @@ function Home(): JSX.Element {
                   <Movie />
                 </div>
               </div>
-              <div className={styled.home__tab__body__container__today__down}></div>
             </div>
             <div className={styled.home__tab__body__container__schedule}></div>
             <div className={styled.home__tab__body__container__soon}></div>
