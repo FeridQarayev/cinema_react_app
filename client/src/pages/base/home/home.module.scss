@@ -9,13 +9,14 @@
       text-align: center;
       height: 46px;
       &__btn {
+        border: none;
         border-radius: 5px 5px 0 0;
         padding: 15px 20px 12px 20px;
         font-size: 18px;
         line-height: 21px;
         display: inline-block;
         color: #000;
-        border: none;
+        background-color: #fff;
         &:nth-child(1),
         &:nth-child(2) {
           margin-right: 5px;
@@ -23,13 +24,15 @@
       }
     }
     &__body {
-      border-top: 5px solid #334e9e;
+      border-top: 5px solid #1e2129;
+      position: relative;
       &__container {
         &__today {
           display: block;
           &__up {
             padding: 25px 0;
-            background: #334e9e;
+            // background: #334e9e;
+            background-color: #1e2129;
             text-align: center;
             &__drop {
               display: inline-block;
@@ -133,6 +136,7 @@
                     line-height: 50px;
                     text-align: center;
                     color: #334e9e;
+                    margin-top: 5px;
                     &__icon {
                       &:hover {
                         span {
@@ -206,6 +210,9 @@
                     }
                   }
                 }
+                &:hover{
+                  
+                }
               }
             }
           }
@@ -222,6 +229,7 @@
 }
 
 .tab_active {
-  background: #334e9e;
+  // background: #334e9e;
+  background: #1e2129;
   color: #fff;
 }
