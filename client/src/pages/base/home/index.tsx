@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
+import movie from '../../../images/movies/img_20-360x618_c.jpg';
 import paralImg from '../../../images/parallax/banner-7.jpg';
 import banner from '../../../images/slider/banner-3.png';
 import avatarImg from '../../../images/watch-more/avatar.png';
@@ -11,7 +12,8 @@ import secretImg from '../../../images/watch-more/secret.png';
 import wakandaImg from '../../../images/watch-more/wakanda.png';
 import womenkingImg from '../../../images/watch-more/woman_king.png';
 import worryImg from '../../../images/watch-more/worry.png';
-import play from '../../../svgs/circle-play-solid.svg';
+import { ReactComponent as InfoSvg } from '../../../svgs/circle-info-solid.svg';
+import { ReactComponent as PlaySvg } from '../../../svgs/circle-play-solid.svg';
 import { ReactComponent as PatternSvg } from '../../../svgs/pattern-logo.svg';
 import starhalfsvg from '../../../svgs/star-half-solid.svg';
 import starsvg from '../../../svgs/star-solid.svg';
@@ -46,11 +48,7 @@ function Home(): JSX.Element {
               <div className={styled.home__more__container__content__info__logo}>
                 <span className={styled.home__more__container__content__info__logo__body}>
                   <span></span>
-                  <img
-                    className={styled.home__more__container__content__info__logo__body__img}
-                    src={moreLogoImg}
-                    alt="logo"
-                  />
+                  <img className={styled.home__more__container__content__info__logo__body__img} src={moreLogoImg} alt="logo" />
                 </span>
               </div>
               <div className={styled.home__more__container__content__info__title}>
@@ -180,6 +178,95 @@ function Home(): JSX.Element {
         </div>
       </div>
 
+      <section className={styled.home__today}>
+        <div className={styled.home__today__container}>
+          <div className={styled.home__today__container__body}>
+            <div className={styled.home__today__container__body__container}>
+              <div className={styled.home__today__container__body__container__header}>
+                <div>
+                  <div>
+                    <header>
+                      <span></span>
+                      <h2>
+                        <span>Now Playing</span>
+                      </h2>
+                      <span></span>
+                    </header>
+                  </div>
+                </div>
+              </div>
+              <div className={styled.home__today__container__body__container__content}>
+                <div className={styled.home__today__container__body__container__content__con}>
+                  <div className={styled.home__today__container__body__container__content__con__grid}>
+                    <div className={styled.home__today__container__body__container__content__con__grid__row}>
+                      <div className={styled.home__today__container__body__container__content__con__grid__row__movie}>
+                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__img}>
+                            <img src={movie} alt="movie" />
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__content}>
+                            <h4>Kubo and the Two Strings</h4>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__content__date}>
+                              <strong>Release:</strong>
+                              February 15, 2022
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__content__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__hover}>
+                            <h4>
+                              <Link to={'#'}>Kubo and the Two Strings</Link>
+                            </h4>
+                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__hover__pg}>G</span>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__hover__text}>
+                              <p>
+                                <strong>Relase: </strong>
+                                February 15, 2022
+                              </p>
+                              <p>
+                                <strong>Genre: </strong>
+                                <span>Cartoon</span>
+                                <span>Comic</span>
+                              </p>
+                              <p>
+                                <strong>Duration: </strong>
+                                02 hours 00 minutes
+                              </p>
+                              <p>
+                                <strong>Language: </strong>
+                                English
+                              </p>
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__hover__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section style={{ backgroundImage: `url(${String(banner)}` }} className={styled.home__parallax}>
         <div className={styled.home__parallax__container}>
           <div className={styled.home__parallax__container__body}>
@@ -212,8 +299,8 @@ function Home(): JSX.Element {
                   2h 50 min
                 </h6>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industrys standard dummy text ever since the 1500s
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text
+                  ever since the 1500s
                 </p>
                 <div className={styled.home__parallax__container__body__left__content__btn}>
                   <button>Watch</button>
@@ -226,7 +313,7 @@ function Home(): JSX.Element {
                 <img src={paralImg} alt="paralimg" />
                 <div className={styled.home__parallax__container__body__right__about__play}>
                   <a href="https://www.youtube.com/embed/TcMBFSGVi1c">
-                    <img src={play} alt="play" />
+                    <PlaySvg />
                     <br />
                     <span>Play video</span>
                   </a>
