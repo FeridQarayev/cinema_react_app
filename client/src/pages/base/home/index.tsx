@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
 import movie from '../../../images/movies/img_20-360x618_c.jpg';
+import quantumImg from '../../../images/movies/quantamania.350x0.jpg';
 import seperatorImg from '../../../images/movies/seperator-bg.png';
 import paralImg from '../../../images/parallax/banner-7.jpg';
 import banner from '../../../images/slider/banner-3.png';
@@ -204,6 +205,254 @@ function Home(): JSX.Element {
                         <article className={styled.home__today__container__body__container__content__con__grid__row__movie__body}>
                           <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img}>
                             <img src={movie} alt="movie" />
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img__info}>
+                              <span>G</span>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content}>
+                            <h4>Kubo and the Two Strings</h4>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__date}>
+                              <strong>Release:</strong>
+                              February 15, 2022
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover}>
+                            <h4>
+                              <Link to={'#'}>Kubo and the Two Strings</Link>
+                            </h4>
+                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__pg}>G</span>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__text}>
+                              <p>
+                                <strong>Relase: </strong>
+                                February 15, 2022
+                              </p>
+                              <p>
+                                <strong>Genre: </strong>
+                                <span>Cartoon</span>
+                                <span>Comic</span>
+                              </p>
+                              <p>
+                                <strong>Duration: </strong>
+                                02 hours 00 minutes
+                              </p>
+                              <p>
+                                <strong>Language: </strong>
+                                English
+                              </p>
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div className={styled.home__today__container__body__container__content__con__grid__row__movie}>
+                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie__body}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img}>
+                            <img src={quantumImg} alt="movie" />
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img__info}>
+                              <span>G</span>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content}>
+                            <h4>Kubo and the Two Strings</h4>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__date}>
+                              <strong>Release:</strong>
+                              February 15, 2022
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover}>
+                            <h4>
+                              <Link to={'#'}>Kubo and the Two Strings</Link>
+                            </h4>
+                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__pg}>G</span>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__text}>
+                              <p>
+                                <strong>Relase: </strong>
+                                February 15, 2022
+                              </p>
+                              <p>
+                                <strong>Genre: </strong>
+                                <span>Cartoon</span>
+                                <span>Comic</span>
+                              </p>
+                              <p>
+                                <strong>Duration: </strong>
+                                02 hours 00 minutes
+                              </p>
+                              <p>
+                                <strong>Language: </strong>
+                                English
+                              </p>
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div className={styled.home__today__container__body__container__content__con__grid__row__movie}>
+                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie__body}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img}>
+                            <img src={quantumImg} alt="movie" />
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img__info}>
+                              <span>G</span>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content}>
+                            <h4>Kubo and the Two Strings</h4>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__date}>
+                              <strong>Release:</strong>
+                              February 15, 2022
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover}>
+                            <h4>
+                              <Link to={'#'}>Kubo and the Two Strings</Link>
+                            </h4>
+                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__pg}>G</span>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__text}>
+                              <p>
+                                <strong>Relase: </strong>
+                                February 15, 2022
+                              </p>
+                              <p>
+                                <strong>Genre: </strong>
+                                <span>Cartoon</span>
+                                <span>Comic</span>
+                              </p>
+                              <p>
+                                <strong>Duration: </strong>
+                                02 hours 00 minutes
+                              </p>
+                              <p>
+                                <strong>Language: </strong>
+                                English
+                              </p>
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div className={styled.home__today__container__body__container__content__con__grid__row__movie}>
+                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie__body}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img}>
+                            <img src={quantumImg} alt="movie" />
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img__info}>
+                              <span>G</span>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content}>
+                            <h4>Kubo and the Two Strings</h4>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__date}>
+                              <strong>Release:</strong>
+                              February 15, 2022
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover}>
+                            <h4>
+                              <Link to={'#'}>Kubo and the Two Strings</Link>
+                            </h4>
+                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__pg}>G</span>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__text}>
+                              <p>
+                                <strong>Relase: </strong>
+                                February 15, 2022
+                              </p>
+                              <p>
+                                <strong>Genre: </strong>
+                                <span>Cartoon</span>
+                                <span>Comic</span>
+                              </p>
+                              <p>
+                                <strong>Duration: </strong>
+                                02 hours 00 minutes
+                              </p>
+                              <p>
+                                <strong>Language: </strong>
+                                English
+                              </p>
+                            </div>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__btn}>
+                              <Link to={'#'}>
+                                <PlaySvg />
+                                Trailer
+                              </Link>
+                              <Link to={'#'}>
+                                <InfoSvg />
+                                Detail
+                              </Link>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div className={styled.home__today__container__body__container__content__con__grid__row__movie}>
+                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie__body}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img}>
+                            <img src={quantumImg} alt="movie" />
                             <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img__info}>
                               <span>G</span>
                             </div>
