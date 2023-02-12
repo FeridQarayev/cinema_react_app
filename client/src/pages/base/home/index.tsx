@@ -54,7 +54,7 @@ function Home(): JSX.Element {
                 </span>
               </div>
               <div className={styled.home__more__container__content__info__title}>
-                Join our
+                Join our&nbsp;
                 <span>Club</span> and enjoy free UNLIMITED tickets, up to 15% off food items, exclusive access to events
               </div>
               <div className={styled.home__more__container__content__info__action}>
