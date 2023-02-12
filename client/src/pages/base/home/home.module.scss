@@ -617,6 +617,9 @@
                             cursor: pointer;
                             outline: medium none;
                             transition: all 0.3s ease 0s;
+                            &:hover {
+                              color: #fe7900;
+                            }
                           }
                         }
                         &__pg {
@@ -636,15 +639,22 @@
                             height: 20px;
                             overflow: hidden;
                             margin-bottom: 3px;
+                            font-size: 14px;
+                            line-height: 20px;
+                            strong {
+                              color: #999;
+                            }
                           }
                         }
                         &__btn {
-                          bottom: 20px;
+                          bottom: 10px;
                           left: 15px;
                           position: absolute;
+                          display: flex;
                           a {
                             color: #fff;
                             display: inline-block;
+                            display: flex;
                             line-height: 22px;
                             margin-right: 25px;
                             svg {
@@ -661,6 +671,17 @@
                               background-color: #ffffff;
                               line-height: 20px;
                             }
+                          }
+                        }
+                      }
+                      &:hover {
+                        .home__today__container__body__container__content__con__grid__row__movie__body__hover {
+                          transform: rotateY(0deg);
+                          opacity: 1;
+                        }
+                        .home__today__container__body__container__content__con__grid__row__movie__body__img {
+                          img {
+                            transform: scale(1.8);
                           }
                         }
                       }
