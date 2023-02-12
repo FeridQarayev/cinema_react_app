@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import facebookSvg from '../../../svgs/facebook-f.svg';
-import linkedinSvg from '../../../svgs/linkedin-in.svg';
-import telegramSvg from '../../../svgs/telegram.svg';
-import twitterSvg from '../../../svgs/twitter.svg';
+import { ReactComponent as FacebookSvg } from '../../../svgs/facebook-f.svg';
+import { ReactComponent as LinkedinSvg } from '../../../svgs/linkedin-in.svg';
+import { ReactComponent as TelegramSvg } from '../../../svgs/telegram.svg';
+import { ReactComponent as TwitterSvg } from '../../../svgs/twitter.svg';
 import styled from './footer.module.scss';
 
 function Footer(): JSX.Element {
@@ -26,22 +26,22 @@ function Footer(): JSX.Element {
               <ul className={styled.footer__container__body__item__media}>
                 <li>
                   <Link to={'#'}>
-                    <img src={facebookSvg} alt="facebook" />
+                    <FacebookSvg />
                   </Link>
                 </li>
                 <li>
                   <Link to={'#'}>
-                    <img src={twitterSvg} alt="twitter" />
+                    <TwitterSvg />
                   </Link>
                 </li>
                 <li>
                   <Link to={'#'}>
-                    <img src={linkedinSvg} alt="linkedin" />
+                    <LinkedinSvg />
                   </Link>
                 </li>
                 <li>
                   <Link to={'#'}>
-                    <img src={telegramSvg} alt="telegram" />
+                    <TelegramSvg />
                   </Link>
                 </li>
               </ul>
