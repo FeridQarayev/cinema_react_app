@@ -80,8 +80,8 @@
             border: 1px solid transparent;
             line-height: 1.5;
             border-radius: 0.25rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-              border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+              box-shadow 0.15s ease-in-out;
             &:hover {
               background-color: #da3535;
               border-color: #da3535;
@@ -130,6 +130,15 @@
       box-sizing: content-box;
       transition: 0.5s ease-in-out;
     }
+    &:hover {
+      transition: 0.3s;
+      span:nth-child(1) {
+        transform: translateY(1.5px) rotate(-4.5deg);
+      }
+      span:nth-child(3) {
+        transform: translateY(-1.5px) rotate(4.5deg);
+      }
+    }
   }
   &__nav {
     background: transparent;
@@ -173,7 +182,7 @@
           display: flex;
           align-items: center;
           &:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background-color: #ececec !important;
           }
         }
       }
@@ -224,16 +233,16 @@
   .mobile_bar__link {
     &__sp1 {
       background-color: #444;
-      transform: translateY(200%) rotate(50deg);
+      transform: translateY(200%) rotate(50deg) !important;
     }
     &__sp2 {
       background-color: #444;
       opacity: 0;
-      transform: translateX(-40px);
+      transform: translateX(-40px) !important;
     }
     &__sp3 {
       background-color: #444;
-      transform: translateY(-200%) rotate(-50deg);
+      transform: translateY(-200%) rotate(-50deg) !important;
     }
   }
 }
