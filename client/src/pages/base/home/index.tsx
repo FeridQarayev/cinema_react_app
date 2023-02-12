@@ -1,11 +1,21 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
 import paralImg from '../../../images/parallax/banner-7.jpg';
 import banner from '../../../images/slider/banner-3.png';
+import avatarImg from '../../../images/watch-more/avatar.png';
+import blackadamImg from '../../../images/watch-more/black_adam.png';
+import moreLogoImg from '../../../images/watch-more/FHCLOGOPLUSVERTICAL.jpg';
+import secretImg from '../../../images/watch-more/secret.png';
+import wakandaImg from '../../../images/watch-more/wakanda.png';
+import womenkingImg from '../../../images/watch-more/woman_king.png';
+import worryImg from '../../../images/watch-more/worry.png';
 import play from '../../../svgs/circle-play-solid.svg';
+import { ReactComponent as PatternSvg } from '../../../svgs/pattern-logo.svg';
 import starhalfsvg from '../../../svgs/star-half-solid.svg';
 import starsvg from '../../../svgs/star-solid.svg';
+import { ReactComponent as WatchSvg } from '../../../svgs/watch-more.svg';
 import styled from './home.module.scss';
 
 function Home(): JSX.Element {
@@ -19,6 +29,84 @@ function Home(): JSX.Element {
   return (
     <div className={styled.home}>
       <Slider />
+
+      <section className={styled.home__more}>
+        <div className={styled.home__more__pattern}>
+          <PatternSvg />
+        </div>
+        <div className={styled.home__more__container}>
+          <div className={styled.home__more__container__header}>
+            <div className={styled.home__more__container__header__title}>
+              <WatchSvg />
+              <span>Watch More For Less</span>
+            </div>
+          </div>
+          <div className={styled.home__more__container__content}>
+            <div className={styled.home__more__container__content__info}>
+              <div className={styled.home__more__container__content__info__logo}>
+                <span className={styled.home__more__container__content__info__logo__body}>
+                  <span></span>
+                  <img
+                    className={styled.home__more__container__content__info__logo__body__img}
+                    src={moreLogoImg}
+                    alt="logo"
+                  />
+                </span>
+              </div>
+              <div className={styled.home__more__container__content__info__title}>
+                Join our
+                <span>Club</span> and enjoy free UNLIMITED tickets, up to 15% off food items, exclusive access to events
+              </div>
+              <div className={styled.home__more__container__content__info__action}>
+                <Link to={'#'}>
+                  <span>Get Started</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styled.home__more__images}>
+          <div className={styled.home__more__images__more}>
+            <div className={styled.home__more__images__more__row}>
+              <div className={styled.home__more__images__more__row__wrapper}>
+                <span>
+                  <img src={avatarImg} alt="avatar" />
+                </span>
+              </div>
+              <div className={styled.home__more__images__more__row__wrapper}>
+                <span>
+                  <img src={wakandaImg} alt="wakanda" />
+                </span>
+              </div>
+            </div>
+            <div className={styled.home__more__images__more__row}>
+              <div className={styled.home__more__images__more__row__wrapper}>
+                <span>
+                  <img src={blackadamImg} alt="blackadam" />
+                </span>
+              </div>
+              <div className={styled.home__more__images__more__row__wrapper}>
+                <span>
+                  <img src={womenkingImg} alt="womenking" />
+                </span>
+              </div>
+            </div>
+            <div className={styled.home__more__images__more__row}>
+              <div className={styled.home__more__images__more__row__wrapper}>
+                <span>
+                  <img src={secretImg} alt="secret" />
+                </span>
+              </div>
+              <div className={styled.home__more__images__more__row__wrapper}>
+                <span>
+                  <img src={worryImg} alt="worry" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className={styled.home__tab}>
         <div className={styled.home__tab__header}>
           <button
