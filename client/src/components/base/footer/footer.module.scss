@@ -75,7 +75,64 @@
             }
           }
         }
+        h4 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          line-height: 1.2;
+          margin-top: 0;
+        }
+        &__row {
+          display: flex;
+          flex-wrap: wrap;
+          margin-right: -15px;
+          margin-left: -15px;
+          &__col {
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            flex: 0 0 50%;
+            max-width: 50%;
+            &__list {
+              margin: 0;
+              padding: 0;
+              &__item {
+                margin-bottom: 0;
+                line-height: 36px;
+                color: #777;
+                font-size: 14px;
+                position: relative;
+                display: block;
+                padding: 0;
+                a {
+                  color: #8f8f8f;
+                  background-color: transparent;
+                  font-weight: 600;
+                  &:hover {
+                    color: #e41a1a;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
+  }
+}
+
+.copyright {
+  p {
+    margin-top: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #7b7b7b;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-top: 1px solid #dee2e6;
+    padding-top: 1rem;
+    text-align: center;
   }
 }
