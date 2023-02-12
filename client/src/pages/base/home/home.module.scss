@@ -233,7 +233,7 @@
   }
 
   &__more {
-    padding: 60px 50px 290px;
+    padding: 0px 50px 230px;
     position: relative;
     overflow: hidden;
     min-height: 360px;
@@ -384,7 +384,7 @@
     }
     &__images {
       position: absolute;
-      top: 175px;
+      top: 115px;
       margin-left: 43%;
       margin-right: -50px;
       &__more {
@@ -558,7 +558,7 @@
 }
 @media (max-width: 966px) {
   .home__more {
-    padding: 30px 20px 75px;
+    padding: 0px 20px 45px;
     &__pattern {
       transform: rotate(180deg);
       right: 0;
