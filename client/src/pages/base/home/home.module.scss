@@ -161,8 +161,7 @@
                 font-size: 1rem;
                 line-height: 1.5;
                 border-radius: 0.25rem;
-                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-                  box-shadow 0.15s ease-in-out;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
               }
               button:first-child {
                 color: #fff !important;
@@ -446,6 +445,228 @@
                 min-height: 100%;
                 max-height: 100%;
                 object-fit: cover;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__today {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    &__container {
+      display: flex;
+      margin-right: auto;
+      margin-left: auto;
+      position: relative;
+      max-width: 1140px;
+      &__body {
+        width: 100%;
+        &__container {
+          display: flex;
+          padding: 10px;
+          flex-wrap: wrap;
+          align-content: flex-start;
+          &__header {
+            margin-bottom: 20px;
+            width: 100%;
+            div {
+              transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s;
+              div {
+                margin-bottom: 25px;
+                text-align: center;
+                header {
+                  display: flex;
+                  span {
+                    display: inline-block;
+                    flex: 1 0;
+                    background: repeat-x center;
+                    position: relative;
+                  }
+                  h2 {
+                    flex: 0 auto;
+                    padding: 0 20px;
+                    font-size: 35px;
+                    font-weight: 700;
+                    color: #202020;
+                    margin: 0;
+                    position: relative;
+                    display: inline-block;
+                  }
+                }
+              }
+            }
+          }
+          &__content {
+            width: 100%;
+            position: relative;
+            &__con {
+              transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s, -webkit-box-shadow 0.3s;
+              &__grid {
+                margin-bottom: 20px;
+                &__row {
+                  display: flex;
+                  flex-wrap: wrap;
+                  margin-left: -15px;
+                  margin-right: -15px;
+                  &__movie {
+                    padding: 0 15px;
+                    float: left;
+                    width: 20%;
+                    position: relative;
+                    min-height: 1px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    min-width: 204px;
+                    margin-bottom: 30px;
+                    &__body {
+                      overflow: hidden;
+                      position: relative;
+                      &__img {
+                        border-bottom: 3px solid #fe7900;
+                        position: relative;
+                        img {
+                          height: auto;
+                          max-width: 100%;
+                          border: none;
+                          border-radius: 0;
+                          box-shadow: none;
+                          transition: all 0.5s ease 0s;
+                          transform: scale(1);
+                          vertical-align: middle;
+                        }
+                        &__info {
+                          position: absolute;
+                          right: 0;
+                          top: 25px;
+                          text-align: right;
+                          span {
+                            display: inline-block;
+                            font-size: 14px;
+                            font-weight: bold;
+                            padding: 5px 10px;
+                            text-transform: uppercase;
+                            background: #fe7900;
+                            color: #ffffff;
+                            margin-bottom: 4px;
+                          }
+                        }
+                      }
+                      &__content {
+                        min-height: 100px;
+                        font-size: 13px;
+                        color: #999;
+                        h4 {
+                          overflow: hidden;
+                          font-size: 20px;
+                          font-weight: bold;
+                          color: #000;
+                          margin: 10px 0;
+                        }
+                        &__date {
+                          margin-bottom: 10px;
+                        }
+                        &__btn {
+                          a {
+                            display: inline-block;
+                            margin-right: 30px;
+                            color: #666666;
+                            line-height: 22px;
+                            svg {
+                              fill: #666;
+                              border-radius: 50%;
+                              border: 1px solid #666;
+                              color: #ffffff;
+                              display: block;
+                              float: left;
+                              height: 20px;
+                              line-height: 20px;
+                              margin-right: 8px;
+                              text-align: center;
+                              width: 20px;
+                              font-size: 9px;
+                            }
+                          }
+                        }
+                      }
+                      &__hover {
+                        transform: rotateY(180deg);
+                        left: 0;
+                        top: 0;
+                        background: rgba(0, 0, 0, 0.85) none repeat scroll 0 0;
+                        color: #fff;
+                        cursor: default;
+                        height: 100%;
+                        opacity: 0;
+                        padding: 20px 15px;
+                        position: absolute;
+                        text-align: left;
+                        transition: all 0.5s ease 0s;
+                        width: 100%;
+                        z-index: 2;
+                        h4 {
+                          margin: 0px 0 10px;
+                          overflow: hidden;
+                          font-size: 20px;
+                          font-weight: bold;
+                          color: #000;
+                          a {
+                            color: #fff;
+                            cursor: pointer;
+                            outline: medium none;
+                            transition: all 0.3s ease 0s;
+                          }
+                        }
+                        &__pg {
+                          display: inline-block;
+                          font-size: 14px;
+                          font-weight: bold;
+                          padding: 5px 10px;
+                          text-transform: uppercase;
+                          background: #fe7900 none repeat scroll 0 0;
+                          color: #ffffff;
+                          margin-bottom: 10px;
+                        }
+                        &__text {
+                          margin-bottom: 20px;
+                          p {
+                            margin: 0 0 10px;
+                            height: 20px;
+                            overflow: hidden;
+                            margin-bottom: 3px;
+                          }
+                        }
+                        &__btn {
+                          bottom: 20px;
+                          left: 15px;
+                          position: absolute;
+                          a {
+                            color: #fff;
+                            display: inline-block;
+                            line-height: 22px;
+                            margin-right: 25px;
+                            svg {
+                              border-radius: 50%;
+                              display: block;
+                              float: left;
+                              height: 20px;
+                              margin-right: 8px;
+                              text-align: center;
+                              width: 20px;
+                              font-size: 9px;
+                              border: 1px solid #fe7900;
+                              fill: #fe7900;
+                              background-color: #ffffff;
+                              line-height: 20px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

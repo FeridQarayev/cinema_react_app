@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
 import movie from '../../../images/movies/img_20-360x618_c.jpg';
+import seperatorImg from '../../../images/movies/seperator-bg.png';
 import paralImg from '../../../images/parallax/banner-7.jpg';
 import banner from '../../../images/slider/banner-3.png';
 import avatarImg from '../../../images/watch-more/avatar.png';
@@ -186,11 +187,11 @@ function Home(): JSX.Element {
                 <div>
                   <div>
                     <header>
-                      <span></span>
+                      <span style={{ backgroundImage: `url(${String(seperatorImg)})` }}></span>
                       <h2>
                         <span>Now Playing</span>
                       </h2>
-                      <span></span>
+                      <span style={{ backgroundImage: `url(${String(seperatorImg)})` }}></span>
                     </header>
                   </div>
                 </div>
@@ -200,17 +201,20 @@ function Home(): JSX.Element {
                   <div className={styled.home__today__container__body__container__content__con__grid}>
                     <div className={styled.home__today__container__body__container__content__con__grid__row}>
                       <div className={styled.home__today__container__body__container__content__con__grid__row__movie}>
-                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie}>
-                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__img}>
+                        <article className={styled.home__today__container__body__container__content__con__grid__row__movie__body}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img}>
                             <img src={movie} alt="movie" />
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__img__info}>
+                              <span>G</span>
+                            </div>
                           </div>
-                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__content}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content}>
                             <h4>Kubo and the Two Strings</h4>
-                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__content__date}>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__date}>
                               <strong>Release:</strong>
                               February 15, 2022
                             </div>
-                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__content__btn}>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__content__btn}>
                               <Link to={'#'}>
                                 <PlaySvg />
                                 Trailer
@@ -221,12 +225,12 @@ function Home(): JSX.Element {
                               </Link>
                             </div>
                           </div>
-                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__hover}>
+                          <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover}>
                             <h4>
                               <Link to={'#'}>Kubo and the Two Strings</Link>
                             </h4>
-                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__hover__pg}>G</span>
-                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__hover__text}>
+                            <span className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__pg}>G</span>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__text}>
                               <p>
                                 <strong>Relase: </strong>
                                 February 15, 2022
@@ -245,7 +249,7 @@ function Home(): JSX.Element {
                                 English
                               </p>
                             </div>
-                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__hover__btn}>
+                            <div className={styled.home__today__container__body__container__content__con__grid__row__movie__body__hover__btn}>
                               <Link to={'#'}>
                                 <PlaySvg />
                                 Trailer
