@@ -1,4 +1,5 @@
 import BaseRoot from '../pages/base/BaseRoot';
+import ComingSoon from '../pages/base/comingsoon';
 import Home from '../pages/base/home';
 
 export const ROUTES = [
@@ -13,6 +14,10 @@ export const ROUTES = [
       {
         path: 'home',
         element: <Home />,
+      },
+      {
+        path: 'comingsoon',
+        element: <ComingSoon />,
       },
     ],
   },

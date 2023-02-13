@@ -1,0 +1,108 @@
+.soon {
+  padding-top: 80px;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: grey;
+  &__header {
+    text-align: center;
+    height: 46px;
+    &__btn {
+      border: none;
+      border-radius: 5px 5px 0 0;
+      padding: 15px 20px 12px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 21px;
+      display: inline-block;
+      color: #000;
+      background-color: #fff;
+      transition: all 0.2s linear;
+      cursor: pointer;
+      &:nth-child(1),
+      &:nth-child(2) {
+        margin-right: 5px;
+      }
+    }
+  }
+  &__body {
+    border-top: 5px solid #1e2129;
+    position: relative;
+    &__container {
+      &__today {
+        display: block;
+        &__up {
+          padding: 25px 0;
+          // background: #334e9e;
+          background-color: #1e2129;
+          text-align: center;
+          &__drop {
+            display: inline-block;
+            margin-right: 40px;
+            appearance: none;
+            select {
+              font-size: 16px;
+              line-height: 19px;
+              padding: 0 15px 0 20px;
+              float: left;
+              margin-right: 1px;
+              border-radius: 20px;
+              min-width: 170px;
+              height: 40px;
+              border: none;
+              &:focus-visible {
+                outline: none;
+              }
+            }
+          }
+        }
+        &__middle {
+          margin-right: auto;
+          margin-left: auto;
+          padding-left: 15px;
+          padding-right: 15px;
+          margin-bottom: 100px;
+          padding-top: 10px;
+          // width: 1170px;
+          &__body {
+            margin-left: -15px;
+            margin-right: -15px;
+            display: flex;
+            flex-wrap: wrap;
+          }
+        }
+      }
+      &__schedule {
+      }
+      &__soon {
+      }
+    }
+  }
+}
+
+.tab_active {
+  background: #1e2129;
+  color: #fff;
+  cursor: default;
+}
+
+@media (min-width: 768px) {
+  .home__tab__body__container__today__middle {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .home__tab__body__container__today__middle {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .home__tab__body__container__today__middle {
+    width: 1170px;
+  }
+}
+@media (max-width: 1023px) {
+  .home__tab__body__container__today__up {
+    display: none !important;
+  }
+}
