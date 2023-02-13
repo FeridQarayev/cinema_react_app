@@ -1,0 +1,194 @@
+.movie {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 25%;
+  // width: 292.5px;
+  float: left;
+  &__presale {
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(0, 172, 236, 0.8);
+    color: #fff;
+    line-height: 24px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    position: absolute;
+    right: 15px;
+    top: 102px;
+    z-index: 100;
+  }
+  h2 {
+    margin: 31px 0 0px 0;
+    background: #f3f3f3;
+    margin-top: 40px !important;
+    max-height: 62px;
+    cursor: pointer;
+    p {
+      font-size: 17px;
+      color: #000000;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      min-height: 62px;
+      display: block;
+      text-align: center;
+      transition: all 0.3s linear;
+    }
+  }
+  &__content {
+    position: relative;
+    &__age {
+      position: absolute;
+      bottom: 21px;
+      right: 10px;
+      border-radius: 50%;
+      background: #d0021b;
+      width: 40px;
+      height: 40px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      line-height: 40px;
+      color: #ffffff;
+      text-align: center;
+    }
+    &__poster {
+      width: 100%;
+      display: block;
+      height: 370px;
+      overflow: hidden;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        display: block;
+        height: 370px;
+        transition: all 0.3s linear;
+      }
+    }
+    &__icons {
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      color: #334e9e;
+      margin-top: 5px;
+      display: flex;
+      justify-content: center;
+      &__icon {
+        &:hover {
+          span {
+            opacity: 1;
+            text-decoration: none;
+            visibility: visible;
+            overflow: visible;
+            display: inline;
+            margin-left: -106px;
+            margin-top: 69px;
+          }
+        }
+        span {
+          width: 250px;
+          padding: 10px 20px;
+          margin-top: 0;
+          margin-left: -135px;
+          opacity: 0;
+          visibility: hidden;
+          z-index: 10;
+          text-align: center;
+          line-height: 15px;
+          position: absolute;
+          font-family: 'Roboto', sans-serif;
+          font-size: 13px;
+          font-style: normal;
+          border-radius: 3px;
+          box-shadow: 2px 2px 2px #999;
+          color: #334e9e;
+          background: -webkit-linear-gradient(top, #fff, #fff);
+          border: 1px solid #00acec;
+          b {
+            width: 15px;
+            height: 15px;
+            margin-left: 101px;
+            margin-top: -18px;
+            display: block;
+            position: absolute;
+            box-shadow: inset 0 1px 0 #fff;
+            transform: rotate(-45deg);
+            background: #fff;
+            border-top: 1px solid #00acec;
+            border-right: 1px solid #00acec;
+          }
+        }
+        img {
+          margin: 4px 0px;
+          position: relative;
+          top: -7px;
+          display: inline-block;
+          transition: all 0.3s linear;
+          height: 80%;
+          width: 100%;
+        }
+      }
+    }
+    &__down {
+      background: #f3f3f3;
+      padding: 20px 0;
+      text-align: center;
+      a {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        color: #ffffff;
+        line-height: 19px;
+        background: #334e9e;
+        padding: 12px 20px;
+        display: inline-block;
+        border-radius: 50px;
+        transition: all 0.3s linear;
+        &:hover {
+          background-color: #00acec;
+        }
+      }
+    }
+  }
+  &:hover {
+    transition: all 0.5s ease 0s;
+    h2 {
+      p {
+        color: #fff;
+        background: #334e9e;
+      }
+    }
+    .movie__content__poster {
+      img {
+        transform: scale(1.2, 1.2);
+        transform-origin: center;
+      }
+    }
+  }
+}
+
+@media (min-width: 200px) {
+  .movie {
+    width: 100%;
+  }
+}
+@media (min-width: 500px) {
+  .movie {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .movie {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .movie {
+    width: 33%;
+  }
+}
+@media (min-width: 1200px) {
+  .movie {
+    width: 25%;
+  }
+}

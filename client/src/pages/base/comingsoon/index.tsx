@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Movie from '../../../components/base/movie';
+import Movie from '../../../components/base/newmovie';
 import styled from './comingsoon.module.scss';
 
 function ComingSoon(): JSX.Element {
