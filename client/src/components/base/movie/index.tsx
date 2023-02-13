@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ReactComponent as D2 } from '../../../svgs/2d-label-icon.svg';
+import { ReactComponent as D3 } from '../../../svgs/3d-label-icon.svg';
+import { ReactComponent as AzerbaijanFlag } from '../../../svgs/azerbaijan-flag-icon.svg';
 import { ReactComponent as InfoSvg } from '../../../svgs/circle-info-solid.svg';
 import { ReactComponent as PlaySvg } from '../../../svgs/circle-play-solid.svg';
+import { ReactComponent as RusFlag } from '../../../svgs/russia-flag-icon.svg';
+import { ReactComponent as TurkeyFlag } from '../../../svgs/turkey-flag-icon.svg';
+import { ReactComponent as EnglishFlag } from '../../../svgs/united-kingdom-flag-icon.svg';
 import styled from './movie.module.scss';
 
 function Movie(props: { img: string }): JSX.Element {
@@ -19,6 +25,14 @@ function Movie(props: { img: string }): JSX.Element {
           <div className={styled.movie__body__content__date}>
             <strong>Release:</strong>
             February 15, 2022
+          </div>
+          <div className={styled.movie__body__content__icons}>
+            <D2 />
+            <D3 />
+            <TurkeyFlag />
+            <AzerbaijanFlag />
+            <EnglishFlag />
+            <RusFlag />
           </div>
           <div className={styled.movie__body__content__btn}>
             <Link to={'#'}>

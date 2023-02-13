@@ -108,7 +108,7 @@ function Home(): JSX.Element {
                     <header>
                       <span style={{ backgroundImage: `url(${String(seperatorImg)})` }}></span>
                       <h2>
-                        <span>Now Playing</span>
+                        <span>To Day</span>
                       </h2>
                       <span style={{ backgroundImage: `url(${String(seperatorImg)})` }}></span>
                     </header>
@@ -121,6 +121,8 @@ function Home(): JSX.Element {
                     <div className={styled.home__today__container__body__container__content__con__grid__row}>
                       <Movie img={quantumImg} />
                       <Movie img={movieImg} />
+                      <Movie img={movieImg} />
+                      <Movie img={quantumImg} />
                     </div>
                   </div>
                 </div>
