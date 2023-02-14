@@ -62,15 +62,18 @@
         svg {
           height: 20px;
           border-radius: 3px;
-          &:nth-child(3),
-          &:nth-child(5),
-          &:nth-child(6) {
+        }
+        &__tr,
+        &__en,
+        &__ru {
+          svg {
             height: 19px;
-            // width: 34px;
             border-radius: 3px;
             border: 2px solid #000;
           }
-          &:nth-child(4) {
+        }
+        &__az {
+          svg {
             width: 34px;
             height: 19px;
             border-radius: 3px;

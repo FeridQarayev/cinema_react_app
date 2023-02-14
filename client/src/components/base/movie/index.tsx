@@ -27,12 +27,25 @@ function Movie(props: { img: string }): JSX.Element {
             February 15, 2022
           </div>
           <div className={styled.movie__body__content__icons}>
+            <div className={styled.movie__body__content__icons__2d}>
             <D2 />
+            </div>
+            <div className={styled.movie__body__content__icons__3d}>
             <D3 />
+            </div>
+            <div className={styled.movie__body__content__icons__tr}>
             <TurkeyFlag />
+            </div>
+            <div className={styled.movie__body__content__icons__az}>
             <AzerbaijanFlag />
+
+            </div>
+            <div className={styled.movie__body__content__icons__en}>
             <EnglishFlag />
+            </div>
+            <div className={styled.movie__body__content__icons__ru}>
             <RusFlag />
+            </div>
           </div>
           <div className={styled.movie__body__content__btn}>
             <Link to={'#'}>
