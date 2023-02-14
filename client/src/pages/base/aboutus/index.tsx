@@ -13,6 +13,7 @@ function AboutUs(): JSX.Element {
             <iframe
               src={video}
               frameBorder="0"
+              allowFullScreen={true}
               title="Free HD Stock Film 8mm Projector broll"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
