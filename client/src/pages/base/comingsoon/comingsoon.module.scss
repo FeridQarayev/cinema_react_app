@@ -2,7 +2,7 @@
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  background-color: grey;
+  background-color: #fff;
   &__up {
     zoom: 1;
     padding: 80px 0;
@@ -114,6 +114,8 @@
 
   &__body {
     border-top: 5px solid #1e2129;
+    border-bottom: 10px solid #1e2129;
+    padding-top: 50px;
     position: relative;
     &__container {
       &__today {

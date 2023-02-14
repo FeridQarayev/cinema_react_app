@@ -1,6 +1,9 @@
 import React from 'react';
 import Movie from '../../../components/base/newmovie';
 import backImg from '../../../images/coming/jake-hills-194864.jpg';
+import avatarImg from '../../../images/movies/avatarthewayofwater700x1000.350x0.jpg';
+import planeImg from '../../../images/movies/krushenie700x1000-1.350x0.jpg';
+import quantumImg from '../../../images/movies/quantamania.350x0.jpg';
 import styled from './comingsoon.module.scss';
 
 function ComingSoon(): JSX.Element {
@@ -35,11 +38,12 @@ function ComingSoon(): JSX.Element {
           <div className={styled.soon__body__container__today}>
             <div className={styled.soon__body__container__today__middle}>
               <div className={styled.soon__body__container__today__middle__body}>
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
+                <Movie img={quantumImg} />
+                <Movie img={avatarImg} />
+                <Movie img={planeImg} />
+                <Movie img={avatarImg} />
+                <Movie img={planeImg} />
+                <Movie img={quantumImg} />
               </div>
             </div>
           </div>

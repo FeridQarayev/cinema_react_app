@@ -5,10 +5,9 @@ import icon1 from '../../../images/constant/fourdx.png';
 import icon3 from '../../../images/constant/ru.png';
 import icon2 from '../../../images/constant/threed.png';
 import icon4 from '../../../images/constant/tr.png';
-import move1 from '../../../images/movies/quantamania.350x0.jpg';
 import styled from './newmovie.module.scss';
 
-function Movie(): JSX.Element {
+function Movie(props: { img: string }): JSX.Element {
   return (
     <div className={styled.movie}>
       <div className={styled.movie__presale}>PRESALE</div>
@@ -18,7 +17,7 @@ function Movie(): JSX.Element {
       <div className={styled.movie__content}>
         <span className={styled.movie__content__age}>12+</span>
         <div className={styled.movie__content__poster}>
-          <img src={move1} alt="movie" />
+          <img src={props.img} alt="movie" />
         </div>
         <div className={styled.movie__content__icons}>
           <span className={styled.movie__content__icons__icon}>
