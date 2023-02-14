@@ -28,23 +28,22 @@ function Movie(props: { img: string }): JSX.Element {
           </div>
           <div className={styled.movie__body__content__icons}>
             <div className={styled.movie__body__content__icons__2d}>
-            <D2 />
+              <D2 />
             </div>
             <div className={styled.movie__body__content__icons__3d}>
-            <D3 />
+              <D3 />
             </div>
             <div className={styled.movie__body__content__icons__tr}>
-            <TurkeyFlag />
+              <TurkeyFlag />
             </div>
             <div className={styled.movie__body__content__icons__az}>
-            <AzerbaijanFlag />
-
+              <AzerbaijanFlag />
             </div>
             <div className={styled.movie__body__content__icons__en}>
-            <EnglishFlag />
+              <EnglishFlag />
             </div>
             <div className={styled.movie__body__content__icons__ru}>
-            <RusFlag />
+              <RusFlag />
             </div>
           </div>
           <div className={styled.movie__body__content__btn}>
@@ -70,17 +69,24 @@ function Movie(props: { img: string }): JSX.Element {
             </p>
             <p>
               <strong>Genre: </strong>
-              <span>Cartoon</span>
+              <span>Cartoon, </span>
               <span>Comic</span>
             </p>
             <p>
               <strong>Duration: </strong>
               02 hours 00 minutes
             </p>
-            <p>
+            {/* <p>
               <strong>Language: </strong>
               English
-            </p>
+            </p> */}
+          </div>
+          <div className={styled.movie__body__hover__lang}>
+            <span>AZ</span>
+            <span>EN</span>
+          </div>
+          <div className={styled.movie__body__hover__age}>
+            <p>12 +</p>
           </div>
           <div className={styled.movie__body__hover__btn}>
             <Link to={'#'}>
