@@ -14,3 +14,6 @@ body {
   background-color: #fff;
   /* background-color: #777; */
 }
+::selection {
+  background: #e41a1a;
+}

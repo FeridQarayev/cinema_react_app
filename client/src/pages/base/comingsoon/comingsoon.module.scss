@@ -1,5 +1,4 @@
 .soon {
-  // padding-top: 80px;
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -94,11 +93,11 @@
                   div {
                     margin-bottom: 0;
                     h2 {
+                      font-family: 'Vollkorn', serif;
                       font-size: 96px;
                       font-weight: 400;
                       text-align: center;
                       line-height: 1.5;
-                      font-family: Six Caps;
                       text-transform: uppercase;
                       color: #fff;
                       letter-spacing: 1px;
@@ -195,24 +194,64 @@
   cursor: default;
 }
 
+@media (min-width: 280px) {
+  .soon__body__container__today__middle {
+    width: 300px;
+  }
+  .soon__up__body {
+    h2 {
+      font-size: 40px !important;
+    }
+  }
+}
+@media (min-width: 450px) {
+  .soon__body__container__today__middle {
+    width: 430px;
+  }
+  .soon__up__body {
+    h2 {
+      font-size: 80px !important;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .soon__body__container__today__middle {
+    width: 520px;
+  }
+  .soon__up__body {
+    h2 {
+      font-size: 80px !important;
+    }
+  }
+}
 @media (min-width: 768px) {
-  .home__tab__body__container__today__middle {
+  .soon__body__container__today__middle {
     width: 750px;
+  }
+  .soon__up__body {
+    h2 {
+      font-size: 96px !important;
+    }
   }
 }
 @media (min-width: 992px) {
-  .home__tab__body__container__today__middle {
+  .soon__body__container__today__middle {
     width: 970px;
   }
 }
 @media (min-width: 1200px) {
-  .home__tab__body__container__today__middle {
+  .soon__body__container__today__middle {
     width: 1170px;
   }
 }
 @media (max-width: 1023px) {
-  .home__tab__body__container__today__up {
+  .soon__body__container__today__up {
     display: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .soon {
+    margin-top: 50px;
   }
 }
 
@@ -221,7 +260,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.25);
+    transform: scale(1.35);
   }
   100% {
     transform: scale(1);
