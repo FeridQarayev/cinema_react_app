@@ -4,6 +4,12 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   background-color: grey;
+  &__up{
+    &__back{}
+    &__color{}
+    &__body{}
+  }
+
   &__header {
     text-align: center;
     height: 46px;
