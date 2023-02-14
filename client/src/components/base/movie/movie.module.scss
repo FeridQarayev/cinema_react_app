@@ -7,7 +7,7 @@
   padding-left: 15px;
   padding-right: 15px;
   width: 280px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   &__body {
     overflow: hidden;
     position: relative;
@@ -160,6 +160,7 @@
         }
       }
       &__lang {
+        margin-bottom: 5px;
         span {
           display: inline-block;
           color: #ea7900;

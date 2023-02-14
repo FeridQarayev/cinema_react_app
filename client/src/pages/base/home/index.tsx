@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
+import avatarMImg from '../../../images/movies/avatarthewayofwater700x1000.350x0.jpg';
 import movieImg from '../../../images/movies/img_20-360x618_c.jpg';
 import quantumImg from '../../../images/movies/quantamania.350x0.jpg';
 import seperatorImg from '../../../images/movies/seperator-bg.png';
@@ -123,6 +124,9 @@ function Home(): JSX.Element {
                       <Movie img={movieImg} />
                       <Movie img={movieImg} />
                       <Movie img={quantumImg} />
+                      <Movie img={avatarMImg} />
+                      <Movie img={quantumImg} />
+                      <Movie img={avatarMImg} />
                     </div>
                   </div>
                 </div>
