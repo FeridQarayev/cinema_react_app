@@ -7,7 +7,6 @@ function AboutUs(): JSX.Element {
   const videoTag = useRef<HTMLVideoElement>(null);
   window.addEventListener('scroll', (e) => {
     if (videoTag.current !== null && window.pageYOffset < 700) {
-      console.log(window.pageYOffset);
       videoTag.current.style.transform = String(`translate3d(0px, ${window.pageYOffset}px, 0px)`);
     }
   });
