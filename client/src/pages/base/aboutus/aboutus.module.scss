@@ -99,3 +99,27 @@
     }
   }
 }
+
+@media (max-width: 400px) {
+  .about {
+    margin-top: 50px;
+    h2 {
+      font-size: 100px;
+    }
+    &__up__back__video {
+      video {
+        height: 800px;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .about {
+    margin-top: 50px;
+    &__up__back__video {
+      video {
+        object-fit: cover;
+      }
+    }
+  }
+}

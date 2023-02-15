@@ -30,7 +30,7 @@ function AboutUs(): JSX.Element {
           </div>
         </div>
       </section>
-      <div style={{ height: '1000px', width: '400px', backgroundColor: 'red' }}></div>
+      <div style={{ height: '1000px', width: '100%', backgroundColor: 'red' }}></div>
     </div>
   );
 }
