@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import record from '../../../images/aboutus/maxresdefault-11.jpg';
 import video from '../../../videos/Free HD Stock Film 8mm Projector broll.mp4';
 import styled from './aboutus.module.scss';
 
 function AboutUs(): JSX.Element {
+  const videoTag = useRef<HTMLVideoElement>(null);
+  window.addEventListener('scroll', (e) => {
+    if (videoTag.current !== null && window.pageYOffset < 700) {
+      console.log(window.pageYOffset);
+      videoTag.current.style.transform = String(`translate3d(0px, ${window.pageYOffset}px, 0px)`);
+    }
+  });
   return (
     <div className={styled.about}>
       <section className={styled.about__up}>
         <div className={styled.about__up__back}>
           <img src={record} alt="cinema" />
           <div className={styled.about__up__back__video}>
-            <iframe
-              src={video}
-              frameBorder="0"
-              allowFullScreen={true}
-              title="Free HD Stock Film 8mm Projector broll"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            ></iframe>
+            <video ref={videoTag} preload="auto" autoPlay loop muted>
+              <source src={video} type="video/mp4" />
+            </video>
           </div>
         </div>
         <div className={styled.about__up__color}></div>
@@ -28,6 +31,7 @@ function AboutUs(): JSX.Element {
           </div>
         </div>
       </section>
+      <div style={{ height: '1000px', width: '400px', backgroundColor: 'red' }}></div>
     </div>
   );
 }
