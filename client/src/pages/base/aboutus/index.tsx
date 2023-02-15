@@ -35,6 +35,7 @@ function AboutUs(): JSX.Element {
           </div>
         </div>
       </section>
+
       <section className={styled.about__body} style={{ backgroundImage: `url(${String(backImg)})` }}>
         <div className={styled.about__body__overlay}></div>
         <div className={styled.about__body__container}>
@@ -107,29 +108,31 @@ function AboutUs(): JSX.Element {
                 <span>Naxçivan</span>
               </li>
             </ul>
-            <div className={styled.about__body__container__content__item}>
-              <img src={drinkImg} alt="drink" />
-              <p>CinemaPlus şəbəkəsinə 9 kinoteatr, 50+ ekran və 5000+ oturacaq daxildir.</p>
-            </div>
-            <div className={styled.about__body__container__content__item}>
-              <img src={rollImg} alt="roll" />
-              <p>
-                Bizim kinoteatrin “Platinum Movie Suites” zalinda film izləyəndən sonra Sizdə unudulmaz təəssüratlar qalacaq. Bu premium-zalin
-                konsepsiyasi tamaşaçilara yüksək komfortlu, arxaya açilan təmtəraqli italyan dəri kreslolarinda, kinoseans zamani qida və içki sifariş
-                etmək imkani olan zalda film izləmək imkani təklif edir.
-              </p>
-            </div>
-            <div className={styled.about__body__container__content__item}>
-              <img src={crystalImg} alt="drink" />
-              <p>
-                “CinemaPlus” öz qonaqlari üçün bileti müxtəlif rahat üsullar ilə almaq imkani yaradir: kinoteatrin www.cinemaplus.az rəsmi saytindan,
-                İOS və Android əməliyyat sistemləri tərəfindən idarə olunan smartfonlar üçün təzəlikcə işə düşmüş mobil tətbiq vasitəsilə və ya
-                kinoteatrin bilet kassasindan.
-              </p>
-            </div>
-            <div className={styled.about__body__container__content__item}>
-              <img src={ticketImg} alt="drink" />
-              <p>CinemaPlus şəbəkəsinə 9 kinoteatr, 50+ ekran və 5000+ oturacaq daxildir.</p>
+            <div className={styled.about__body__container__content__list}>
+              <div className={styled.about__body__container__content__list__item}>
+                <img src={drinkImg} alt="drink" />
+                <p>CinemaPlus şəbəkəsinə 9 kinoteatr, 50+ ekran və 5000+ oturacaq daxildir.</p>
+              </div>
+              <div className={styled.about__body__container__content__list__item}>
+                <img src={rollImg} alt="roll" />
+                <p>
+                  Bizim kinoteatrin “Platinum Movie Suites” zalinda film izləyəndən sonra Sizdə unudulmaz təəssüratlar qalacaq. Bu premium-zalin
+                  konsepsiyasi tamaşaçilara yüksək komfortlu, arxaya açilan təmtəraqli italyan dəri kreslolarinda, kinoseans zamani qida və içki
+                  sifariş etmək imkani olan zalda film izləmək imkani təklif edir.
+                </p>
+              </div>
+              <div className={styled.about__body__container__content__list__item}>
+                <img src={crystalImg} alt="drink" />
+                <p>
+                  “CinemaPlus” öz qonaqlari üçün bileti müxtəlif rahat üsullar ilə almaq imkani yaradir: kinoteatrin www.cinemaplus.az rəsmi
+                  saytindan, İOS və Android əməliyyat sistemləri tərəfindən idarə olunan smartfonlar üçün təzəlikcə işə düşmüş mobil tətbiq vasitəsilə
+                  və ya kinoteatrin bilet kassasindan.
+                </p>
+              </div>
+              <div className={styled.about__body__container__content__list__item}>
+                <img src={ticketImg} alt="drink" />
+                <p>CinemaPlus şəbəkəsinə 9 kinoteatr, 50+ ekran və 5000+ oturacaq daxildir.</p>
+              </div>
             </div>
           </div>
         </div>
