@@ -45,7 +45,7 @@
         video {
           inset: 0px;
           width: 1519.2px;
-          height: 1254.55px;
+          height: 1354.55px;
           max-width: none;
           max-height: none;
           pointer-events: none;
@@ -195,9 +195,12 @@
     h2 {
       font-size: 100px;
     }
-    &__up__back__video {
-      video {
-        height: 800px;
+    &__up{
+      height: 400px;
+      &__back__video {
+        video {
+          height: 900px;
+        }
       }
     }
   }
