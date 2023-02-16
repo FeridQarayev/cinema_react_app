@@ -1,0 +1,58 @@
+.detail {
+  &__up {
+    overflow: hidden;
+    background-color: #202020;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .detail {
+    margin-top: 50px;
+    &__up {
+      img {
+        height: 300px;
+        width: 100%;
+      }
+    }
+  }
+}
+@media (max-width: 540px) {
+  .detail {
+    &__up {
+      img {
+        height: 250px;
+        width: 100%;
+        transform: scale(1);
+      }
+    }
+  }
+}
+@media (max-width: 420px) {
+  .detail {
+    &__up {
+      img {
+        height: 200px;
+        width: 100%;
+        transform: scale(1);
+      }
+    }
+  }
+}
+@media (max-width: 300px) {
+  .detail {
+    &__up {
+      height: 200px;
+      object-fit: cover;
+      img {
+        height: auto;
+        width: 100%;
+        height: 100%;
+        transform: scale(1.2);
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import AboutUs from '../pages/base/aboutus';
 import BaseRoot from '../pages/base/BaseRoot';
 import ComingSoon from '../pages/base/comingsoon';
+import Detail from '../pages/base/detail';
 import Home from '../pages/base/home';
 
 export const ROUTES = [
@@ -23,6 +24,10 @@ export const ROUTES = [
       {
         path: 'aboutus',
         element: <AboutUs />,
+      },
+      {
+        path: 'detail',
+        element: <Detail />,
       },
     ],
   },

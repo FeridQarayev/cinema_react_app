@@ -1,5 +1,5 @@
 import React from 'react';
-import avatarBack from '../../../images/slider/banner-2.jpg';
+import avatarBack from '../../../images/slider/banner-1.jpg';
 import styled from './detail.module.scss';
 
 function Detail(): JSX.Element {
