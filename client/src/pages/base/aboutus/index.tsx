@@ -41,7 +41,7 @@ function AboutUs(): JSX.Element {
         <div className={styled.about__body__container}>
           <div className={styled.about__body__container__content}>
             <h1>“CinemaPlus”</h1>
-            <div className={styled.about__body__container__content__decription}>
+            <div className={styled.about__body__container__content__description}>
               <p>CinemaPlus şəbəkəsinə 9 kinoteatr, 50+ ekran və 5000+ oturacaq daxildir.</p>
               <p>
                 Yüksək ölçülü 3D-kontentini nümayiş etdirmək imkani olan rəqəmsal proyeksiya sistemi və yüksək keyfiyyətli kinoekranlar ilə təchiz
