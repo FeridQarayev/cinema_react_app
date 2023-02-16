@@ -212,7 +212,7 @@
     }
   }
 }
-@media (min-width: 280px) {
+@media (min-width: 280px)  and (max-width: 540px) {
   .about__body__container {
     width: 70%;
     &__content__description {
@@ -232,7 +232,7 @@
     }
   }
 }
-@media (min-width: 540px) {
+@media (min-width: 540px)  and (max-width: 768px){
   .about__body__container {
     width: 510px;
     &__content__list {
