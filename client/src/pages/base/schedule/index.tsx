@@ -18,45 +18,44 @@ function Schedule(): JSX.Element {
                   <div className={styled.schedule__up__container__content__col__def__inner__wrap}>
                     <div className={styled.schedule__up__container__content__col__def__inner__wrap__force}>
                       <div className={styled.schedule__up__container__content__col__def__inner__wrap__force__rev}>
-                        <div className={styled.progress}>
-                          <div className={styled.progress__back}></div>
-                        </div>
-                        <div className={styled.slides}>
-                          <div className={styled.slides__slide}>
-                            <div className={styled.slides__slide__text}>
-                              <p>A Video WordPress Theme </p>
-                            </div>
-                            <div className={styled.slides__slide__middledown}>
-                              <div>
-                                <img src={middleDown} alt="galesses" />
+                        <article>
+                          <div className={styled.slides}>
+                            <div className={styled.slides__slide}>
+                              <div className={styled.slides__slide__text}>
+                                <p>A Video WordPress Theme </p>
                               </div>
-                            </div>
-                            <div className={styled.slides__slide__topleft}>
-                              <div>
+                              <div className={styled.slides__slide__middledown}>
                                 <div>
-                                  <img src={topLeft} alt="popcorn" />
+                                  <img src={middleDown} alt="galesses" />
                                 </div>
                               </div>
-                            </div>
-                            <div className={styled.slides__slide__bottomright}>
-                              <div>
+                              <div className={styled.slides__slide__topleft}>
                                 <div>
-                                  <img src={bottomRight} alt="popcorn" />
+                                  <div>
+                                    <img src={topLeft} alt="popcorn" />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className={styled.slides__slide__bottomleft}>
-                              <div>
-                                <img src={bottomLeft} alt="popcorn" />
+                              <div className={styled.slides__slide__bottomright}>
+                                <div>
+                                  <div>
+                                    <img src={bottomRight} alt="popcorn" />
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                            <div className={styled.slides__slide__topright}>
-                              <div>
-                                <img src={topRight} alt="cola" />
+                              <div className={styled.slides__slide__bottomleft}>
+                                <div>
+                                  <img src={bottomLeft} alt="popcorn" />
+                                </div>
+                              </div>
+                              <div className={styled.slides__slide__topright}>
+                                <div>
+                                  <img src={topRight} alt="cola" />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </article>
                       </div>
                       <div className={styled.schedule__up__container__content__col__def__inner__wrap__force__fw}></div>
                     </div>

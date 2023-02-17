@@ -1,0 +1,350 @@
+.schedule {
+  &__up {
+    align-self: stretch;
+    width: 100%;
+    position: relative;
+    &__container {
+      height: 100%;
+      width: 100% !important;
+      margin-left: 0 !important;
+      display: flex;
+      align-items: flex-start;
+      &__content {
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        display: flex;
+        &__col {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          margin: 0 17.5px;
+          align-self: center;
+          width: 100%;
+          position: static !important;
+          &__def {
+            z-index: 0;
+            position: relative;
+            display: flex;
+            width: 100%;
+            &__inner {
+              display: flex;
+              width: 100%;
+              position: relative;
+              z-index: 5;
+              &__wrap {
+                width: 100%;
+                margin: 0 auto;
+                &__force {
+                  position: relative;
+                  width: 100%;
+                  height: auto;
+                  display: block;
+                  overflow: visible;
+                  max-width: none !important;
+                  &__rev {
+                    visibility: visible;
+                    background: transparent;
+                    padding: 0px;
+                    height: 358px;
+                    display: block;
+                    width: 1519px;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    position: absolute;
+                    max-height: none;
+                    overflow: visible;
+                    left: 0 !important;
+                    z-index: 1;
+                    user-select: none;
+                    article {
+                      height: 100%;
+                      width: 1519px;
+                      max-height: none;
+                      position: relative;
+                      overflow: hidden;
+                      display: block;
+                      .slides {
+                        text-indent: 0em;
+                        top: 0;
+                        left: 0;
+                        overflow: hidden;
+                        position: absolute;
+                        visibility: visible;
+                        max-height: none;
+                        height: 100%;
+                        width: 100%;
+                        &__slide {
+                          text-indent: 0em;
+                          top: 0;
+                          left: 0;
+                          position: absolute;
+                          display: block;
+                          overflow: hidden;
+                          height: 100%;
+                          width: 100%;
+                          z-index: 20;
+                          opacity: 1;
+                          visibility: inherit;
+                          &__text {
+                            vertical-align: top;
+                            position: absolute;
+                            pointer-events: auto;
+                            height: 139px;
+                            left: 625px;
+                            top: 109px;
+                            z-index: 10;
+                            visibility: visible;
+                            perspective: 601px;
+                          }
+                          &__middledown {
+                            position: absolute;
+                            display: block;
+                            pointer-events: auto;
+                            left: 602px;
+                            top: 202px;
+                            z-index: 5;
+                            visibility: visible;
+                            perspective: 601px;
+                            transform-style: flat;
+                            div {
+                              z-index: 5;
+                              color: rgb(255, 255, 255);
+                              width: 314px;
+                              height: 156px;
+                              min-height: 0px;
+                              min-width: 0px;
+                              max-height: none;
+                              max-width: none;
+                              transform-origin: 50% 50%;
+                              opacity: 1;
+                              transform: translate(0px, 0px);
+                              visibility: visible;
+                              outline: none !important;
+                              position: relative;
+                              display: block;
+                              img {
+                                max-width: none !important;
+                                transition: none;
+                                margin: 0;
+                                padding: 0;
+                                border: none;
+                                position: relative;
+                                height: 100%;
+                                width: 100%;
+                                outline: none !important;
+                                background: 0 0;
+                                vertical-align: top;
+                              }
+                            }
+                          }
+                          &__topleft {
+                            position: absolute;
+                            display: block;
+                            pointer-events: auto;
+                            left: -20px;
+                            top: -20px;
+                            z-index: 6;
+                            visibility: visible;
+                            perspective: 601px;
+                            div {
+                              position: absolute;
+                              display: block;
+                              height: 209px;
+                              width: 495px;
+                              opacity: 1;
+                              min-height: 209px;
+                              min-width: 495px;
+                              filter: none;
+                              transform: perspective(600px) translate3d(-0.75621px, -2.08263px, 0px);
+                              transform-origin: 300px 126.75px;
+                              div {
+                                z-index: 6;
+                                color: rgb(255, 255, 255);
+                                width: 494.931px;
+                                height: 209.108px;
+                                min-height: 0px;
+                                min-width: 0px;
+                                max-height: none;
+                                max-width: none;
+                                transform-origin: 50% 50%;
+                                opacity: 1;
+                                transform: translate(0px, 0px);
+                                visibility: visible;
+                                outline: none;
+                                position: relative;
+                                display: block;
+                                img {
+                                  position: relative;
+                                  height: 100%;
+                                  width: 100%;
+                                  outline: none;
+                                  margin-bottom: 0;
+                                  background: 0 0;
+                                  vertical-align: top;
+                                  max-width: none;
+                                  transition: none;
+                                  margin: 0;
+                                  padding: 0;
+                                  border: none;
+                                }
+                              }
+                            }
+                          }
+                          &__bottomright {
+                            position: absolute;
+                            display: block;
+                            pointer-events: auto;
+                            left: 1282px;
+                            top: 2px;
+                            z-index: 7;
+                            visibility: visible;
+                            perspective: 601px;
+                            div {
+                              position: absolute;
+                              display: block;
+                              height: 376.138px;
+                              width: 257.362px;
+                              opacity: 1;
+                              min-height: 376px;
+                              min-width: 257px;
+                              transform: perspective(600px) translate3d(-2.06268px, 0.11727px, 0px);
+                              filter: none;
+                              transform-origin: 128.675px 188.069px;
+                              div {
+                                z-index: 7;
+                                color: rgb(255, 255, 255);
+                                width: 257.364px;
+                                height: 376.147px;
+                                min-height: 0px;
+                                min-width: 0px;
+                                max-height: none;
+                                max-width: none;
+                                transform-origin: 50% 50%;
+                                opacity: 1;
+                                transform: translate(0px, 0px);
+                                visibility: visible;
+                                outline: none;
+                                position: relative;
+                                display: block;
+                                img {
+                                  position: relative;
+                                  height: 100%;
+                                  width: 100%;
+                                  outline: none;
+                                  margin-bottom: 0;
+                                  background: 0 0;
+                                  vertical-align: top;
+                                  max-width: none;
+                                  transition: none;
+                                  margin: 0;
+                                  padding: 0;
+                                  border: none;
+                                }
+                              }
+                            }
+                          }
+                          &__bottomleft {
+                            position: absolute;
+                            display: block;
+                            pointer-events: auto;
+                            left: -20px;
+                            top: 68px;
+                            z-index: 8;
+                            visibility: visible;
+                            perspective: 601px;
+                            transform: translate(0px, 0px);
+                            div {
+                              z-index: 8;
+                              color: rgb(255, 255, 255);
+                              width: 390.583px;
+                              height: 310.157px;
+                              min-height: 0px;
+                              min-width: 0px;
+                              max-height: none;
+                              max-width: none;
+                              transform-origin: 50% 50%;
+                              opacity: 1;
+                              transform: translate(0px, 0px);
+                              visibility: visible;
+                              outline: none;
+                              position: relative;
+                              display: block;
+                              img {
+                                position: relative;
+                                height: 100%;
+                                width: 100%;
+                                outline: none;
+                                margin-bottom: 0;
+                                background: 0 0;
+                                vertical-align: top;
+                                max-width: none;
+                                transition: none;
+                                margin: 0;
+                                padding: 0;
+                                border: none;
+                              }
+                            }
+                          }
+                          &__topright {
+                            position: absolute;
+                            display: block;
+                            pointer-events: auto;
+                            left: 1369px;
+                            top: -29px;
+                            z-index: 9;
+                            visibility: visible;
+                            perspective: 601px;
+                            transform: translate(0px, 0px);
+                            transform-style: flat;
+                            div {
+                              z-index: 9;
+                              color: rgb(255, 255, 255);
+                              width: 157.141px;
+                              height: 170.751px;
+                              min-height: 0px;
+                              min-width: 0px;
+                              max-height: none;
+                              max-width: none;
+                              transform-origin: 50% 50%;
+                              opacity: 1;
+                              transform: translate(0px, 0px);
+                              visibility: visible;
+                              outline: none;
+                              position: relative;
+                              display: block;
+                              img {
+                                position: relative;
+                                height: 100%;
+                                width: 100%;
+                                outline: none;
+                                margin-bottom: 0;
+                                background: 0 0;
+                                vertical-align: top;
+                                max-width: none;
+                                transition: none;
+                                margin: 0;
+                                padding: 0;
+                                border: none;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  &__fw {
+                    height: 358px;
+                    display: block;
+                    width: 100%;
+                    pointer-events: none;
+                    transform-style: flat;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
