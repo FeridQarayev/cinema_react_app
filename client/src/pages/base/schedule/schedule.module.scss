@@ -183,7 +183,7 @@
                             z-index: 6;
                             visibility: visible;
                             perspective: 601px;
-                            div {
+                            &__first {
                               position: absolute;
                               display: block;
                               height: 209px;
@@ -192,9 +192,12 @@
                               min-height: 209px;
                               min-width: 495px;
                               filter: none;
-                              transform: perspective(600px) translate3d(-0.75621px, -2.08263px, 0px);
+                              animation-name: LeftTop;
+                              animation-iteration-count: infinite;
+                              animation-duration: 8s;
+                              animation-direction: alternate;
                               transform-origin: 300px 126.75px;
-                              div {
+                              &__second {
                                 z-index: 6;
                                 color: rgb(255, 255, 255);
                                 width: 494.931px;
@@ -236,7 +239,7 @@
                             z-index: 7;
                             visibility: visible;
                             perspective: 601px;
-                            div {
+                            &__first {
                               position: absolute;
                               display: block;
                               height: 376.138px;
@@ -244,10 +247,13 @@
                               opacity: 1;
                               min-height: 376px;
                               min-width: 257px;
-                              transform: perspective(600px) translate3d(-2.06268px, 0.11727px, 0px);
+                              animation-name: LeftTop;
+                              animation-iteration-count: infinite;
+                              animation-duration: 8s;
+                              animation-direction: alternate;
                               filter: none;
                               transform-origin: 128.675px 188.069px;
-                              div {
+                              &__second {
                                 z-index: 7;
                                 color: rgb(255, 255, 255);
                                 width: 257.364px;
@@ -383,5 +389,26 @@
         }
       }
     }
+  }
+}
+
+@keyframes LeftTop {
+  0% {
+    transform: perspective(600px) translate3d(0px, 0px, 0px);
+  }
+  20% {
+    transform: perspective(600px) translate3d(2px, 1px, 0px);
+  }
+  40% {
+    transform: perspective(600px) translate3d(2.5px, 3px, 0px);
+  }
+  60% {
+    transform: perspective(600px) translate3d(0.5px, 1px, 0px);
+  }
+  80% {
+    transform: perspective(600px) translate3d(-1.5px, -1px, 0px);
+  }
+  100% {
+    transform: perspective(600px) translate3d(-2.5px, -2px, 0px);
   }
 }

@@ -35,15 +35,15 @@ function Schedule(): JSX.Element {
                                   </div>
                                 </div>
                                 <div className={styled.slides__slide__topleft}>
-                                  <div>
-                                    <div>
+                                  <div className={styled.slides__slide__topleft__first}>
+                                    <div className={styled.slides__slide__topleft__first__second}>
                                       <img src={topLeft} alt="popcorn" />
                                     </div>
                                   </div>
                                 </div>
                                 <div className={styled.slides__slide__bottomright}>
-                                  <div>
-                                    <div>
+                                  <div className={styled.slides__slide__bottomright__first}>
+                                    <div className={styled.slides__slide__bottomright__first__second}>
                                       <img src={bottomRight} alt="popcorn" />
                                     </div>
                                   </div>
