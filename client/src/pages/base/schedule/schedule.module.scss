@@ -84,7 +84,7 @@
                     padding: 0px;
                     height: 358px;
                     display: block;
-                    width: 1519px;
+                    width: 100%;
                     margin-top: 0px;
                     margin-bottom: 0px;
                     position: absolute;
@@ -95,7 +95,7 @@
                     user-select: none;
                     article {
                       height: 100%;
-                      width: 1519px;
+                      width: 100%;
                       max-height: none;
                       position: relative;
                       overflow: hidden;
@@ -127,7 +127,9 @@
                             position: absolute;
                             pointer-events: auto;
                             height: 139px;
-                            left: 625px;
+                            // left: 42%;
+                            left: 50%;
+                            transform: translateX(-50%);
                             top: 109px;
                             z-index: 10;
                             visibility: visible;
@@ -137,8 +139,11 @@
                             position: absolute;
                             display: block;
                             pointer-events: auto;
-                            left: 602px;
-                            top: 202px;
+                            // left: 39.5%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            // top: 202px;
+                            bottom: 0px;
                             z-index: 5;
                             visibility: visible;
                             perspective: 601px;
@@ -234,8 +239,10 @@
                             position: absolute;
                             display: block;
                             pointer-events: auto;
-                            left: 1282px;
-                            top: 2px;
+                            // left: 84.3%;
+                            right:239px;
+                            // top: 0.7%;
+                            bottom: 355px;
                             z-index: 7;
                             visibility: visible;
                             perspective: 601px;
@@ -291,7 +298,8 @@
                             display: block;
                             pointer-events: auto;
                             left: -20px;
-                            top: 68px;
+                            // top: 17.5%;
+                            bottom: -14px;
                             z-index: 8;
                             visibility: visible;
                             perspective: 601px;
@@ -332,7 +340,8 @@
                             position: absolute;
                             display: block;
                             pointer-events: auto;
-                            left: 1369px;
+                            // left: 89.7%;
+                            right: 0px;
                             top: -29px;
                             z-index: 9;
                             visibility: visible;
