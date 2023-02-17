@@ -3,6 +3,7 @@ import BaseRoot from '../pages/base/BaseRoot';
 import ComingSoon from '../pages/base/comingsoon';
 import Detail from '../pages/base/detail';
 import Home from '../pages/base/home';
+import Schedule from '../pages/base/schedule';
 
 export const ROUTES = [
   {
@@ -28,6 +29,10 @@ export const ROUTES = [
       {
         path: 'detail',
         element: <Detail />,
+      },
+      {
+        path: 'schedule',
+        element: <Schedule />,
       },
     ],
   },
