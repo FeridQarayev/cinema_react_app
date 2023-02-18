@@ -7,6 +7,7 @@ import bottomLeft from '../../../images/schedule/bottom-left.png';
 import bottomRight from '../../../images/schedule/bottom-right.png';
 import middleDown from '../../../images/schedule/glasses-1.png';
 import topLeft from '../../../images/schedule/top-left.png';
+import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
 
 interface MovieList {
@@ -140,6 +141,48 @@ function Schedule(): JSX.Element {
         header: 'Price',
         /* eslint-disable react/prop-types */
         Cell: ({ cell }) => <Box component="span">{cell.getValue<number>()} AZN</Box>,
+        /* eslint-enable react/prop-types */
+      },
+      {
+        accessorFn: (row) => row.places,
+        id: 'places',
+        header: 'Buy Now',
+        /* eslint-disable react/prop-types */
+        Cell: ({ cell }) => (
+          <Box
+            component="div"
+            sx={() => {
+              return {
+                border: '1px solid #DCDCDC',
+                borderRadius: '5px',
+                padding: '4px 15px',
+                width: '110px',
+                margin: 'auto',
+                float: 'none',
+                position: 'relative',
+                background: '#FFFFFF',
+              };
+            }}
+          >
+            <Box
+              component="span"
+              sx={() => {
+                return {
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  lineHeight: '16px',
+                  color: '#000',
+                  teaxtAlign: 'left',
+                  width: '100%',
+                  paddingRight: '25px',
+                  background: `url(${String(placeSvg)}) no-repeat right`,
+                };
+              }}
+            >
+              Places{cell.getValue<number>()}
+            </Box>
+          </Box>
+        ),
         /* eslint-enable react/prop-types */
       },
     ],
