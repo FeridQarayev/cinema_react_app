@@ -13,7 +13,7 @@ function Schedule(): JSX.Element {
   useEffect(() => {
     container.current?.addEventListener('mousemove', (e) => {
       divTags.current.forEach(
-        (divTag) => (divTag.style.transform = String(`perspective(600px) translate3d(${e.clientX / 100}px, ${e.clientY / 100}px, 0px)`))
+        (divTag) => (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`))
       );
     });
   }, []);
@@ -36,7 +36,7 @@ function Schedule(): JSX.Element {
                             <div className={styled.slides}>
                               <div ref={container} className={styled.slides__slide}>
                                 <div className={styled.slides__slide__text}>
-                                  <h1>A Video WordPress Theme </h1>
+                                  <h1>Enjoy Watching</h1>
                                 </div>
                                 <div className={styled.slides__slide__middledown}>
                                   <div>
