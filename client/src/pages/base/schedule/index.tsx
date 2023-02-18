@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import React, { useEffect, useRef, useMemo } from 'react';
 import backimg from '../../../images/schedule/bg.jpg';
 import topRight from '../../../images/schedule/bobine.png';
 import bottomLeft from '../../../images/schedule/bottom-left.png';
@@ -7,6 +8,21 @@ import middleDown from '../../../images/schedule/glasses-1.png';
 import topLeft from '../../../images/schedule/top-left.png';
 import styled from './schedule.module.scss';
 
+interface MovieList {
+  name: string;
+  age: number;
+}
+
+const data: MovieList[] = [
+  {
+    name: 'John',
+    age: 30,
+  },
+  {
+    name: 'Sara',
+    age: 25,
+  },
+];
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
@@ -17,6 +33,23 @@ function Schedule(): JSX.Element {
       );
     });
   }, []);
+
+  const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
+    () => [
+      {
+        accessorKey: 'name',
+        header: 'Name',
+        muiTableHeadCellProps: { sx: { color: 'green' } },
+      },
+      {
+        accessorFn: (row) => row.age,
+        id: 'age',
+        header: 'Age',
+        Header: <i style={{ color: 'red' }}>Age</i>,
+      },
+    ],
+    []
+  );
   return (
     <div className={styled.schedule}>
       <section>
@@ -81,8 +114,7 @@ function Schedule(): JSX.Element {
           </div>
         </div>
       </section>
-
-      
+      <MaterialReactTable columns={columns} data={data} />;
     </div>
   );
 }

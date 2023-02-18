@@ -28,7 +28,7 @@
         "quotes": ["error", "single"],
         "arrow-body-style": ["error", "as-needed",{ "requireReturnForObjectLiteral": true }],
         "max-len": ["warn", { "code": 150 }],
-        "camelcase": "error",
+        "camelcase": ["error",{"allow": ["MRT_ColumnDef"]}],
         "spaced-comment": "error",
         "no-duplicate-imports": "error",
         "jsx-quotes": ["error", "prefer-double"],
