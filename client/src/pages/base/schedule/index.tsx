@@ -81,6 +81,8 @@ function Schedule(): JSX.Element {
           </div>
         </div>
       </section>
+
+      
     </div>
   );
 }
