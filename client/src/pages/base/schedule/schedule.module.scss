@@ -1,6 +1,6 @@
 .schedule {
   section {
-    min-height: 300px;
+    min-height: 668px;
     background: #131313;
     display: flex;
     width: 100%;
@@ -82,7 +82,7 @@
                     visibility: visible;
                     background: transparent;
                     padding: 0px;
-                    height: 358px;
+                    height: 668px;
                     display: block;
                     width: 100%;
                     margin-top: 0px;
@@ -126,7 +126,7 @@
                             vertical-align: top;
                             position: absolute;
                             pointer-events: auto;
-                            height: 139px;
+                            height: 260px;
                             // left: 42%;
                             left: 50%;
                             transform: translateX(-50%);
@@ -151,8 +151,8 @@
                             div {
                               z-index: 5;
                               color: rgb(255, 255, 255);
-                              width: 314px;
-                              height: 156px;
+                              width: 586px;
+                              height: 292px;
                               min-height: 0px;
                               min-width: 0px;
                               max-height: none;
@@ -183,30 +183,30 @@
                             position: absolute;
                             display: block;
                             pointer-events: auto;
-                            left: -20px;
-                            top: -20px;
+                            left: -38px;
+                            top: -38px;
                             z-index: 6;
                             visibility: visible;
                             perspective: 601px;
                             &__first {
                               position: absolute;
                               display: block;
-                              height: 209px;
-                              width: 495px;
+                              height: 390px;
+                              width: 924px;
                               opacity: 1;
-                              min-height: 209px;
-                              min-width: 495px;
+                              min-height: 390px;
+                              min-width: 924px;
                               filter: none;
                               animation-name: LeftTop;
                               animation-iteration-count: infinite;
-                              animation-duration: 8s;
+                              animation-duration: 4s;
                               animation-direction: alternate;
                               transform-origin: 300px 126.75px;
                               &__second {
                                 z-index: 6;
                                 color: rgb(255, 255, 255);
-                                width: 494.931px;
-                                height: 209.108px;
+                                width: 924px;
+                                height: 390px;
                                 min-height: 0px;
                                 min-width: 0px;
                                 max-height: none;
@@ -240,31 +240,31 @@
                             display: block;
                             pointer-events: auto;
                             // left: 84.3%;
-                            right:239px;
+                            right:440px;
                             // top: 0.7%;
-                            bottom: 355px;
+                            bottom: 655px;
                             z-index: 7;
                             visibility: visible;
                             perspective: 601px;
                             &__first {
                               position: absolute;
                               display: block;
-                              height: 376.138px;
-                              width: 257.362px;
+                              height: 702px;
+                              width: 480px;
                               opacity: 1;
-                              min-height: 376px;
-                              min-width: 257px;
+                              min-height: 702px;
+                              min-width: 480px;
                               animation-name: LeftTop;
                               animation-iteration-count: infinite;
-                              animation-duration: 8s;
+                              animation-duration: 4s;
                               animation-direction: alternate;
                               filter: none;
-                              transform-origin: 128.675px 188.069px;
+                              transform-origin: 240.1px 350.925px;
                               &__second {
                                 z-index: 7;
                                 color: rgb(255, 255, 255);
-                                width: 257.364px;
-                                height: 376.147px;
+                                width: 480px;
+                                height: 702px;
                                 min-height: 0px;
                                 min-width: 0px;
                                 max-height: none;
@@ -297,7 +297,7 @@
                             position: absolute;
                             display: block;
                             pointer-events: auto;
-                            left: -20px;
+                            left: -38px;
                             // top: 17.5%;
                             bottom: -14px;
                             z-index: 8;
@@ -307,8 +307,8 @@
                             div {
                               z-index: 8;
                               color: rgb(255, 255, 255);
-                              width: 390.583px;
-                              height: 310.157px;
+                              width: 729px;
+                              height: 579px;
                               min-height: 0px;
                               min-width: 0px;
                               max-height: none;
@@ -342,7 +342,7 @@
                             pointer-events: auto;
                             // left: 89.7%;
                             right: 0px;
-                            top: -29px;
+                            top: -55px;
                             z-index: 9;
                             visibility: visible;
                             perspective: 601px;
@@ -351,8 +351,8 @@
                             div {
                               z-index: 9;
                               color: rgb(255, 255, 255);
-                              width: 157.141px;
-                              height: 170.751px;
+                              width: 293px;
+                              height: 319px;
                               min-height: 0px;
                               min-width: 0px;
                               max-height: none;
@@ -385,7 +385,7 @@
                     }
                   }
                   &__fw {
-                    height: 358px;
+                    height: 668px;
                     display: block;
                     width: 100%;
                     pointer-events: none;
@@ -405,19 +405,13 @@
   0% {
     transform: perspective(600px) translate3d(0px, 0px, 0px);
   }
-  20% {
-    transform: perspective(600px) translate3d(2px, 1px, 0px);
+  33% {
+    transform: perspective(600px) translate3d(7.5px, 6px, 0px);
   }
-  40% {
-    transform: perspective(600px) translate3d(2.5px, 3px, 0px);
-  }
-  60% {
-    transform: perspective(600px) translate3d(0.5px, 1px, 0px);
-  }
-  80% {
-    transform: perspective(600px) translate3d(-1.5px, -1px, 0px);
+  66% {
+    transform: perspective(600px) translate3d(0.5px, 0px, 0px);
   }
   100% {
-    transform: perspective(600px) translate3d(-2.5px, -2px, 0px);
+    transform: perspective(600px) translate3d(-7px, -6px, 0px);
   }
 }
