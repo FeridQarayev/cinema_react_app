@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo } from 'react';
 import backimg from '../../../images/schedule/bg.jpg';
@@ -97,6 +98,27 @@ function Schedule(): JSX.Element {
         accessorFn: (row) => row.languages,
         id: 'languages',
         header: 'Languages',
+        /* eslint-disable react/prop-types */
+        Cell: ({ cell }) =>
+          cell.getValue<string[]>().map((value, index) => (
+            <Box
+              key={index}
+              component="span"
+              sx={(theme) => {
+                return {
+                  borderRadius: '4px',
+                  border: '#ea7900 solid 1px',
+                  color: '#ea7900',
+                  padding: '0 3px',
+                  margin: '0px 5px',
+                  fontWeight: 'bolder',
+                };
+              }}
+            >
+              {value}
+            </Box>
+          )),
+        /* eslint-enable react/prop-types */
       },
     ],
     []
