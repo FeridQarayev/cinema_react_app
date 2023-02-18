@@ -144,10 +144,15 @@
                             pointer-events: auto;
                             // left: 39.5%;
                             left: 50%;
-                            transform: translateX(-50%);
                             // top: 202px;
+
+                            // transform: translateY(0px);
+                            transform: translateX(-50%);
+                            animation-name: opsenShowMiddle;
+                            animation-duration: 1s;
                             bottom: 0px;
-                            z-index: 5;
+                            transition: all 3s;
+                            z-index: 2;
                             visibility: visible;
                             perspective: 601px;
                             transform-style: flat;
@@ -345,6 +350,8 @@
                             pointer-events: auto;
                             // left: 89.7%;
                             right: -50px;
+                            animation-name: openShowUpRight;
+                            animation-duration: 3.5s;
                             top: -55px;
                             z-index: 9;
                             visibility: visible;
@@ -418,7 +425,22 @@
     transform: perspective(600px) translate3d(-7px, -6px, 0px);
   }
 }
-
+@keyframes opsenShowMiddle {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+@keyframes openShowUpRight {
+  from {
+    top: -100%;
+  }
+  to {
+    top: -55px;
+  }
+}
 @media (max-width: 769px) {
   .schedule {
     margin-top: 50px;
