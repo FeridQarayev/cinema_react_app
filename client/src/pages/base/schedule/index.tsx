@@ -9,18 +9,50 @@ import topLeft from '../../../images/schedule/top-left.png';
 import styled from './schedule.module.scss';
 
 interface MovieList {
+  id: number;
   name: string;
-  age: number;
+  sessions: string;
+  cinema: string;
+  hall: string;
+  formats: string[];
+  languages: string[];
+  price: number;
+  places: number;
 }
 
 const data: MovieList[] = [
   {
+    id: 1,
     name: 'John',
-    age: 30,
+    sessions: new Date().toLocaleTimeString(),
+    cinema: '28 Mall',
+    hall: 'Hall 1',
+    formats: ['2D', '3D'],
+    languages: ['AZ', 'RU'],
+    price: 12,
+    places: 1,
   },
   {
-    name: 'Sara',
-    age: 25,
+    id: 2,
+    name: 'Ant-Man and the Wasp: Quantumania',
+    sessions: new Date().toLocaleTimeString(),
+    cinema: 'Deniz Mall',
+    hall: 'Hall 2',
+    formats: ['2D', '3D'],
+    languages: ['AZ', 'EN'],
+    price: 18,
+    places: 2,
+  },
+  {
+    id: 3,
+    name: 'Plane',
+    sessions: new Date().toLocaleTimeString(),
+    cinema: '28 Mall',
+    hall: 'Hall 4',
+    formats: ['2D', '3D'],
+    languages: ['AZ', 'RU'],
+    price: 7,
+    places: 3,
   },
 ];
 function Schedule(): JSX.Element {
@@ -33,7 +65,7 @@ function Schedule(): JSX.Element {
       );
     });
   }, []);
-
+  console.log(data);
   const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
     () => [
       {
@@ -42,10 +74,29 @@ function Schedule(): JSX.Element {
         muiTableHeadCellProps: { sx: { color: 'green' } },
       },
       {
-        accessorFn: (row) => row.age,
-        id: 'age',
-        header: 'Age',
-        Header: <i style={{ color: 'red' }}>Age</i>,
+        accessorFn: (row) => row.sessions,
+        id: 'sessions',
+        header: 'Sessions',
+      },
+      {
+        accessorFn: (row) => row.cinema,
+        id: 'cinema',
+        header: 'Cinema',
+      },
+      {
+        accessorFn: (row) => row.hall,
+        id: 'hall',
+        header: 'Hall',
+      },
+      {
+        accessorFn: (row) => row.formats,
+        id: 'formats',
+        header: 'Formats',
+      },
+      {
+        accessorFn: (row) => row.languages,
+        id: 'languages',
+        header: 'Languages',
       },
     ],
     []
