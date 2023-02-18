@@ -90,25 +90,20 @@ function Schedule(): JSX.Element {
         header: 'Hall',
       },
       {
-        accessorFn: (row) => row.formats,
+        accessorFn: (row) => [row.languages, row.formats],
         id: 'formats',
         header: 'Formats',
-      },
-      {
-        accessorFn: (row) => row.languages,
-        id: 'languages',
-        header: 'Languages',
         /* eslint-disable react/prop-types */
-        Cell: ({ cell }) =>
-          cell.getValue<string[]>().map((value, index) => (
+        Cell: ({ renderedCellValue, row }) => [
+          row.original.formats.map((value, index) => (
             <Box
               key={index}
               component="span"
-              sx={(theme) => {
+              sx={() => {
                 return {
                   borderRadius: '4px',
-                  border: '#ea7900 solid 1px',
-                  color: '#ea7900',
+                  border: '#000 solid 1px',
+                  color: '#000',
                   padding: '0 3px',
                   margin: '0px 5px',
                   fontWeight: 'bolder',
@@ -118,6 +113,33 @@ function Schedule(): JSX.Element {
               {value}
             </Box>
           )),
+          row.original.languages.map((value, index) => (
+            <Box
+              key={index}
+              component="span"
+              sx={() => {
+                return {
+                  borderRadius: '4px',
+                  border: '#000 solid 1px',
+                  color: '#000',
+                  padding: '0 3px',
+                  margin: '0px 5px',
+                  fontWeight: 'bolder',
+                };
+              }}
+            >
+              {value}
+            </Box>
+          )),
+        ],
+        /* eslint-enable react/prop-types */
+      },
+      {
+        accessorFn: (row) => row.price,
+        id: 'price',
+        header: 'Price',
+        /* eslint-disable react/prop-types */
+        Cell: ({ cell }) => <Box component="span">{cell.getValue<number>()} AZN</Box>,
         /* eslint-enable react/prop-types */
       },
     ],
