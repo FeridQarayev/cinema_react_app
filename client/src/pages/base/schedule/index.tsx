@@ -264,14 +264,14 @@ function Schedule(): JSX.Element {
       let leftpx = 95;
       const borderedLiLeft: JSX.Element = createElement(
         'li',
-        { key: i, className: styled.modal__body__list__border },
+        { key: (Math.random() * new Date().getTime()) / 100, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
       for (let z = 1; z <= hall.row; z++) {
         const emptyLi: JSX.Element = createElement(
           'li',
           {
-            key: z,
+            key: (Math.random() * new Date().getTime()) / 1000,
             className: styled.modal__body__list__empty,
           },
           createElement(
@@ -293,7 +293,7 @@ function Schedule(): JSX.Element {
       }
       const borderedLiRight: JSX.Element = createElement(
         'li',
-        { key: i, className: styled.modal__body__list__border },
+        { key: (Math.random() * new Date().getTime()) / 10, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`), right: String(`${rightpx}px`), left: String('unset') } }, i)
       );
       toppx -= 34;
