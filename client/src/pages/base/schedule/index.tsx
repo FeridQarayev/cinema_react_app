@@ -75,7 +75,7 @@ const bordereds: Hall = {
 };
 const borderedss: Hall = {
   column: 5,
-  row: 8,
+  row: 3,
 };
 
 const modalStyle = {
@@ -241,18 +241,36 @@ function Schedule(): JSX.Element {
   );
 
   const sortedBorder = (hall: Hall): JSX.Element[] => {
-    const totalLi: JSX.Element[] = [];
+    const totalLiBordered: JSX.Element[] = [];
+    const totalLiEmpty: JSX.Element[] = [];
     let toppx = 341;
+    const rightpx = 20;
     for (let i = 1; i <= hall.column; i++) {
-      toppx -= 34;
-      const myData: JSX.Element = createElement(
+      let leftpx = 95;
+      const borderedLiLeft: JSX.Element = createElement(
         'li',
-        { key: i, style: { backgroundColor: 'red' }, className: styled.modal__body__list__border },
+        { key: i, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
-      totalLi.push(myData);
+      for (let i = 1; i <= hall.row; i++) {
+        const emptyLi: JSX.Element = createElement(
+          'li',
+          { key: i, className: styled.modal__body__list__empty },
+          createElement('span', { style: { left: String(`${leftpx}px`), top: String(`${toppx}px`) } }, i)
+        );
+        leftpx += 34;
+        totalLiEmpty.push(emptyLi);
+      }
+      const borderedLiRight: JSX.Element = createElement(
+        'li',
+        { key: i, className: styled.modal__body__list__border },
+        createElement('b', { style: { top: String(`${toppx}px`), right: String(`${rightpx}px`), left: String('unset') } }, i)
+      );
+      toppx -= 34;
+      totalLiBordered.push(borderedLiLeft);
+      totalLiBordered.push(borderedLiRight);
     }
-    return totalLi;
+    return [...totalLiBordered, ...totalLiEmpty];
   };
   return (
     <div className={styled.schedule}>
@@ -397,246 +415,16 @@ function Schedule(): JSX.Element {
                 {/* <li className={styled.modal__body__list__border}>
                   <b>2</b>
                 </li> */}
-                <li className={styled.modal__body__list__empty}>
+                {/* <li className={styled.modal__body__list__empty}>
                   <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>8</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>1</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>2</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>3</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>4</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>5</span>
-                </li>
-                <li className={styled.modal__body__list__empty}>
-                  <span>6</span>
-                </li>
-                <li className={styled.modal__body__list__select}>
+                </li> */}
+
+                {/* <li className={styled.modal__body__list__select}>
                   <span>7</span>
                 </li>
                 <li className={styled.modal__body__list__reserv}>
                   <span>8</span>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
