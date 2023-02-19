@@ -105,6 +105,7 @@ function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
   const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0 });
+  const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const handleOpen = (num: number, price: number): void => {
     setOpen(true);
@@ -247,11 +248,11 @@ function Schedule(): JSX.Element {
   );
 
   const selectPlace = (place: React.MouseEvent<HTMLSpanElement>): void => {
-    console.log(place.currentTarget);
-    console.log(place.currentTarget.getAttribute('row'));
+    const placePrice = parseInt(String(place.currentTarget.getAttribute('price')));
     console.log(place.currentTarget.getAttribute('column'));
     console.log(place.currentTarget.getAttribute('price'));
     place.currentTarget.classList.toggle(styled.modal__body__list__select);
+    place.currentTarget.classList.value === styled.modal__body__list__select ? setPrice(price + placePrice) : setPrice(price - placePrice);
   };
 
   const sortedBorder = (hall: Hall): JSX.Element[] => {
@@ -488,7 +489,7 @@ function Schedule(): JSX.Element {
                   <div className={styled.modal__footer__container__bottom__price}>
                     <label>Ümumi məbləğ:</label>
                     <p>
-                      <span>0</span> AZN
+                      <span>{price}</span> AZN
                     </p>
                   </div>
                   <div className={styled.modal__footer__container__bottom__btn}>
