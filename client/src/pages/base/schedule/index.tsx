@@ -18,6 +18,11 @@ import topLeft from '../../../images/schedule/top-left.png';
 import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
 
+interface Formats {
+  d2: boolean;
+  d3: boolean;
+  d4: boolean;
+}
 interface MovieList {
   id: number;
   name: string;
@@ -25,7 +30,7 @@ interface MovieList {
   sessionsDay: string;
   cinema: string;
   hall: string;
-  formats: string[];
+  formats: Formats;
   languages: string[];
   price: number;
   places: number;
@@ -48,7 +53,11 @@ const data: MovieList[] = [
     sessionsDay: new Date().toLocaleDateString(),
     cinema: '28 Mall',
     hall: 'Hall 1',
-    formats: ['2D', '3D'],
+    formats: {
+      d2: true,
+      d3: true,
+      d4: true,
+    },
     languages: ['AZ', 'RU'],
     price: 12,
     places: 1,
@@ -60,7 +69,11 @@ const data: MovieList[] = [
     sessionsDay: new Date().toLocaleDateString(),
     cinema: 'Deniz Mall',
     hall: 'Hall 2',
-    formats: ['2D', '3D'],
+    formats: {
+      d2: true,
+      d3: false,
+      d4: true,
+    },
     languages: ['AZ', 'EN'],
     price: 18,
     places: 2,
@@ -72,7 +85,11 @@ const data: MovieList[] = [
     sessionsDay: new Date().toLocaleDateString(),
     cinema: '28 Mall',
     hall: 'Hall 4',
-    formats: ['2D', '3D'],
+    formats: {
+      d2: true,
+      d3: true,
+      d4: false,
+    },
     languages: ['AZ', 'RU'],
     price: 7,
     places: 3,
@@ -184,24 +201,27 @@ function Schedule(): JSX.Element {
         header: 'Formats',
         /* eslint-disable react/prop-types */
         Cell: ({ renderedCellValue, row }) => [
-          row.original.formats.map((value, index) => (
-            <Box
-              key={index}
-              component="span"
-              sx={() => {
-                return {
-                  borderRadius: '4px',
-                  border: '#000 solid 1px',
-                  color: '#000',
-                  padding: '0 3px',
-                  margin: '0px 5px',
-                  fontWeight: 'bolder',
-                };
-              }}
-            >
-              {value}
-            </Box>
-          )),
+          [row.original.formats.d2 && '2D', row.original.formats.d3 && '3D', row.original.formats.d4 && '4D'].map(
+            (value, index) =>
+              value !== false && (
+                <Box
+                  key={index}
+                  component="span"
+                  sx={() => {
+                    return {
+                      borderRadius: '4px',
+                      border: '#000 solid 1px',
+                      color: '#000',
+                      padding: '0 3px',
+                      margin: '0px 5px',
+                      fontWeight: 'bolder',
+                    };
+                  }}
+                >
+                  {value}
+                </Box>
+              )
+          ),
           row.original.languages.map((value, index) => (
             <Box
               key={index}
