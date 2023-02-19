@@ -84,23 +84,6 @@ const modalStyle = {
     outline: 'none',
   },
 };
-
-const upDiv = {
-  fontFamily: 'Roboto',
-  fontWeight: 600,
-  backgroundColor: '#334E9E',
-  width: '100%',
-  position: 'relative',
-  top: '0px',
-  left: '0',
-  textAlign: 'center',
-  fontSize: '18px',
-  color: '#fff',
-  height: '130px',
-  padding: '5px 0',
-  borderRadius: '15px 15px 0 0',
-  lineHeight: '24px',
-};
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
@@ -309,7 +292,7 @@ function Schedule(): JSX.Element {
 
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={modalStyle}>
-          <Typography component="div" sx={upDiv}>
+          <div className={styled.modal}>
             Demir Kadin: Neslican
             <br />
             19.02.2023, 13:00
@@ -366,13 +349,7 @@ function Schedule(): JSX.Element {
                 <img src={enImg} alt="EN" />
               </span>
             </div>
-          </Typography>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          </div>
         </Box>
       </Modal>
     </div>
