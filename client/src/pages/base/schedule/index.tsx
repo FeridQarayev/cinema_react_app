@@ -103,6 +103,7 @@ const modalStyle = {
 };
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
+  const buyBtn = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
   const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0 });
   const [price, setPrice] = useState<number>(0);
@@ -123,7 +124,8 @@ function Schedule(): JSX.Element {
         divTag != null && (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`));
       });
     });
-  }, []);
+    price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
+  }, [price]);
   const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
     () => [
       {
@@ -250,10 +252,10 @@ function Schedule(): JSX.Element {
 
   const selectPlace = (place: React.MouseEvent<HTMLSpanElement>): void => {
     const placePrice = parseInt(String(place.currentTarget.getAttribute('price')));
-    console.log(place.currentTarget);
-    console.log(place.currentTarget.classList);
     place.currentTarget.classList.toggle(styled.modal__body__list__select);
-    place.currentTarget.classList.value === styled.modal__body__list__select ? setPrice(price + placePrice) : setPrice(price - placePrice);
+    place.currentTarget.classList.value === styled.modal__body__list__select
+      ? setPrice((prc) => placePrice + prc)
+      : setPrice((prc) => prc - placePrice);
   };
 
   const sortedBorder = (hall: Hall): JSX.Element[] => {
@@ -269,7 +271,6 @@ function Schedule(): JSX.Element {
         createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
       for (let z = 1; z <= hall.row; z++) {
-        // console.log(((z + 73) / 9) * ((((i + 4) * 99) / 4) * 3));
         const emptyLi: JSX.Element = createElement(
           'li',
           {
@@ -304,6 +305,7 @@ function Schedule(): JSX.Element {
     }
     return [...totalLiBordered, ...totalLiEmpty];
   };
+
   return (
     <div className={styled.schedule}>
       <section>
@@ -494,7 +496,7 @@ function Schedule(): JSX.Element {
                       <span>{price}</span> AZN
                     </p>
                   </div>
-                  <div className={styled.modal__footer__container__bottom__btn}>
+                  <div ref={buyBtn} className={styled.modal__footer__container__bottom__btn}>
                     <a href="#">Tesdiqlemek</a>
                   </div>
                 </div>
