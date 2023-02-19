@@ -22,6 +22,7 @@ interface MovieList {
   id: number;
   name: string;
   sessions: string;
+  sessionsDay: string;
   cinema: string;
   hall: string;
   formats: string[];
@@ -44,6 +45,7 @@ const data: MovieList[] = [
     id: 1,
     name: 'John',
     sessions: new Date().toLocaleTimeString(),
+    sessionsDay: new Date().toLocaleDateString(),
     cinema: '28 Mall',
     hall: 'Hall 1',
     formats: ['2D', '3D'],
@@ -55,6 +57,7 @@ const data: MovieList[] = [
     id: 2,
     name: 'Ant-Man and the Wasp: Quantumania',
     sessions: new Date().toLocaleTimeString(),
+    sessionsDay: new Date().toLocaleDateString(),
     cinema: 'Deniz Mall',
     hall: 'Hall 2',
     formats: ['2D', '3D'],
@@ -66,6 +69,7 @@ const data: MovieList[] = [
     id: 3,
     name: 'Plane',
     sessions: new Date().toLocaleTimeString(),
+    sessionsDay: new Date().toLocaleDateString(),
     cinema: '28 Mall',
     hall: 'Hall 4',
     formats: ['2D', '3D'],
@@ -132,12 +136,14 @@ function Schedule(): JSX.Element {
   const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0, reserved: [{ reservedCol: 0, reservedRow: 0 }] });
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
-  const handleOpen = (num: number, price: number): void => {
+  const [movie, setMovie] = useState<MovieList>();
+  const handleOpen = (num: number, movie: MovieList): void => {
     setOpen(true);
-    bordereds.price = price;
-    borderedss.price = price;
+    bordereds.price = movie.price;
+    borderedss.price = movie.price;
     setPrice(0);
     num === 1 ? setArr(bordereds) : setArr(borderedss);
+    setMovie(movie);
   };
   const handleClose = (): void => {
     setOpen(false);
@@ -234,7 +240,7 @@ function Schedule(): JSX.Element {
           <Box
             component="div"
             onClick={() => {
-              handleOpen(cell.getValue<number>(), row.original.price);
+              handleOpen(cell.getValue<number>(), row.original);
             }}
             sx={() => {
               return {
@@ -403,11 +409,11 @@ function Schedule(): JSX.Element {
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={modalStyle}>
           <div className={styled.modal}>
-            Demir Kadin: Neslican
+            {movie?.name}
             <br />
-            19.02.2023, 13:00
+            {movie?.sessionsDay}, {movie?.sessions}
             <br />
-            Naxçivan, Zal 3
+            {movie?.cinema}, {movie?.hall}
             <div className={styled.up__icon}>
               <span className={styled.hover__text}>
                 <span className={styled.hover__text__content}>
