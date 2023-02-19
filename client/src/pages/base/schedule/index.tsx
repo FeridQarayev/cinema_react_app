@@ -111,6 +111,7 @@ function Schedule(): JSX.Element {
     setOpen(true);
     bordereds.price = price;
     borderedss.price = price;
+    setPrice(0);
     num === 1 ? setArr(bordereds) : setArr(borderedss);
   };
   const handleClose = (): void => {
@@ -249,8 +250,8 @@ function Schedule(): JSX.Element {
 
   const selectPlace = (place: React.MouseEvent<HTMLSpanElement>): void => {
     const placePrice = parseInt(String(place.currentTarget.getAttribute('price')));
-    console.log(place.currentTarget.getAttribute('column'));
-    console.log(place.currentTarget.getAttribute('price'));
+    console.log(place.currentTarget);
+    console.log(place.currentTarget.classList);
     place.currentTarget.classList.toggle(styled.modal__body__list__select);
     place.currentTarget.classList.value === styled.modal__body__list__select ? setPrice(price + placePrice) : setPrice(price - placePrice);
   };
@@ -264,14 +265,15 @@ function Schedule(): JSX.Element {
       let leftpx = 95;
       const borderedLiLeft: JSX.Element = createElement(
         'li',
-        { key: (Math.random() * new Date().getTime()) / 100, className: styled.modal__body__list__border },
+        { key: i, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
       for (let z = 1; z <= hall.row; z++) {
+        // console.log(((z + 73) / 9) * ((((i + 4) * 99) / 4) * 3));
         const emptyLi: JSX.Element = createElement(
           'li',
           {
-            key: (Math.random() * new Date().getTime()) / 1000,
+            key: ((z + 73) / 9) * ((((i + 4) * 99) / 4) * 3),
             className: styled.modal__body__list__empty,
           },
           createElement(
@@ -293,7 +295,7 @@ function Schedule(): JSX.Element {
       }
       const borderedLiRight: JSX.Element = createElement(
         'li',
-        { key: (Math.random() * new Date().getTime()) / 10, className: styled.modal__body__list__border },
+        { key: i * 77, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`), right: String(`${rightpx}px`), left: String('unset') } }, i)
       );
       toppx -= 34;
