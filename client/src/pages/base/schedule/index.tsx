@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Modal } from '@mui/material';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState } from 'react';
 import azImg from '../../../images/constant/ni_aze_white.png';
@@ -348,6 +348,280 @@ function Schedule(): JSX.Element {
                 </span>
                 <img src={enImg} alt="EN" />
               </span>
+            </div>
+            <div className={styled.modal__body}>
+              <ul className={styled.modal__body__list}>
+                <li className={styled.modal__body__list__border}>
+                  <b>1</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>2</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>3</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>4</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>5</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>6</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>7</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>8</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>9</b>
+                </li>
+                <li className={styled.modal__body__list__border}>
+                  <b>10</b>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>8</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>1</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>2</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>3</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>4</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>5</span>
+                </li>
+                <li className={styled.modal__body__list__empty}>
+                  <span>6</span>
+                </li>
+                <li className={styled.modal__body__list__select}>
+                  <span>7</span>
+                </li>
+                <li className={styled.modal__body__list__reserv}>
+                  <span>8</span>
+                </li>
+              </ul>
             </div>
           </div>
         </Box>
