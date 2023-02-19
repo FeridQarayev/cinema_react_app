@@ -33,6 +33,10 @@ interface Hall {
   column: number;
   row: number;
   price: number;
+  reserved: Array<{
+    reservedCol: number;
+    reservedRow: number;
+  }>;
 }
 
 const data: MovieList[] = [
@@ -75,11 +79,31 @@ const bordereds: Hall = {
   column: 10,
   row: 8,
   price: 0,
+  reserved: [
+    {
+      reservedCol: 2,
+      reservedRow: 3,
+    },
+    {
+      reservedCol: 1,
+      reservedRow: 3,
+    },
+    {
+      reservedCol: 2,
+      reservedRow: 4,
+    },
+  ],
 };
 const borderedss: Hall = {
   column: 5,
   row: 3,
   price: 0,
+  reserved: [
+    {
+      reservedCol: 1,
+      reservedRow: 3,
+    },
+  ],
 };
 
 const modalStyle = {
@@ -105,7 +129,7 @@ function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
-  const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0 });
+  const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0, reserved: [{ reservedCol: 0, reservedRow: 0 }] });
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const handleOpen = (num: number, price: number): void => {
@@ -275,7 +299,10 @@ function Schedule(): JSX.Element {
           'li',
           {
             key: ((z + 73) / 9) * ((((i + 4) * 99) / 4) * 3),
-            className: styled.modal__body__list__empty,
+            className:
+              hall.reserved.find((r) => r.reservedRow === z && r.reservedCol === i)?.reservedCol === undefined
+                ? styled.modal__body__list__empty
+                : styled.modal__body__list__reserv,
           },
           createElement(
             'span',
