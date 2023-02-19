@@ -460,6 +460,42 @@ function Schedule(): JSX.Element {
                 </li> */}
               </ul>
             </div>
+            <div className={styled.modal__footer}>
+              <span className={styled.modal__footer__screen}>EKRAN</span>
+              <div className={styled.modal__footer__marg}></div>
+              <div className={styled.modal__footer__container}>
+                <div className={styled.modal__footer__container__info}>
+                  <div className={styled.modal__footer__container__info__empty}>
+                    <span></span>
+                    <b>Boş yerlər</b>
+                  </div>
+                  <div className={styled.modal__footer__container__info__reserv}>
+                    <span></span>
+                    <b>Boş yerlər</b>
+                  </div>
+                  <div className={styled.modal__footer__container__info__select}>
+                    <span></span>
+                    <b>Boş yerlər</b>
+                  </div>
+                  <div className={styled.modal__footer__container__info__comfort}>
+                    <span></span>
+                    <b>Boş yerlər</b>
+                  </div>
+                </div>
+                <div className={styled.modal__footer__container__clr}></div>
+                <div className={styled.modal__footer__container__bottom}>
+                  <div className={styled.modal__footer__container__bottom__price}>
+                    <label>Ümumi məbləğ:</label>
+                    <p>
+                      <span>0</span> AZN
+                    </p>
+                  </div>
+                  <div className={styled.modal__footer__container__bottom__btn}>
+                    <a href="#">Tesdiqlemek</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </Box>
       </Modal>
