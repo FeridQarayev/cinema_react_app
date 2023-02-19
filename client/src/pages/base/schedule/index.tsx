@@ -1,6 +1,6 @@
 import { Box, Modal } from '@mui/material';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
-import React, { useEffect, useRef, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useMemo, useState, createElement } from 'react';
 import azImg from '../../../images/constant/ni_aze_white.png';
 import enImg from '../../../images/constant/ni_eng_white.png';
 import fourDxImg from '../../../images/constant/ni_fourdx_white.png';
@@ -65,6 +65,9 @@ const data: MovieList[] = [
   },
 ];
 
+const bordereds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const borderedss: number[] = [1, 2, 3, 4, 5];
+
 const modalStyle = {
   position: 'absolute',
   top: '0',
@@ -87,6 +90,15 @@ const modalStyle = {
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
+  const [arr, setArr] = useState<number[]>([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = (num: number): void => {
+    setOpen(true);
+    num === 1 ? setArr(bordereds) : setArr(borderedss);
+  };
+  const handleClose = (): void => {
+    setOpen(false);
+  };
   useEffect(() => {
     container.current?.addEventListener('mousemove', (e) => {
       divTags.current.forEach((divTag) => {
@@ -177,7 +189,9 @@ function Schedule(): JSX.Element {
         Cell: ({ cell }) => (
           <Box
             component="div"
-            onClick={handleOpen}
+            onClick={() => {
+              handleOpen(cell.getValue<number>());
+            }}
             sx={() => {
               return {
                 border: '1px solid #DCDCDC',
@@ -216,12 +230,19 @@ function Schedule(): JSX.Element {
     []
   );
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
-  const handleClose = (): void => {
-    setOpen(false);
+  const sortedBorder = (): JSX.Element[] => {
+    const totalLi: JSX.Element[] = [];
+    let toppx = 341;
+    arr.forEach((item) => {
+      toppx -= 34;
+      const myData: JSX.Element = createElement(
+        'li',
+        { key: item, style: { backgroundColor: 'red' }, className: styled.modal__body__list__border },
+        createElement('b', { style: { top: String(`${toppx}px`) } }, item)
+      );
+      totalLi.push(myData);
+    });
+    return totalLi;
   };
   return (
     <div className={styled.schedule}>
@@ -351,36 +372,21 @@ function Schedule(): JSX.Element {
             </div>
             <div className={styled.modal__body}>
               <ul className={styled.modal__body__list}>
-                <li className={styled.modal__body__list__border}>
-                  <b>1</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
+                {/* {bordereds.map((n, index) => (
+                  <li
+                    key={index}
+                    className={styled.modal__body__list__border}
+                    ref={(e: HTMLLIElement) => {
+                      borderedList.current.push(e);
+                    }}
+                  >
+                    <b>{n}</b>
+                  </li>
+                ))} */}
+                {sortedBorder()}
+                {/* <li className={styled.modal__body__list__border}>
                   <b>2</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>3</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>4</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>5</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>6</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>7</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>8</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>9</b>
-                </li>
-                <li className={styled.modal__body__list__border}>
-                  <b>10</b>
-                </li>
+                </li> */}
                 <li className={styled.modal__body__list__empty}>
                   <span>1</span>
                 </li>
