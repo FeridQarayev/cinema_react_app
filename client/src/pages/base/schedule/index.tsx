@@ -460,38 +460,7 @@ function Schedule(): JSX.Element {
               </span>
             </div>
             <div className={styled.modal__body}>
-              <ul className={styled.modal__body__list}>
-                {/* {bordereds.map((n, index) => (
-                  <li
-                    key={index}
-                    className={styled.modal__body__list__border}
-                    ref={(e: HTMLLIElement) => {
-                      borderedList.current.push(e);
-                    }}
-                  >
-                    <b>{n}</b>
-                  </li>
-                ))} */}
-                {sortedBorder(arr)}
-                {/* <li className={styled.modal__body__list__border}>
-                  <b>2</b>
-                </li> */}
-                {/* <li
-                  className={styled.modal__body__list__empty}
-                  onClick={(e) => {
-                    console.log(e.currentTarget.children[0]);
-                  }}
-                >
-                  <span>1</span>
-                </li> */}
-
-                {/* <li className={styled.modal__body__list__select}>
-                  <span>7</span>
-                </li>
-                <li className={styled.modal__body__list__reserv}>
-                  <span>8</span>
-                </li> */}
-              </ul>
+              <ul className={styled.modal__body__list}>{sortedBorder(arr)}</ul>
             </div>
             <div className={styled.modal__footer}>
               <span className={styled.modal__footer__screen}>EKRAN</span>
