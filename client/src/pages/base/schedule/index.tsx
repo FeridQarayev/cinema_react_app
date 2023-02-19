@@ -1,6 +1,13 @@
 import { Box, Modal, Typography } from '@mui/material';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState } from 'react';
+import azImg from '../../../images/constant/ni_aze_white.png';
+import enImg from '../../../images/constant/ni_eng_white.png';
+import fourDxImg from '../../../images/constant/ni_fourdx_white.png';
+import ruImg from '../../../images/constant/ni_rus_white.png';
+import d3 from '../../../images/constant/ni_threed_white.png';
+import turImg from '../../../images/constant/ni_tur_white.png';
+import d2 from '../../../images/constant/ni_twod_white.png';
 import backimg from '../../../images/schedule/bg.jpg';
 import topRight from '../../../images/schedule/bobine.png';
 import bottomLeft from '../../../images/schedule/bottom-left.png';
@@ -58,16 +65,41 @@ const data: MovieList[] = [
   },
 ];
 
-const style = {
+const modalStyle = {
   position: 'absolute',
-  top: '50%',
+  top: '0',
   left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  transform: 'translate(-50%, 0)',
+  maxHeight: '100vh',
+  border: 'none',
   boxShadow: 24,
-  p: 4,
+  backgroundColor: '#f3f3f3',
+  width: '1000px',
+  height: '761px',
+  verticalAlign: 'middle',
+  overflow: 'auto',
+  borderRadius: '15px 15px 15px 15px',
+  fontFamily: 'Roboto',
+  '&:focus-visible': {
+    outline: 'none',
+  },
+};
+
+const upDiv = {
+  fontFamily: 'Roboto',
+  fontWeight: 600,
+  backgroundColor: '#334E9E',
+  width: '100%',
+  position: 'relative',
+  top: '0px',
+  left: '0',
+  textAlign: 'center',
+  fontSize: '18px',
+  color: '#fff',
+  height: '130px',
+  padding: '5px 0',
+  borderRadius: '15px 15px 0 0',
+  lineHeight: '24px',
 };
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
@@ -276,7 +308,65 @@ function Schedule(): JSX.Element {
       <MaterialReactTable columns={columns} data={data} />
 
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={style}>
+        <Box sx={modalStyle}>
+          <Typography component="div" sx={upDiv}>
+            Demir Kadin: Neslican
+            <br />
+            19.02.2023, 13:00
+            <br />
+            Naxçivan, Zal 3
+            <div className={styled.up__icon}>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film 4DX formatinda nümayiş olunur
+                </span>
+                <img src={fourDxImg} alt="4DX" />
+              </span>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film 3D formatinda nümayiş olunur
+                </span>
+                <img src={d3} alt="3D" />
+              </span>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film 2D formatinda nümayiş olunur
+                </span>
+                <img src={d2} alt="2d" />
+              </span>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film Azərbaycan dilində nümayiş olunur
+                </span>
+                <img src={azImg} alt="AZ" />
+              </span>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film Türk dilində nümayiş olunur
+                </span>
+                <img src={turImg} alt="Tu" />
+              </span>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film Rus dilində nümayiş olunur
+                </span>
+                <img src={ruImg} alt="RU" />
+              </span>
+              <span className={styled.hover__text}>
+                <span className={styled.hover__text__content}>
+                  <b></b>
+                  Film İngilis dilində nümayiş olunur
+                </span>
+                <img src={enImg} alt="EN" />
+              </span>
+            </div>
+          </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Text in a modal
           </Typography>
