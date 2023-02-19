@@ -1,6 +1,6 @@
-import { Box } from '@mui/material';
+import { Box, Modal, Typography } from '@mui/material';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import backimg from '../../../images/schedule/bg.jpg';
 import topRight from '../../../images/schedule/bobine.png';
 import bottomLeft from '../../../images/schedule/bottom-left.png';
@@ -57,17 +57,28 @@ const data: MovieList[] = [
     places: 3,
   },
 ];
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
   useEffect(() => {
     container.current?.addEventListener('mousemove', (e) => {
-      divTags.current.forEach(
-        (divTag) => (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`))
-      );
+      divTags.current.forEach((divTag) => {
+        divTag != null && (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`));
+      });
     });
   }, []);
-  console.log(data);
   const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
     () => [
       {
@@ -151,6 +162,7 @@ function Schedule(): JSX.Element {
         Cell: ({ cell }) => (
           <Box
             component="div"
+            onClick={handleOpen}
             sx={() => {
               return {
                 border: '1px solid #DCDCDC',
@@ -161,6 +173,7 @@ function Schedule(): JSX.Element {
                 float: 'none',
                 position: 'relative',
                 background: '#FFFFFF',
+                cursor: 'pointer',
               };
             }}
           >
@@ -168,7 +181,6 @@ function Schedule(): JSX.Element {
               component="span"
               sx={() => {
                 return {
-                  cursor: 'pointer',
                   fontSize: '14px',
                   lineHeight: '16px',
                   color: '#000',
@@ -188,6 +200,14 @@ function Schedule(): JSX.Element {
     ],
     []
   );
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = (): void => {
+    setOpen(true);
+  };
+  const handleClose = (): void => {
+    setOpen(false);
+  };
   return (
     <div className={styled.schedule}>
       <section>
@@ -252,7 +272,19 @@ function Schedule(): JSX.Element {
           </div>
         </div>
       </section>
-      <MaterialReactTable columns={columns} data={data} />;
+
+      <MaterialReactTable columns={columns} data={data} />
+
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 }
