@@ -8,6 +8,7 @@ import ruImg from '../../../images/constant/ni_rus_white.png';
 import d3 from '../../../images/constant/ni_threed_white.png';
 import turImg from '../../../images/constant/ni_tur_white.png';
 import d2 from '../../../images/constant/ni_twod_white.png';
+import screenImg from '../../../images/constant/zone_footer.png';
 import backimg from '../../../images/schedule/bg.jpg';
 import topRight from '../../../images/schedule/bobine.png';
 import bottomLeft from '../../../images/schedule/bottom-left.png';
@@ -462,7 +463,7 @@ function Schedule(): JSX.Element {
             </div>
             <div className={styled.modal__footer}>
               <span className={styled.modal__footer__screen}>EKRAN</span>
-              <div className={styled.modal__footer__marg}></div>
+              <div style={{ backgroundImage: `url(${String(screenImg)})` }} className={styled.modal__footer__marg}></div>
               <div className={styled.modal__footer__container}>
                 <div className={styled.modal__footer__container__info}>
                   <div className={styled.modal__footer__container__info__empty}>
@@ -471,15 +472,15 @@ function Schedule(): JSX.Element {
                   </div>
                   <div className={styled.modal__footer__container__info__reserv}>
                     <span></span>
-                    <b>Boş yerlər</b>
+                    <b>Məşğul yerlər</b>
                   </div>
                   <div className={styled.modal__footer__container__info__select}>
                     <span></span>
-                    <b>Boş yerlər</b>
+                    <b>Seçilmiş yerlər</b>
                   </div>
                   <div className={styled.modal__footer__container__info__comfort}>
                     <span></span>
-                    <b>Boş yerlər</b>
+                    <b>İkili Comfort yerlər</b>
                   </div>
                 </div>
                 <div className={styled.modal__footer__container__clr}></div>
