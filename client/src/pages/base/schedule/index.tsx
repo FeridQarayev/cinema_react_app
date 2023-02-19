@@ -31,6 +31,7 @@ interface MovieList {
 interface Hall {
   column: number;
   row: number;
+  price: number;
 }
 
 const data: MovieList[] = [
@@ -72,10 +73,12 @@ const data: MovieList[] = [
 const bordereds: Hall = {
   column: 10,
   row: 8,
+  price: 0,
 };
 const borderedss: Hall = {
   column: 5,
   row: 3,
+  price: 0,
 };
 
 const modalStyle = {
@@ -100,10 +103,12 @@ const modalStyle = {
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
-  const [arr, setArr] = useState<Hall>({ column: 0, row: 0 });
+  const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0 });
   const [open, setOpen] = useState(false);
-  const handleOpen = (num: number): void => {
+  const handleOpen = (num: number, price: number): void => {
     setOpen(true);
+    bordereds.price = price;
+    borderedss.price = price;
     num === 1 ? setArr(bordereds) : setArr(borderedss);
   };
   const handleClose = (): void => {
@@ -196,11 +201,11 @@ function Schedule(): JSX.Element {
         id: 'places',
         header: 'Buy Now',
         /* eslint-disable react/prop-types */
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <Box
             component="div"
             onClick={() => {
-              handleOpen(cell.getValue<number>());
+              handleOpen(cell.getValue<number>(), row.original.price);
             }}
             sx={() => {
               return {
@@ -240,6 +245,14 @@ function Schedule(): JSX.Element {
     []
   );
 
+  const selectPlace = (place: React.MouseEvent<HTMLSpanElement>): void => {
+    console.log(place.currentTarget);
+    console.log(place.currentTarget.getAttribute('row'));
+    console.log(place.currentTarget.getAttribute('column'));
+    console.log(place.currentTarget.getAttribute('price'));
+    place.currentTarget.classList.toggle(styled.modal__body__list__select);
+  };
+
   const sortedBorder = (hall: Hall): JSX.Element[] => {
     const totalLiBordered: JSX.Element[] = [];
     const totalLiEmpty: JSX.Element[] = [];
@@ -252,11 +265,26 @@ function Schedule(): JSX.Element {
         { key: i, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
-      for (let i = 1; i <= hall.row; i++) {
+      for (let z = 1; z <= hall.row; z++) {
         const emptyLi: JSX.Element = createElement(
           'li',
-          { key: i, className: styled.modal__body__list__empty },
-          createElement('span', { style: { left: String(`${leftpx}px`), top: String(`${toppx}px`) } }, i)
+          {
+            key: z,
+            className: styled.modal__body__list__empty,
+          },
+          createElement(
+            'span',
+            {
+              onClick: (e: React.MouseEvent<HTMLSpanElement>): void => {
+                selectPlace(e);
+              },
+              style: { left: String(`${leftpx}px`), top: String(`${toppx}px`) },
+              row: z,
+              column: i,
+              price: hall.price,
+            },
+            z
+          )
         );
         leftpx += 34;
         totalLiEmpty.push(emptyLi);
@@ -415,7 +443,12 @@ function Schedule(): JSX.Element {
                 {/* <li className={styled.modal__body__list__border}>
                   <b>2</b>
                 </li> */}
-                {/* <li className={styled.modal__body__list__empty}>
+                {/* <li
+                  className={styled.modal__body__list__empty}
+                  onClick={(e) => {
+                    console.log(e.currentTarget.children[0]);
+                  }}
+                >
                   <span>1</span>
                 </li> */}
 
