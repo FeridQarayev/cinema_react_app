@@ -28,6 +28,10 @@ interface MovieList {
   price: number;
   places: number;
 }
+interface Hall {
+  column: number;
+  row: number;
+}
 
 const data: MovieList[] = [
   {
@@ -65,8 +69,14 @@ const data: MovieList[] = [
   },
 ];
 
-const bordereds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const borderedss: number[] = [1, 2, 3, 4, 5];
+const bordereds: Hall = {
+  column: 10,
+  row: 8,
+};
+const borderedss: Hall = {
+  column: 5,
+  row: 8,
+};
 
 const modalStyle = {
   position: 'absolute',
@@ -90,7 +100,7 @@ const modalStyle = {
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
-  const [arr, setArr] = useState<number[]>([]);
+  const [arr, setArr] = useState<Hall>({ column: 0, row: 0 });
   const [open, setOpen] = useState(false);
   const handleOpen = (num: number): void => {
     setOpen(true);
@@ -230,18 +240,18 @@ function Schedule(): JSX.Element {
     []
   );
 
-  const sortedBorder = (): JSX.Element[] => {
+  const sortedBorder = (hall: Hall): JSX.Element[] => {
     const totalLi: JSX.Element[] = [];
     let toppx = 341;
-    arr.forEach((item) => {
+    for (let i = 1; i <= hall.column; i++) {
       toppx -= 34;
       const myData: JSX.Element = createElement(
         'li',
-        { key: item, style: { backgroundColor: 'red' }, className: styled.modal__body__list__border },
-        createElement('b', { style: { top: String(`${toppx}px`) } }, item)
+        { key: i, style: { backgroundColor: 'red' }, className: styled.modal__body__list__border },
+        createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
       totalLi.push(myData);
-    });
+    }
     return totalLi;
   };
   return (
@@ -383,7 +393,7 @@ function Schedule(): JSX.Element {
                     <b>{n}</b>
                   </li>
                 ))} */}
-                {sortedBorder()}
+                {sortedBorder(arr)}
                 {/* <li className={styled.modal__body__list__border}>
                   <b>2</b>
                 </li> */}
