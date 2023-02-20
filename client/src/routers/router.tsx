@@ -3,6 +3,7 @@ import BaseRoot from '../pages/base/BaseRoot';
 import ComingSoon from '../pages/base/comingsoon';
 import Detail from '../pages/base/detail';
 import Home from '../pages/base/home';
+import Register from '../pages/base/register';
 import Schedule from '../pages/base/schedule';
 
 export const ROUTES = [
@@ -33,6 +34,10 @@ export const ROUTES = [
       {
         path: 'schedule',
         element: <Schedule />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
       },
     ],
   },
