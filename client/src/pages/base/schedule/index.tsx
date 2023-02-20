@@ -464,55 +464,69 @@ function Schedule(): JSX.Element {
             <br />
             {movie?.cinema}, {movie?.hall}
             <div className={styled.up__icon}>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film 4DX formatinda nümayiş olunur
+              {movie?.formats.d4 === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film 4DX formatinda nümayiş olunur
+                  </span>
+                  <img src={fourDxImg} alt="4DX" />
                 </span>
-                <img src={fourDxImg} alt="4DX" />
-              </span>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film 3D formatinda nümayiş olunur
+              )}
+              {movie?.formats.d3 === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film 3D formatinda nümayiş olunur
+                  </span>
+                  <img src={d3} alt="3D" />
                 </span>
-                <img src={d3} alt="3D" />
-              </span>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film 2D formatinda nümayiş olunur
+              )}
+              {movie?.formats.d2 === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film 2D formatinda nümayiş olunur
+                  </span>
+                  <img src={d2} alt="2d" />
                 </span>
-                <img src={d2} alt="2d" />
-              </span>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film Azərbaycan dilində nümayiş olunur
+              )}
+              {movie?.languages.az === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film Azərbaycan dilində nümayiş olunur
+                  </span>
+                  <img src={azImg} alt="AZ" />
                 </span>
-                <img src={azImg} alt="AZ" />
-              </span>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film Türk dilində nümayiş olunur
+              )}
+              {movie?.languages.tu === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film Türk dilində nümayiş olunur
+                  </span>
+                  <img src={turImg} alt="Tu" />
                 </span>
-                <img src={turImg} alt="Tu" />
-              </span>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film Rus dilində nümayiş olunur
+              )}
+              {movie?.languages.ru === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film Rus dilində nümayiş olunur
+                  </span>
+                  <img src={ruImg} alt="RU" />
                 </span>
-                <img src={ruImg} alt="RU" />
-              </span>
-              <span className={styled.hover__text}>
-                <span className={styled.hover__text__content}>
-                  <b></b>
-                  Film İngilis dilində nümayiş olunur
+              )}
+              {movie?.languages.en === true && (
+                <span className={styled.hover__text}>
+                  <span className={styled.hover__text__content}>
+                    <b></b>
+                    Film İngilis dilində nümayiş olunur
+                  </span>
+                  <img src={enImg} alt="EN" />
                 </span>
-                <img src={enImg} alt="EN" />
-              </span>
+              )}
             </div>
             <div className={styled.modal__body}>
               <ul className={styled.modal__body__list}>{sortedBorder(arr)}</ul>
