@@ -410,9 +410,10 @@
     }
   }
   &__table {
-    margin-top: 200px;
-    margin-bottom: 100px;
+    margin-top: 100px;
+    padding-bottom: 100px;
     width: 100%;
+    background-color: #333;
     &__header {
       background-color: #333;
       width: 100%;
@@ -772,5 +773,10 @@
   }
   .slides__slide__topright {
     display: none !important;
+  }
+}
+@media (max-width: 1400px) {
+  .schedule__table__body {
+    width: 100%;
   }
 }
