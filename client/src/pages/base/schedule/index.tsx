@@ -55,6 +55,10 @@ interface Cinema {
   id: number;
   name: string;
 }
+interface DropLanguages {
+  id: string;
+  name: string;
+}
 
 const data: MovieList[] = [
   {
@@ -128,6 +132,102 @@ const data: MovieList[] = [
     },
     price: 7,
     places: 3,
+  },
+  {
+    id: 4,
+    name: 'Kino',
+    sessions: new Date().toLocaleTimeString(),
+    sessionsDay: getDateByDay(3).toLocaleDateString(),
+    cinema: {
+      id: 2,
+      name: 'Deniz Mall',
+    },
+    hall: 'Hall 4',
+    formats: {
+      d2: true,
+      d3: true,
+      d4: false,
+    },
+    languages: {
+      az: true,
+      tu: true,
+      ru: false,
+      en: false,
+    },
+    price: 7,
+    places: 3,
+  },
+  {
+    id: 5,
+    name: 'Film',
+    sessions: new Date().toLocaleTimeString(),
+    sessionsDay: getDateByDay(0).toLocaleDateString(),
+    cinema: {
+      id: 3,
+      name: 'Amburan Mall',
+    },
+    hall: 'Hall 4',
+    formats: {
+      d2: true,
+      d3: false,
+      d4: false,
+    },
+    languages: {
+      az: false,
+      tu: false,
+      ru: false,
+      en: true,
+    },
+    price: 7,
+    places: 3,
+  },
+  {
+    id: 6,
+    name: 'Movie',
+    sessions: new Date().toLocaleTimeString(),
+    sessionsDay: getDateByDay(0).toLocaleDateString(),
+    cinema: {
+      id: 3,
+      name: 'Amburan Mall',
+    },
+    hall: 'Hall 4',
+    formats: {
+      d2: true,
+      d3: true,
+      d4: false,
+    },
+    languages: {
+      az: true,
+      tu: false,
+      ru: false,
+      en: false,
+    },
+    price: 7,
+    places: 3,
+  },
+  {
+    id: 7,
+    name: 'Kink Kong',
+    sessions: new Date().toLocaleTimeString(),
+    sessionsDay: new Date().toLocaleDateString(),
+    cinema: {
+      id: 4,
+      name: 'Nakhcivan',
+    },
+    hall: 'Hall 8',
+    formats: {
+      d2: false,
+      d3: false,
+      d4: true,
+    },
+    languages: {
+      az: false,
+      tu: true,
+      ru: true,
+      en: false,
+    },
+    price: 8,
+    places: 1,
   },
 ];
 
@@ -219,6 +319,13 @@ const dropCinemas: Cinema[] = [
   },
 ];
 
+const dropLanguages: DropLanguages[] = [
+  { id: '0', name: 'Language' },
+  { id: 'az', name: 'Azerbaijan' },
+  { id: 'tu', name: 'Turkish' },
+  { id: 'ru', name: 'Russian' },
+  { id: 'en', name: 'English' },
+];
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
@@ -230,11 +337,15 @@ function Schedule(): JSX.Element {
   const [movies, setMovies] = useState<MovieList[]>(data);
   const [day, setDay] = useState(new Date().toLocaleDateString());
   const [cinema, setCinema] = useState(0);
+  const [language, setLanguage] = useState('0');
   const handleChangeDay = (event: SelectChangeEvent): void => {
     setDay(event.target.value);
   };
   const handleChangeCinema = (event: SelectChangeEvent): void => {
-    setCinema(parseInt(event.target.value));
+    setCinema(Number(event.target.value));
+  };
+  const handleChangeLanguage = (event: SelectChangeEvent): void => {
+    setLanguage(event.target.value);
   };
   const handleOpen = (num: number, movie: MovieList): void => {
     setOpen(true);
@@ -254,9 +365,21 @@ function Schedule(): JSX.Element {
       });
     });
     setMovies(data);
-    setMovies((mov) => mov.filter((row) => row.sessionsDay.includes(day) && (cinema !== 0 ? row.cinema.id === cinema : true)));
+    setMovies((mov) =>
+      mov.filter(
+        (row) =>
+          row.sessionsDay.includes(day) &&
+          (cinema !== 0 ? row.cinema.id === cinema : true) &&
+          (language !== '0'
+            ? (language.includes('az') && row.languages.az) ||
+              (language.includes('tu') && row.languages.tu) ||
+              (language.includes('ru') && row.languages.ru) ||
+              (language.includes('en') && row.languages.en)
+            : true)
+      )
+    );
     price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
-  }, [price, day, cinema]);
+  }, [price, day, cinema, language]);
   const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
     () => [
       {
@@ -594,11 +717,54 @@ function Schedule(): JSX.Element {
               value={cinema.toString()}
               onChange={handleChangeCinema}
               autoWidth
-              label="Age"
+              label="Cinema"
             >
               {dropCinemas.map((cinema) => (
                 <MenuItem key={cinema.id} value={cinema.id}>
                   {cinema.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl
+            sx={{
+              m: 1,
+              minWidth: 80,
+              backgroundColor: '#333',
+              '.css-rrdfqm-MuiFormLabel-root-MuiInputLabel-root': {
+                color: 'white !important',
+              },
+            }}
+          >
+            <InputLabel sx={{ color: 'white' }} id="demo-simple-select-autowidth-label">
+              Language
+            </InputLabel>
+            <Select
+              sx={{
+                color: 'white',
+                '.MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '.MuiSvgIcon-root ': {
+                  fill: 'white !important',
+                },
+              }}
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={language}
+              onChange={handleChangeLanguage}
+              autoWidth
+              label="Language"
+            >
+              {dropLanguages.map((language) => (
+                <MenuItem key={language.id} value={language.id}>
+                  {language.name}
                 </MenuItem>
               ))}
             </Select>
