@@ -35,7 +35,7 @@ interface MovieList {
   name: string;
   sessions: string;
   sessionsDay: string;
-  cinema: string;
+  cinema: Cinema;
   hall: string;
   formats: Formats;
   languages: Languages;
@@ -51,6 +51,10 @@ interface Hall {
     reservedRow: number;
   }>;
 }
+interface Cinema {
+  id: number;
+  name: string;
+}
 
 const data: MovieList[] = [
   {
@@ -58,7 +62,10 @@ const data: MovieList[] = [
     name: 'John',
     sessions: new Date().toLocaleTimeString(),
     sessionsDay: new Date().toLocaleDateString(),
-    cinema: '28 Mall',
+    cinema: {
+      id: 1,
+      name: '28 Mall',
+    },
     hall: 'Hall 1',
     formats: {
       d2: true,
@@ -79,7 +86,10 @@ const data: MovieList[] = [
     name: 'Ant-Man and the Wasp: Quantumania',
     sessions: new Date().toLocaleTimeString(),
     sessionsDay: getDateByDay(1).toLocaleDateString(),
-    cinema: 'Deniz Mall',
+    cinema: {
+      id: 2,
+      name: 'Deniz Mall',
+    },
     hall: 'Hall 2',
     formats: {
       d2: true,
@@ -100,7 +110,10 @@ const data: MovieList[] = [
     name: 'Plane',
     sessions: new Date().toLocaleTimeString(),
     sessionsDay: getDateByDay(-2).toLocaleDateString(),
-    cinema: '28 Mall',
+    cinema: {
+      id: 3,
+      name: 'Amburan Mall',
+    },
     hall: 'Hall 4',
     formats: {
       d2: true,
@@ -179,6 +192,32 @@ const dropDays = [
   getDateByDay(2).toLocaleDateString(),
   getDateByDay(3).toLocaleDateString(),
 ];
+const dropCinemas: Cinema[] = [
+  {
+    id: 0,
+    name: 'Cinema',
+  },
+  {
+    id: 1,
+    name: '28 Mall',
+  },
+  {
+    id: 2,
+    name: 'Deniz Mall',
+  },
+  {
+    id: 3,
+    name: 'Amburan Mall',
+  },
+  {
+    id: 4,
+    name: 'Nakhcivan',
+  },
+  {
+    id: 5,
+    name: 'Metro Prak',
+  },
+];
 
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
@@ -190,9 +229,12 @@ function Schedule(): JSX.Element {
   const [movie, setMovie] = useState<MovieList>();
   const [movies, setMovies] = useState<MovieList[]>(data);
   const [day, setDay] = useState(new Date().toLocaleDateString());
-
-  const handleChange = (event: SelectChangeEvent): void => {
+  const [cinema, setCinema] = useState(0);
+  const handleChangeDay = (event: SelectChangeEvent): void => {
     setDay(event.target.value);
+  };
+  const handleChangeCinema = (event: SelectChangeEvent): void => {
+    setCinema(parseInt(event.target.value));
   };
   const handleOpen = (num: number, movie: MovieList): void => {
     setOpen(true);
@@ -212,9 +254,9 @@ function Schedule(): JSX.Element {
       });
     });
     setMovies(data);
-    setMovies((mov) => mov.filter((row) => row.sessionsDay.includes(day)));
+    setMovies((mov) => mov.filter((row) => row.sessionsDay.includes(day) && (cinema !== 0 ? row.cinema.id === cinema : true)));
     price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
-  }, [price, day]);
+  }, [price, day, cinema]);
   const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
     () => [
       {
@@ -228,7 +270,7 @@ function Schedule(): JSX.Element {
         header: 'Sessions',
       },
       {
-        accessorFn: (row) => row.cinema,
+        accessorFn: (row) => row.cinema.name,
         id: 'cinema',
         header: 'Cinema',
       },
@@ -486,7 +528,7 @@ function Schedule(): JSX.Element {
             }}
           >
             <InputLabel sx={{ color: 'white' }} id="demo-simple-select-autowidth-label">
-              Tarix
+              Date
             </InputLabel>
             <Select
               sx={{
@@ -507,13 +549,56 @@ function Schedule(): JSX.Element {
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               value={day}
-              onChange={handleChange}
+              onChange={handleChangeDay}
               autoWidth
               label="Age"
             >
               {dropDays.map((day, i) => (
                 <MenuItem key={i} value={day}>
                   {day === new Date().toLocaleDateString() ? 'Today' : day}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl
+            sx={{
+              m: 1,
+              minWidth: 80,
+              backgroundColor: '#333',
+              '.css-rrdfqm-MuiFormLabel-root-MuiInputLabel-root': {
+                color: 'white !important',
+              },
+            }}
+          >
+            <InputLabel sx={{ color: 'white' }} id="demo-simple-select-autowidth-label">
+              Cinema
+            </InputLabel>
+            <Select
+              sx={{
+                color: 'white',
+                '.MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '.MuiSvgIcon-root ': {
+                  fill: 'white !important',
+                },
+              }}
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={cinema.toString()}
+              onChange={handleChangeCinema}
+              autoWidth
+              label="Age"
+            >
+              {dropCinemas.map((cinema) => (
+                <MenuItem key={cinema.id} value={cinema.id}>
+                  {cinema.name}
                 </MenuItem>
               ))}
             </Select>
@@ -531,7 +616,7 @@ function Schedule(): JSX.Element {
             <br />
             {movie?.sessionsDay}, {movie?.sessions}
             <br />
-            {movie?.cinema}, {movie?.hall}
+            {movie?.cinema.name}, {movie?.hall}
             <div className={styled.up__icon}>
               {movie?.formats.d4 === true && (
                 <span className={styled.hover__text}>
