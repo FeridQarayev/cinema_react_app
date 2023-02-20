@@ -168,6 +168,17 @@ const modalStyle = {
     outline: 'none',
   },
 };
+
+function getDateByDay(day: number): Date {
+  return new Date(new Date().setDate(new Date().getDate() + day));
+}
+
+const dropDays = [
+  new Date().toLocaleDateString(),
+  getDateByDay(1).toLocaleDateString(),
+  getDateByDay(2).toLocaleDateString(),
+  getDateByDay(3).toLocaleDateString(),
+];
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
@@ -176,7 +187,7 @@ function Schedule(): JSX.Element {
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const [movie, setMovie] = useState<MovieList>();
-  const [day, setDay] = useState('20.02.2023');
+  const [day, setDay] = useState(new Date().toLocaleDateString());
 
   const handleChange = (event: SelectChangeEvent): void => {
     setDay(event.target.value);
@@ -393,7 +404,7 @@ function Schedule(): JSX.Element {
     }
     return [...totalLiBordered, ...totalLiEmpty];
   };
-  console.log(day);
+  console.log(dropDays);
   return (
     <div className={styled.schedule}>
       <section>
@@ -497,12 +508,11 @@ function Schedule(): JSX.Element {
               autoWidth
               label="Age"
             >
-              <MenuItem selected={true} value={'20.02.2023'}>
-                Today
-              </MenuItem>
-              <MenuItem value={'21.02.2023'}>Tomorrow</MenuItem>
-              <MenuItem value={'22.02.2023'}>22.02.2023</MenuItem>
-              <MenuItem value={'23.02.2023'}>23.02.2023</MenuItem>
+              {dropDays.map((day, i) => (
+                <MenuItem key={i} value={day}>
+                  {day === new Date().toLocaleDateString() ? 'Today' : day}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
