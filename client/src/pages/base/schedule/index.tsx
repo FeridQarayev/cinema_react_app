@@ -17,45 +17,11 @@ import bottomRight from '../../../images/schedule/bottom-right.png';
 import middleDown from '../../../images/schedule/glasses-1.png';
 import topLeft from '../../../images/schedule/top-left.png';
 import type Cinema from '../../../interfaces/cinema';
+import type DropLanguages from '../../../interfaces/droplanguages';
+import type Hall from '../../../interfaces/hall';
+import type MovieList from '../../../interfaces/movielist';
 import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
-
-interface Formats {
-  d2: boolean;
-  d3: boolean;
-  d4: boolean;
-}
-interface Languages {
-  az: boolean;
-  tu: boolean;
-  ru: boolean;
-  en: boolean;
-}
-interface MovieList {
-  id: number;
-  name: string;
-  sessions: string;
-  sessionsDay: string;
-  cinema: Cinema;
-  hall: string;
-  formats: Formats;
-  languages: Languages;
-  price: number;
-  places: number;
-}
-interface Hall {
-  column: number;
-  row: number;
-  price: number;
-  reserved: Array<{
-    reservedCol: number;
-    reservedRow: number;
-  }>;
-}
-interface DropLanguages {
-  id: string;
-  name: string;
-}
 
 const data: MovieList[] = [
   {
