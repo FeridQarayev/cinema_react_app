@@ -16,6 +16,7 @@ import bottomLeft from '../../../images/schedule/bottom-left.png';
 import bottomRight from '../../../images/schedule/bottom-right.png';
 import middleDown from '../../../images/schedule/glasses-1.png';
 import topLeft from '../../../images/schedule/top-left.png';
+import type Cinema from '../../../interfaces/cinema';
 import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
 
@@ -50,10 +51,6 @@ interface Hall {
     reservedCol: number;
     reservedRow: number;
   }>;
-}
-interface Cinema {
-  id: number;
-  name: string;
 }
 interface DropLanguages {
   id: string;
