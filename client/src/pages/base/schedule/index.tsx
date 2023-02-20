@@ -78,7 +78,7 @@ const data: MovieList[] = [
     id: 2,
     name: 'Ant-Man and the Wasp: Quantumania',
     sessions: new Date().toLocaleTimeString(),
-    sessionsDay: new Date().toLocaleDateString(),
+    sessionsDay: getDateByDay(1).toLocaleDateString(),
     cinema: 'Deniz Mall',
     hall: 'Hall 2',
     formats: {
@@ -99,7 +99,7 @@ const data: MovieList[] = [
     id: 3,
     name: 'Plane',
     sessions: new Date().toLocaleTimeString(),
-    sessionsDay: new Date().toLocaleDateString(),
+    sessionsDay: getDateByDay(-2).toLocaleDateString(),
     cinema: '28 Mall',
     hall: 'Hall 4',
     formats: {
@@ -179,6 +179,7 @@ const dropDays = [
   getDateByDay(2).toLocaleDateString(),
   getDateByDay(3).toLocaleDateString(),
 ];
+
 function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
@@ -187,6 +188,7 @@ function Schedule(): JSX.Element {
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const [movie, setMovie] = useState<MovieList>();
+  const [movies, setMovies] = useState<MovieList[]>(data);
   const [day, setDay] = useState(new Date().toLocaleDateString());
 
   const handleChange = (event: SelectChangeEvent): void => {
@@ -209,8 +211,10 @@ function Schedule(): JSX.Element {
         divTag != null && (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`));
       });
     });
+    setMovies(data);
+    setMovies((mov) => mov.filter((row) => row.sessionsDay.includes(day)));
     price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
-  }, [price]);
+  }, [price, day]);
   const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
     () => [
       {
@@ -404,7 +408,6 @@ function Schedule(): JSX.Element {
     }
     return [...totalLiBordered, ...totalLiEmpty];
   };
-  console.log(dropDays);
   return (
     <div className={styled.schedule}>
       <section>
@@ -517,7 +520,7 @@ function Schedule(): JSX.Element {
           </FormControl>
         </div>
         <div className={styled.schedule__table__body}>
-          <MaterialReactTable columns={columns} data={data} />
+          <MaterialReactTable columns={columns} data={movies} />
         </div>
       </div>
 
