@@ -1,4 +1,5 @@
-import { Box, Modal } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Modal } from '@mui/material';
+import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState, createElement } from 'react';
 import azImg from '../../../images/constant/ni_aze_white.png';
@@ -175,6 +176,11 @@ function Schedule(): JSX.Element {
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const [movie, setMovie] = useState<MovieList>();
+  const [day, setDay] = useState('20.02.2023');
+
+  const handleChange = (event: SelectChangeEvent): void => {
+    setDay(event.target.value);
+  };
   const handleOpen = (num: number, movie: MovieList): void => {
     setOpen(true);
     bordereds.price = movie.price;
@@ -387,7 +393,7 @@ function Schedule(): JSX.Element {
     }
     return [...totalLiBordered, ...totalLiEmpty];
   };
-
+  console.log(day);
   return (
     <div className={styled.schedule}>
       <section>
@@ -454,7 +460,52 @@ function Schedule(): JSX.Element {
       </section>
 
       <div className={styled.schedule__table}>
-        <div className={styled.schedule__table__header}></div>
+        <div className={styled.schedule__table__header}>
+          <FormControl
+            sx={{
+              m: 1,
+              minWidth: 80,
+              backgroundColor: '#333',
+              '.css-rrdfqm-MuiFormLabel-root-MuiInputLabel-root': {
+                color: 'white !important',
+              },
+            }}
+          >
+            <InputLabel sx={{ color: 'white' }} id="demo-simple-select-autowidth-label">
+              Tarix
+            </InputLabel>
+            <Select
+              sx={{
+                color: 'white',
+                '.MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'rgba(228, 219, 233, 0.25)',
+                },
+                '.MuiSvgIcon-root ': {
+                  fill: 'white !important',
+                },
+              }}
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={day}
+              onChange={handleChange}
+              autoWidth
+              label="Age"
+            >
+              <MenuItem selected={true} value={'20.02.2023'}>
+                Today
+              </MenuItem>
+              <MenuItem value={'21.02.2023'}>Tomorrow</MenuItem>
+              <MenuItem value={'22.02.2023'}>22.02.2023</MenuItem>
+              <MenuItem value={'23.02.2023'}>23.02.2023</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
         <div className={styled.schedule__table__body}>
           <MaterialReactTable columns={columns} data={data} />
         </div>
