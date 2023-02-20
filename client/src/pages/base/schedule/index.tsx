@@ -23,6 +23,12 @@ interface Formats {
   d3: boolean;
   d4: boolean;
 }
+interface Languages {
+  az: boolean;
+  tu: boolean;
+  ru: boolean;
+  en: boolean;
+}
 interface MovieList {
   id: number;
   name: string;
@@ -31,7 +37,7 @@ interface MovieList {
   cinema: string;
   hall: string;
   formats: Formats;
-  languages: string[];
+  languages: Languages;
   price: number;
   places: number;
 }
@@ -58,7 +64,12 @@ const data: MovieList[] = [
       d3: true,
       d4: true,
     },
-    languages: ['AZ', 'RU'],
+    languages: {
+      az: false,
+      tu: true,
+      ru: true,
+      en: false,
+    },
     price: 12,
     places: 1,
   },
@@ -74,7 +85,12 @@ const data: MovieList[] = [
       d3: false,
       d4: true,
     },
-    languages: ['AZ', 'EN'],
+    languages: {
+      az: false,
+      tu: true,
+      ru: false,
+      en: true,
+    },
     price: 18,
     places: 2,
   },
@@ -90,7 +106,12 @@ const data: MovieList[] = [
       d3: true,
       d4: false,
     },
-    languages: ['AZ', 'RU'],
+    languages: {
+      az: true,
+      tu: true,
+      ru: false,
+      en: false,
+    },
     price: 7,
     places: 3,
   },
@@ -222,24 +243,32 @@ function Schedule(): JSX.Element {
                 </Box>
               )
           ),
-          row.original.languages.map((value, index) => (
-            <Box
-              key={index}
-              component="span"
-              sx={() => {
-                return {
-                  borderRadius: '4px',
-                  border: '#000 solid 1px',
-                  color: '#000',
-                  padding: '0 3px',
-                  margin: '0px 5px',
-                  fontWeight: 'bolder',
-                };
-              }}
-            >
-              {value}
-            </Box>
-          )),
+          [
+            row.original.languages.az && 'AZ',
+            row.original.languages.tu && 'TU',
+            row.original.languages.en && 'EN',
+            row.original.languages.ru && 'RU',
+          ].map(
+            (value, index) =>
+              value !== false && (
+                <Box
+                  key={index}
+                  component="span"
+                  sx={() => {
+                    return {
+                      borderRadius: '4px',
+                      border: '#000 solid 1px',
+                      color: '#000',
+                      padding: '0 3px',
+                      margin: '0px 5px',
+                      fontWeight: 'bolder',
+                    };
+                  }}
+                >
+                  {value}
+                </Box>
+              )
+          ),
         ],
         /* eslint-enable react/prop-types */
       },
