@@ -453,7 +453,12 @@ function Schedule(): JSX.Element {
         </div>
       </section>
 
-      <MaterialReactTable columns={columns} data={data} />
+      <div className={styled.schedule__table}>
+        <div className={styled.schedule__table__header}></div>
+        <div className={styled.schedule__table__body}>
+          <MaterialReactTable columns={columns} data={data} />
+        </div>
+      </div>
 
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={modalStyle}>
