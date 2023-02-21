@@ -4,7 +4,7 @@ import ComingSoon from '../pages/base/comingsoon';
 import Detail from '../pages/base/detail';
 import Home from '../pages/base/home';
 import Schedule from '../pages/base/schedule';
-import Sign from '../pages/base/sign';
+import SignUp from '../pages/base/signup';
 
 export const ROUTES = [
   {
@@ -37,7 +37,7 @@ export const ROUTES = [
       },
       {
         path: 'sign',
-        element: <Sign />,
+        element: <SignUp />,
       },
     ],
   },
