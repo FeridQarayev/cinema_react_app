@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Login from '../../../components/base/login';
 import Register from '../../../components/base/register';
 import backImg from '../../../images/constant/movie-collection.jpg';
 import styled from './sign.module.scss';
@@ -20,6 +21,9 @@ function Sign(): JSX.Element {
           <div className={styled.sign__main__container__body}>
             <div className={styled.sign__main__container__body__register}>
               <Register />
+            </div>
+            <div className={styled.sign__main__container__body__login}>
+              <Login />
             </div>
           </div>
           <Link className={styled.sign__main__container__link} to={'home'} />
