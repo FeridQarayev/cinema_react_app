@@ -1,17 +1,20 @@
 import React, { Fragment, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from './navbar.module.scss';
 
 function Navbar(): JSX.Element {
   const list = useRef<HTMLElement>(null);
+  const location = useLocation();
   const openBurger = (e: HTMLButtonElement): void => {
     if (list.current != null) list.current.classList.toggle(styled.active);
     e.classList.toggle(styled.active);
   };
-
   return (
     <Fragment>
-      <header className={styled.header}>
+      <header
+        className={styled.header}
+        style={location.pathname.includes('/signin') || location.pathname.includes('/signup') ? { display: 'none' } : { listStyle: 'none' }}
+      >
         <div className={styled.header__container}>
           <div className={styled.header__container__body}>
             <div className={styled.header__container__body__logo}>
@@ -56,7 +59,10 @@ function Navbar(): JSX.Element {
         </div>
       </header>
 
-      <div className={styled.mobile_bar}>
+      <div
+        className={styled.mobile_bar}
+        style={location.pathname.includes('/signin') || location.pathname.includes('/signup') ? { display: 'none' } : { listStyle: 'none' }}
+      >
         <button
           className={styled.mobile_bar__link}
           onClick={(e) => {
@@ -94,7 +100,10 @@ function Navbar(): JSX.Element {
         </nav>
       </div>
 
-      <header className={styled.mobile_header}>
+      <header
+        className={styled.mobile_header}
+        style={location.pathname.includes('/signin') || location.pathname.includes('/signup') ? { display: 'none' } : { listStyle: 'none' }}
+      >
         <div className={styled.mobile_header__container}>
           <div className={styled.mobile_header__container__body}>
             <div className={styled.mobile_header__container__body__logo}>

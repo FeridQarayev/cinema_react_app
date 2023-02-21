@@ -1,5 +1,4 @@
 import { Field, Form, Formik } from 'formik';
-import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import backImg from '../../../images/constant/movie-collection.jpg';
@@ -13,16 +12,8 @@ const RegisterSchema = Yup.object().shape({
 });
 
 function SignUp(): JSX.Element {
-  const signDiv = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    signDiv.current?.previousElementSibling?.classList.add(styled.hide);
-    signDiv.current?.previousElementSibling?.previousElementSibling?.classList.add(styled.hide);
-    signDiv.current?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.add(styled.hide);
-    signDiv.current?.nextElementSibling?.classList.add(styled.hide);
-    signDiv.current?.nextElementSibling?.nextElementSibling?.classList.add(styled.hide);
-  });
   return (
-    <div ref={signDiv} className={styled.signup}>
+    <div className={styled.signup}>
       <main className={styled.signup__main} style={{ backgroundImage: `url(${String(backImg)})` }}>
         <div className={styled.signup__main__container}>
           <div className={styled.signup__main__container__body}>
@@ -68,7 +59,7 @@ function SignUp(): JSX.Element {
                         {errors.password != null && (touched.password ?? false) ? <span>{errors.password}</span> : null}
                       </div>
                       <div className={styled.signup__main__container__body__register__down__form__group}>
-                        <button type="submit">Submit</button>
+                        <button type="submit">Register</button>
                       </div>
                     </Form>
                   )}
@@ -76,13 +67,15 @@ function SignUp(): JSX.Element {
                 <div className={styled.signup__main__container__body__register__down__bottom}>
                   <span>
                     Already have an account?
-                    <a href="#">Sign In</a>
+                    <Link to={'../signin'}>Sign In</Link>
                   </span>
                 </div>
               </div>
             </div>
           </div>
-          <Link className={styled.signup__main__container__link} to={'home'} />
+          <Link className={styled.signup__main__container__link} to={'../home'}>
+            Back to Home
+          </Link>
         </div>
       </main>
     </div>

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as FacebookSvg } from '../../../svgs/facebook-f.svg';
 import { ReactComponent as LinkedinSvg } from '../../../svgs/linkedin-in.svg';
 import { ReactComponent as TelegramSvg } from '../../../svgs/telegram.svg';
@@ -7,9 +7,14 @@ import { ReactComponent as TwitterSvg } from '../../../svgs/twitter.svg';
 import styled from './footer.module.scss';
 
 function Footer(): JSX.Element {
+  const location = useLocation();
+
   return (
     <Fragment>
-      <footer className={styled.footer}>
+      <footer
+        className={styled.footer}
+        style={location.pathname.includes('/signin') || location.pathname.includes('/signup') ? { display: 'none' } : { listStyle: 'none' }}
+      >
         <div className={styled.footer__container}>
           <div className={styled.footer__container__body}>
             <div className={styled.footer__container__body__item}>
@@ -20,8 +25,7 @@ function Footer(): JSX.Element {
                 </Link>
               </div>
               <p className={styled.footer__container__body__item__text}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industrys
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys
               </p>
               <ul className={styled.footer__container__body__item__media}>
                 <li>
@@ -140,7 +144,10 @@ function Footer(): JSX.Element {
           </div>
         </div>
       </footer>
-      <div className={styled.copyright}>
+      <div
+        className={styled.copyright}
+        style={location.pathname.includes('/signin') || location.pathname.includes('/signup') ? { display: 'none' } : { listStyle: 'none' }}
+      >
         <p>YouVideo - © 2021 All Rights Reserved</p>
       </div>
     </Fragment>
