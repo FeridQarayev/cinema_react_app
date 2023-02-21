@@ -33,6 +33,94 @@
         box-sizing: border-box;
         margin: 0 auto;
         padding-bottom: 10px;
+        &__register {
+          &__up {
+            background: #9352b3;
+            padding: 20px 30px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+            h4 {
+              color: #fff;
+              margin: 0;
+              text-transform: uppercase;
+              text-align: center !important;
+              font-weight: 700;
+              font-size: 24px;
+            }
+          }
+          &__down {
+            padding: 40px;
+            border: 0;
+            border-radius: 0 0 5px 5px;
+            background: #fff;
+            box-shadow: none;
+            &__form {
+              &__status {
+                margin-top: 40px;
+                font-size: 16px;
+                line-height: 24px;
+                color: #948a99;
+                margin-bottom: 1.7em;
+              }
+              &__group {
+                margin-bottom: 1rem;
+                label {
+                  font-weight: 500;
+                  display: inline-block;
+                  margin-bottom: 0.5rem;
+                }
+                input {
+                  width: 100%;
+                  padding: 10px 20px;
+                  color: #666;
+                  border: 1px solid #e3e3e3;
+                  border-radius: 5px;
+                  height: auto;
+                  box-shadow: none;
+                  display: block;
+                  font-size: 1rem;
+                  line-height: 1.5;
+                  background-color: #fff;
+                  background-clip: padding-box;
+                  outline: 0 !important;
+                  overflow: visible;
+                  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                }
+                span {
+                  color: red;
+                  font-weight: 500;
+                }
+                button {
+                  background: #9352b3;
+                  border-radius: 0.25rem;
+                  display: inline-block;
+                  text-align: center;
+                  white-space: nowrap;
+                  vertical-align: middle;
+                  font-size: 14px;
+                  text-transform: uppercase;
+                  cursor: pointer;
+                  color: #fff;
+                  overflow: hidden;
+                  padding: 0 15px;
+                  position: relative;
+                  font-weight: 600;
+                  border: 0;
+                  transition: all 0.5s ease;
+                  line-height: 35px;
+                  margin: 0 !important;
+                }
+              }
+            }
+            &__bottom {
+              a {
+                cursor: pointer;
+                color: #9352b3;
+                margin-left: 5px;
+              }
+            }
+          }
+        }
       }
       &__link {
         color: #fff !important;
