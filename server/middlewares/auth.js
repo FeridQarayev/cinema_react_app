@@ -35,29 +35,31 @@ const verifyToken = (req, res, next) => {
 };
 
 isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.status(400).send({ message: "User Id is required" });
+  }
+
+  User.findById(userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-
-    Role.find(
+    console.log("user: ", user);
+    Role.findOne(
       {
         _id: { $in: user.role },
       },
-      (err, roles) => {
+      (err, role) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
 
-        console.log(roles);
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
-            next();
-            return;
-          }
+        if (role.name === "admin") {
+          next();
+          return;
         }
 
         res.status(403).send({ message: "Require Admin Role!" });
@@ -69,7 +71,7 @@ isAdmin = (req, res, next) => {
 
 const authMiddleware = {
   verifyToken,
-  isAdmin
-}
+  isAdmin,
+};
 
 module.exports = authMiddleware;

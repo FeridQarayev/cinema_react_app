@@ -11,7 +11,7 @@ exports.register = async (req, res) => {
 
     // Validate user input
     if (!(email && password && first_name && last_name)) {
-      res.status(400).send("All input is required");
+      return res.status(400).send("All input is required");
     }
 
     // check if user already exist
@@ -65,4 +65,46 @@ exports.register = async (req, res) => {
     return res.status(500).send(err);
   }
   // Our register logic ends here
+};
+
+exports.login = (req, res) => {
+  User.findOne({
+    email: req.body.email,
+  })
+    .populate("role")
+    .exec((err, user) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      console.log("user:", user);
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+        return res.status(401).send({ message: "Invalid Password!" });
+      }
+
+      // var token = jwt.sign({ id: user.id }, config.secret, {
+      //   expiresIn: "1h", // 24 hours
+      // });
+
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+      user.token = token;
+
+      return res.status(200).json(user);
+    });
 };
