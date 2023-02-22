@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+const Role = require("../models/role.model");
 require("dotenv").config();
 
 const config = process.env;
@@ -11,7 +13,9 @@ const verifyToken = (req, res, next) => {
     req.session.token;
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
+    return res
+      .status(403)
+      .send({ message: "A token is required for authentication" });
   }
   //   try {
   //     const decoded = jwt.verify(token, config.TOKEN_KEY);
@@ -30,4 +34,42 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = verifyToken;
+isAdmin = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.role },
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        console.log(roles);
+
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "admin") {
+            next();
+            return;
+          }
+        }
+
+        res.status(403).send({ message: "Require Admin Role!" });
+        return;
+      }
+    );
+  });
+};
+
+const authMiddleware = {
+  verifyToken,
+  isAdmin
+}
+
+module.exports = authMiddleware;
