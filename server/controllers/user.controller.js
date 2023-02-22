@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.register = async (req, res) => {
   try {
@@ -46,6 +47,7 @@ exports.register = async (req, res) => {
     res.status(201).json(user);
   } catch (err) {
     console.log(err);
+    return res.status(500).send(err);
   }
   // Our register logic ends here
 };

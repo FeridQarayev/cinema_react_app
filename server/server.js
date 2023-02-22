@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json(), cors());
 
 require("./routes/user.route")(app);
+require("./routes/movie.route")(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
