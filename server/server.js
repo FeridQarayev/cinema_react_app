@@ -1,6 +1,6 @@
-const cors = require("cors");
 require("./config/database").connect();
 
+const cors = require("cors");
 const express = require("express");
 const { PORT } = process.env;
 
