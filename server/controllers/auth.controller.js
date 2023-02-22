@@ -1,4 +1,5 @@
-const User = require("../models/user");
+const User = require("../models/user.model");
+const Role = require("../models/role.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -32,6 +33,20 @@ exports.register = async (req, res) => {
       password: encryptedPassword,
     });
 
+    Role.findOne({ name: "user" }, (err, role) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      user.role = role._id;
+      user.save((err) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+      });
+    });
     // Create token
     const token = jwt.sign(
       { user_id: user._id, email },
