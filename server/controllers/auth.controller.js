@@ -2,6 +2,9 @@ const User = require("../models/user.model");
 const Role = require("../models/role.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const mapping = require("../mappings/validate.map");
+const registerValSchema = require("../schemas/register.schema");
+
 require("dotenv").config();
 
 exports.register = async (req, res) => {
@@ -9,13 +12,11 @@ exports.register = async (req, res) => {
     // Get user input
     const { first_name, last_name, email, password } = req.body;
 
-    // Validate user input
-    if (!(email && password && first_name && last_name)) {
-      return res.status(400).send("All input is required");
-    }
-
-    // check if user already exist
-    // Validate if user exist in our database
+    const validate = mapping.mapping(req, registerValSchema);
+    // return res.status(422).json({ error: message });
+    if (validate.valid)
+      return res.status(422).json({ message: validate.message });
+    console.log("Salam");
     const oldUser = await User.findOne({ email });
 
     if (oldUser) {
