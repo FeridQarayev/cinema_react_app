@@ -4,6 +4,16 @@ const cinemaUpdateValSchema = require("../schemas/cinema.update.schema");
 const cinemaDeleteValSchema = require("../schemas/cinema.delete.schema");
 const mapping = require("../mappings/validate.map");
 
+exports.get = (req, res) => {
+  Cinema.find()
+    .populate("halls")
+    .exec((error, data) => {
+      if (error) return res.status(500).send({ error });
+
+      res.send(data);
+    });
+};
+
 exports.create = async (req, res) => {
   try {
     const validate = mapping.mapping(req, cinemaCreateValSchema);
