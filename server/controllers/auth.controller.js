@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mapping = require("../mappings/validate.map");
 const registerValSchema = require("../schemas/register.schema");
+const loginValSchema = require("../schemas/login.schema");
 
 require("dotenv").config();
 
@@ -13,10 +14,9 @@ exports.register = async (req, res) => {
     const { first_name, last_name, email, password } = req.body;
 
     const validate = mapping.mapping(req, registerValSchema);
-    // return res.status(422).json({ error: message });
     if (validate.valid)
       return res.status(422).json({ message: validate.message });
-    console.log("Salam");
+
     const oldUser = await User.findOne({ email });
 
     if (oldUser) {
@@ -70,6 +70,11 @@ exports.register = async (req, res) => {
 
 exports.login = (req, res) => {
   const { email } = req.body;
+
+  const validate = mapping.mapping(req, loginValSchema);
+  if (validate.valid)
+    return res.status(422).json({ message: validate.message });
+
   User.findOne({ email })
     .populate("role")
     .exec((err, user) => {
