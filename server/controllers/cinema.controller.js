@@ -1,11 +1,11 @@
 const Cinema = require("../models/cinema.model");
+const cinemaCreateValSchema = require("../schemas/cinema.create.schema");
 const cinemaUpdateValSchema = require("../schemas/cinema.update.schema");
 const mapping = require("../mappings/validate.map");
-const mongoose = require("mongoose");
 
 exports.create = async (req, res) => {
   try {
-    const validate = mapping.mapping(req, cinemaValSchema);
+    const validate = mapping.mapping(req, cinemaCreateValSchema);
     if (validate.valid)
       return res.status(422).send({ message: validate.message });
 
@@ -43,3 +43,5 @@ exports.update = async (req, res) => {
     .status(201)
     .send({ message: "Successfully updated cinema!", cinema: newCinema });
 };
+
+exports.delete = (req, res) => {};
