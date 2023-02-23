@@ -6,7 +6,7 @@ exports.create = async (req, res) => {
   try {
     const validate = mapping.mapping(req, cinemaValSchema);
     if (validate.valid)
-      return res.status(422).json({ message: validate.message });
+      return res.status(422).send({ message: validate.message });
 
     const { name } = req.body;
 
@@ -17,7 +17,11 @@ exports.create = async (req, res) => {
     }
 
     const newCinema = await Cinema.create({ name });
-
-    res.status(201).send({ message: "Successfully added cinema!", newCinema });
-  } catch (error) {}
+    return res
+      .status(201)
+      .send({ message: "Successfully added cinema!", newCinema });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
 };

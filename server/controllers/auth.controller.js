@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
 
     const validate = mapping.mapping(req, registerValSchema);
     if (validate.valid)
-      return res.status(422).json({ message: validate.message });
+      return res.status(422).send({ message: validate.message });
 
     const oldUser = await User.findOne({ email });
 
@@ -60,7 +60,7 @@ exports.register = async (req, res) => {
     user.token = token;
 
     // return new user
-    res.status(201).json(user);
+    return res.status(201).json(user);
   } catch (err) {
     console.log(err);
     return res.status(500).send(err);
