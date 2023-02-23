@@ -3,6 +3,8 @@ const controller = require("../controllers/cinema.controller");
 
 module.exports = function (app) {
   //   app.post("/api/cinema", [auth.verifyToken, auth.isAdmin], controller.create);
+  app.get("/api/cinema", controller.get);
+
   app.post("/api/cinema", controller.create);
 
   app.put("/api/cinema", controller.update);
