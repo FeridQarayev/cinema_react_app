@@ -1,6 +1,7 @@
 const Cinema = require("../models/cinema.model");
-const cinemaValSchema = require("../schemas/cinema.schema");
+const cinemaUpdateValSchema = require("../schemas/cinema.update.schema");
 const mapping = require("../mappings/validate.map");
+const mongoose = require("mongoose");
 
 exports.create = async (req, res) => {
   try {
@@ -19,9 +20,26 @@ exports.create = async (req, res) => {
     const newCinema = await Cinema.create({ name });
     return res
       .status(201)
-      .send({ message: "Successfully added cinema!", newCinema });
+      .send({ message: "Successfully added cinema!", cinema: newCinema });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
   }
+};
+
+exports.update = async (req, res) => {
+  const validate = mapping.mapping(req, cinemaUpdateValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const { name, cinemaId } = req.body;
+
+  const oldCinema = await Cinema.findById(cinemaId);
+  if (!oldCinema) return res.status(404).send({ message: "Cinema not found!" });
+
+  const newCinema = await Cinema.findByIdAndUpdate(cinemaId, { name });
+
+  return res
+    .status(201)
+    .send({ message: "Successfully updated cinema!", cinema: newCinema });
 };
