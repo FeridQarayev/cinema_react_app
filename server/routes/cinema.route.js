@@ -6,4 +6,6 @@ module.exports = function (app) {
   app.post("/api/cinema", controller.create);
 
   app.put("/api/cinema", controller.update);
+
+  app.delete("/api/cinema", controller.delete);
 };

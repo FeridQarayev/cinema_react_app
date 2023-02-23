@@ -45,19 +45,17 @@ exports.update = async (req, res) => {
     .send({ message: "Successfully updated cinema!", cinema: newCinema });
 };
 
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
   const validate = mapping.mapping(req, cinemaDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
   const { cinemaId } = req.body;
 
-  _ = Cinema.findByIdAndDelete(cinemaId, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(`Deleted article ${articleID} successfully`);
-    }
-  });
-  return;
+  const oldCinema = await Cinema.findByIdAndDelete(cinemaId);
+  if (!oldCinema) return res.status(404).send({ message: "Cinema not found!" });
+
+  return res
+    .status(200)
+    .send({ message: "Successfully deleted cinema!", cinema: oldCinema });
 };
