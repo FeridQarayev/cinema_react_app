@@ -68,16 +68,15 @@ exports.register = async (req, res) => {
 };
 
 exports.login = (req, res) => {
-  User.findOne({
-    email: req.body.email,
-  })
+  const { email } = req.body;
+  User.findOne({ email })
     .populate("role")
     .exec((err, user) => {
       if (err) {
+        console.log("user:", err);
         res.status(500).send({ message: err });
         return;
       }
-      console.log("user:", user);
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
