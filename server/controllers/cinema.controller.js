@@ -49,4 +49,15 @@ exports.delete = (req, res) => {
   const validate = mapping.mapping(req, cinemaDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
+
+  const { cinemaId } = req.body;
+
+  _ = Cinema.findByIdAndDelete(cinemaId, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`Deleted article ${articleID} successfully`);
+    }
+  });
+  return;
 };
