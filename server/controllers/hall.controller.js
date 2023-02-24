@@ -53,3 +53,9 @@ exports.update = async (req, res) => {
     .status(201)
     .send({ message: "Successfully updated hall!", hall: oldHall });
 };
+
+exports.delete = (req, res) => {
+    const validate = mapping.mapping(req, HallUpdateValSchema);
+    if (validate.valid)
+      return res.status(422).send({ message: validate.message });
+}
