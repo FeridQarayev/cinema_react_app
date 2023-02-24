@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const movieSchema = new mongoose.Schema({
   //   img: { type: String, default: null },
   image: {
-    data: Buffer,
+    data: String,
     contentType: String,
   },
 });

@@ -11,5 +11,5 @@ module.exports = function (app) {
     res.status(200).send("Welcome Admin 🙌 ");
   });
 
-  app.post("/api/movie", upload.single("myImage"), controller.create);
+  app.post("/api/movie", upload.single("file"), controller.create);
 };

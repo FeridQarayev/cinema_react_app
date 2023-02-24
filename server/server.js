@@ -6,7 +6,7 @@ const { PORT } = process.env;
 
 const app = express();
 
-app.use(express.json(), cors());
+app.use(express.json(), cors(), express.urlencoded({ extended: true }));
 
 require("./routes/auth.route")(app);
 require("./routes/cinema.route")(app);
