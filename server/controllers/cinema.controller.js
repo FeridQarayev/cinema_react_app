@@ -24,9 +24,8 @@ exports.create = async (req, res) => {
 
     const oldCinema = await Cinema.findOne({ name });
 
-    if (oldCinema) {
+    if (oldCinema)
       return res.status(409).send({ message: "Cinema already Exist!" });
-    }
 
     const newCinema = await Cinema.create({ name });
     return res
