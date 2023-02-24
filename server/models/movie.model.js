@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema({
   synopsis: { type: String, default: null },
   rating: { type: Number, default: null },
   image: { type: String, default: null },
-  coveImage: { type: String, default: null },
+  coverImage: { type: String, default: null },
 });
 
 module.exports = mongoose.model("Movie", movieSchema);
