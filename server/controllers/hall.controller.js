@@ -5,6 +5,16 @@ const HallCreateValSchema = require("../schemas/hall.create.schema");
 const HallUpdateValSchema = require("../schemas/hall.update.schema");
 const HallDeleteValSchema = require("../schemas/hall.delete.schema");
 
+exports.get = (req, res) => {
+  Hall.find()
+    .populate("cinema")
+    .exec((error, data) => {
+      if (error) return res.status(500).send({ error });
+
+      res.send(data);
+    });
+};
+
 exports.create = async (req, res) => {
   const validate = mapping.mapping(req, HallCreateValSchema);
   if (validate.valid)

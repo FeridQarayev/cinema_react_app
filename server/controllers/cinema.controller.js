@@ -6,7 +6,7 @@ const mapping = require("../mappings/validate.map");
 
 exports.get = (req, res) => {
   Cinema.find()
-    // .populate("halls")
+    .populate("halls")
     .exec((error, data) => {
       if (error) return res.status(500).send({ error });
 
