@@ -1,6 +1,8 @@
 const controller = require("../controllers/hall.controller");
 
 module.exports = function (app) {
+  app.get("/api/hall", controller.get);
+
   app.post("/api/hall", controller.create);
 
   app.put("/api/hall", controller.update);
