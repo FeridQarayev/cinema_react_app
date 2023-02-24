@@ -10,6 +10,7 @@ app.use(express.json(), cors());
 
 require("./routes/auth.route")(app);
 require("./routes/cinema.route")(app);
+require("./routes/hall.route")(app);
 require("./routes/movie.route")(app);
 
 app.listen(PORT, () => {
