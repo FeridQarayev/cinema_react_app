@@ -15,6 +15,22 @@ exports.get = (req, res) => {
     });
 };
 
+exports.getById = async (req, res) => {
+  const validate = mapping.mapping(req, HallDeleteValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const { hallId } = req.body;
+
+  const hall = await Hall.findById(hallId).populate("cinema");
+
+  if (!hall) return res.status(404).send({ message: "Hall not found!" });
+
+  return res
+    .status(200)
+    .send({ message: "Successfully find hall!", data: hall });
+};
+
 exports.create = async (req, res) => {
   const validate = mapping.mapping(req, HallCreateValSchema);
   if (validate.valid)
