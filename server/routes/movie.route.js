@@ -1,6 +1,8 @@
 const controller = require("../controllers/movie.controller");
 const auth = require("../middlewares/auth");
-const upload = require("../middlewares/upload");
+const saveFilesToFolder = require("../middlewares/upload")(
+  "../client/src/images/movies"
+);
 const imageVal = require("../middlewares/checkImage");
 
 module.exports = function (app) {
@@ -12,5 +14,5 @@ module.exports = function (app) {
     res.status(200).send("Welcome Admin 🙌 ");
   });
 
-  app.post("/api/movie", upload.single("file"), controller.create);
+  app.post("/api/movie", saveFilesToFolder, controller.create);
 };

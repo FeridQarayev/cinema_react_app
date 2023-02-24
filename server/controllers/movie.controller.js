@@ -1,7 +1,6 @@
 const Movie = require("../models/movie.model");
 
 exports.create = (req, res) => {
-  console.log("ba bu", req.file.buffer);
   const obj = {
     img: {
       data: req.file.filename,
