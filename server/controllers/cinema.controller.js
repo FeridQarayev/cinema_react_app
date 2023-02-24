@@ -30,7 +30,7 @@ exports.create = async (req, res) => {
     const newCinema = await Cinema.create({ name });
     return res
       .status(201)
-      .send({ message: "Successfully added cinema!", cinema: newCinema });
+      .send({ message: "Successfully added cinema!", data: newCinema });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -51,7 +51,7 @@ exports.update = async (req, res) => {
 
   return res
     .status(201)
-    .send({ message: "Successfully updated cinema!", cinema: newCinema });
+    .send({ message: "Successfully updated cinema!", data: newCinema });
 };
 
 exports.delete = async (req, res) => {
@@ -66,5 +66,5 @@ exports.delete = async (req, res) => {
 
   return res
     .status(200)
-    .send({ message: "Successfully deleted cinema!", cinema: oldCinema });
+    .send({ message: "Successfully deleted cinema!", data: oldCinema });
 };

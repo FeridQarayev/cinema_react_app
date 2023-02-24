@@ -3,6 +3,7 @@ const Cinema = require("../models/cinema.model");
 const mapping = require("../mappings/validate.map");
 const HallCreateValSchema = require("../schemas/hall.create.schema");
 const HallUpdateValSchema = require("../schemas/hall.update.schema");
+const HallDeleteValSchema = require("../schemas/hall.delete.schema");
 
 exports.create = async (req, res) => {
   const validate = mapping.mapping(req, HallCreateValSchema);
@@ -36,7 +37,7 @@ exports.create = async (req, res) => {
 
   return res
     .status(201)
-    .send({ message: "Successfully added cinema!", hall: newHall });
+    .send({ message: "Successfully added hall!", data: newHall });
 };
 
 exports.update = async (req, res) => {
@@ -51,11 +52,26 @@ exports.update = async (req, res) => {
 
   return res
     .status(201)
-    .send({ message: "Successfully updated hall!", hall: oldHall });
+    .send({ message: "Successfully updated hall!", data: oldHall });
 };
 
-exports.delete = (req, res) => {
-    const validate = mapping.mapping(req, HallUpdateValSchema);
-    if (validate.valid)
-      return res.status(422).send({ message: validate.message });
-}
+exports.delete = async (req, res) => {
+  const validate = mapping.mapping(req, HallDeleteValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const { hallId } = req.body;
+
+  const oldHall = await Hall.findByIdAndDelete(hallId);
+  if (!oldHall) return res.status(404).send({ message: "Hall not found!" });
+
+  await Cinema.findByIdAndUpdate(oldHall.ciname, {
+    $pull: {
+      halls: hallId,
+    },
+  });
+
+  return res
+    .status(200)
+    .send({ message: "Successfully deleted hall!", data: oldHall });
+};
