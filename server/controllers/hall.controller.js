@@ -41,7 +41,7 @@ exports.create = async (req, res) => {
 
   await Hall.findByIdAndUpdate(newHall._id, {
     $set: {
-      ciname: cinemaId,
+      cinema: cinemaId,
     },
   });
 
@@ -75,7 +75,7 @@ exports.delete = async (req, res) => {
   const oldHall = await Hall.findByIdAndDelete(hallId);
   if (!oldHall) return res.status(404).send({ message: "Hall not found!" });
 
-  await Cinema.findByIdAndUpdate(oldHall.ciname, {
+  await Cinema.findByIdAndUpdate(oldHall.cinema, {
     $pull: {
       halls: hallId,
     },

@@ -4,7 +4,7 @@ const hallSchema = new mongoose.Schema({
   name: { type: String, default: null },
   column: { type: Number, default: null },
   row: { type: Number, default: null },
-  ciname: {
+  cinema: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Cinema",
   },
