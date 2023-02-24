@@ -5,7 +5,7 @@ const movieSchema = new mongoose.Schema({
   actor: { type: String, default: null },
   director: { type: String, default: null },
   duration: { type: String, default: null },
-  ageLimit: { type: String, default: null },
+  ageLimit: { type: Number, default: null },
   sessionTime: { type: Date },
   sessionTimeOut: { type: Date },
   formats: {

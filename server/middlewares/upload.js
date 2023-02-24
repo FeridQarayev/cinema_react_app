@@ -32,7 +32,7 @@ const saveFilesToFolder = function (folder) {
       },
     }).fields([
       { name: "file", maxCount: 1 },
-      { name: "fileimg", maxCount: 1 },
+      { name: "file-cover", maxCount: 1 },
     ]);
 
     upload(req, res, (err) => {
