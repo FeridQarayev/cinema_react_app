@@ -5,6 +5,7 @@ const saveFilesToFolder = function (folder) {
   return async (req, res, next) => {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {
+        console.log(file);
         cb(null, String(folder));
       },
       filename: function (req, file, cb) {
@@ -25,11 +26,14 @@ const saveFilesToFolder = function (folder) {
         ) {
           cb(null, true);
         } else {
-          cb(null, false);
+          cb(null, true);
           cb("Only .png, .jpg and .jpeg format allowed!");
         }
       },
-    }).single("file");
+    }).fields([
+      { name: "file", maxCount: 1 },
+      { name: "fileimg", maxCount: 1 },
+    ]);
 
     upload(req, res, (err) => {
       if (err) return res.status(422).send({ message: err });
