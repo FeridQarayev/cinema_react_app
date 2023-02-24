@@ -3,7 +3,6 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log(file);
     cb(null, "../client/src/images/movies");
   },
   filename: function (req, file, cb) {
@@ -15,6 +14,22 @@ const storage = multer.diskStorage({
     );
   },
 });
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  fileFilter: async (req, file, cb) => {
+    console.log(file);
+
+    if (
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+    }
+  },
+});
 
 module.exports = upload;

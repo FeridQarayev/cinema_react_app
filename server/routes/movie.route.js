@@ -1,6 +1,7 @@
 const controller = require("../controllers/movie.controller");
 const auth = require("../middlewares/auth");
 const upload = require("../middlewares/upload");
+const imageVal = require("../middlewares/checkImage");
 
 module.exports = function (app) {
   app.post("/api/welcome", auth.verifyToken, (req, res) => {
