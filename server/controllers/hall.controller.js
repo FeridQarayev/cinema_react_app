@@ -15,31 +15,24 @@ exports.create = async (req, res) => {
   if (oldHall) return res.status(409).send({ message: "Hall already Exist!" });
 
   const newHall = await Hall.create({ name, column, row });
-  console.log(newHall);
 
-  Hall.findByIdAndUpdate(
-    newHall._id,
-    {
-      $set: {
-        ciname: cinemaId,
-      },
+  const oldCinema = await Cinema.findByIdAndUpdate(cinemaId, {
+    $push: {
+      halls: newHall._id,
     },
-    (error) => {
-      if (error) return res.status(500).send({ error });
-    }
-  );
+  });
 
-  Cinema.findByIdAndUpdate(
-    cinemaId,
-    {
-      $push: {
-        halls: newHall._id,
-      },
+  console.log(oldCinema);
+  if (!oldCinema) {
+    await Hall.findByIdAndDelete(newHall._id);
+    return res.status(404).send({ message: "Cinema not found!" });
+  }
+
+  await Hall.findByIdAndUpdate(newHall._id, {
+    $set: {
+      ciname: cinemaId,
     },
-    (error) => {
-      if (error) return res.status(500).send({ error });
-    }
-  );
+  });
 
   return res
     .status(201)
