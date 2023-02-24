@@ -1,4 +1,6 @@
 const Movie = require("../models/movie.model");
+const fs = require("fs");
+const path = require("path");
 
 exports.create = (req, res) => {
   const obj = {
