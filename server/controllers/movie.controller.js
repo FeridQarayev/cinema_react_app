@@ -11,6 +11,20 @@ exports.get = (req, res) => {
   });
 };
 
+exports.getById = async (req, res) => {
+  const validate = mapping.mapping(req, MovieSchema.MovieDeleteValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const movie = await Movie.findById(req.body.movieId);
+
+  if (!movie) return res.status(404).send({ message: "Movie not found!" });
+
+  return res
+    .status(200)
+    .send({ message: "Successfully find movie!", data: movie });
+};
+
 exports.create = (req, res) => {
   const images = [];
   const { files } = req;

@@ -5,6 +5,8 @@ const upload = require("../middlewares/upload");
 module.exports = function (app) {
   app.get("/api/movie", controller.get);
 
+  app.get("/api/movie/id", controller.getById);
+
   app.post("/api/welcome", auth.verifyToken, (req, res) => {
     res.status(200).send("Welcome 🙌 ");
   });
