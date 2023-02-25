@@ -7,14 +7,6 @@ module.exports = function (app) {
 
   app.get("/api/movie/id", controller.getById);
 
-  app.post("/api/welcome", auth.verifyToken, (req, res) => {
-    res.status(200).send("Welcome 🙌 ");
-  });
-
-  app.post("/api/admin", [auth.verifyToken, auth.isAdmin], (req, res) => {
-    res.status(200).send("Welcome Admin 🙌 ");
-  });
-
   app.post(
     "/api/movie",
     upload.saveFilesToFolder("../client/src/images/movies"),

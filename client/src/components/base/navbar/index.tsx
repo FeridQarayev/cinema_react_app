@@ -12,10 +12,8 @@ function Navbar(): JSX.Element {
   };
   let verify = false;
   const user = JSON.parse(String(localStorage.getItem('user')));
-  console.log(user.token);
   void verifyToken(user.token).then((res) => {
     if (res.status === 200) verify = true;
-    console.log(res.data);
   });
   return (
     <Fragment>
