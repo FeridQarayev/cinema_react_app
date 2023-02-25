@@ -3,6 +3,14 @@ const mapping = require("../mappings/validate.map");
 const Movie = require("../models/movie.model");
 const deleteImage = require("../helper/delete.img");
 
+exports.get = (req, res) => {
+  Movie.find().exec((error, data) => {
+    if (error) return res.status(500).send({ error });
+
+    res.send(data);
+  });
+};
+
 exports.create = (req, res) => {
   const images = [];
   const { files } = req;
