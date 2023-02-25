@@ -33,4 +33,18 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.update = async (req, res) => {
+  const validate = mapping.mapping(req, SessionSchema.SessionUpdateValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
 
+  const session = await Session.findByIdAndUpdate(req.body.sessionId, {
+    ...req.body,
+    sessionId: undefined,
+  });
+  if (!session) return res.status(404).send({ message: "Session not found!" });
+
+  return res
+    .status(201)
+    .send({ message: "Successfully updated session!", data: session });
+};
