@@ -1,7 +1,5 @@
 const Cinema = require("../models/cinema.model");
-const cinemaCreateValSchema = require("../schemas/cinema.create.schema");
-const cinemaUpdateValSchema = require("../schemas/cinema.update.schema");
-const cinemaDeleteValSchema = require("../schemas/cinema.delete.schema");
+const CinemaSchema = require("../schemas/cinema.schema");
 const mapping = require("../mappings/validate.map");
 
 exports.get = (req, res) => {
@@ -15,7 +13,7 @@ exports.get = (req, res) => {
 };
 
 exports.getById = async (req, res) => {
-  const validate = mapping.mapping(req, cinemaDeleteValSchema);
+  const validate = mapping.mapping(req, CinemaSchema.CinemaDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
@@ -32,7 +30,7 @@ exports.getById = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const validate = mapping.mapping(req, cinemaCreateValSchema);
+    const validate = mapping.mapping(req, CinemaSchema.CinemaCreateValSchema);
     if (validate.valid)
       return res.status(422).send({ message: validate.message });
 
@@ -54,7 +52,7 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const validate = mapping.mapping(req, cinemaUpdateValSchema);
+  const validate = mapping.mapping(req, CinemaSchema.CinemaUpdateValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
@@ -71,7 +69,7 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const validate = mapping.mapping(req, cinemaDeleteValSchema);
+  const validate = mapping.mapping(req, CinemaSchema.CinemaUpdateValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
