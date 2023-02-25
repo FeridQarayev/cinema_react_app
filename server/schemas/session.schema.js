@@ -25,3 +25,7 @@ exports.SessionUpdateValSchema = Joi.object({
   }),
   language: Joi.string(),
 });
+
+exports.SessionDeleteValSchema = Joi.object({
+  sessionId: Joi.joiObjectid().required(),
+});
