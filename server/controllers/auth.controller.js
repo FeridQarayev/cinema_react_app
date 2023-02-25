@@ -64,7 +64,7 @@ exports.register = async (req, res) => {
     // return new user
     return res.status(201).send({
       message: "Successfully registered!",
-      data: JSON.stringify(user),
+      data: user,
     });
   } catch (err) {
     console.log(err);

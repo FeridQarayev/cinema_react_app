@@ -35,15 +35,17 @@ function SignUp(): JSX.Element {
                   onSubmit={(values, { resetForm }) => {
                     void createUser(values)
                       .then((res) => {
-                        console.log(res.data);
-                        if (res.status === 201) toast.success(res.data.message);
-                        else toast.error(res.data.message);
+                        if (res.status === 201) {
+                          localStorage.setItem(
+                            'user',
+                            JSON.stringify({ ...res.data.data, password: undefined, email: undefined, lastName: undefined, __v: undefined })
+                          );
+                          toast.success(res.data.message);
+                        } else toast.error(res.data.message);
                       })
                       .catch((error) => {
                         toast.error(error.response.data.message);
                       });
-                    // same shape as initial values
-                    console.log(values);
                     resetForm();
                   }}
                 >
