@@ -1,3 +1,5 @@
+import AdminRoot from '../pages/admin/AdminRoot';
+import HomeAdmin from '../pages/admin/home';
 import AboutUs from '../pages/base/aboutus';
 import BaseRoot from '../pages/base/BaseRoot';
 import ComingSoon from '../pages/base/comingsoon';
@@ -46,14 +48,18 @@ export const ROUTES = [
       },
     ],
   },
-  //   {
-  //     path: '/admin/',
-  //     element: <AdminRoot />,
-  //     children: [
-  //       {
-  //         path: '',
-  //         element: <Dashboard />,
-  //       }
-  //     ],
-  //   },
+  {
+    path: '/admin/',
+    element: <AdminRoot />,
+    children: [
+      {
+        path: '',
+        element: <HomeAdmin />,
+      },
+      {
+        path: 'home',
+        element: <HomeAdmin />,
+      },
+    ],
+  },
 ];
