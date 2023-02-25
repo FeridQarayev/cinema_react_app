@@ -1,11 +1,26 @@
 const MovieCreateValSchema = require("../schemas/movie.create.schema");
 const mapping = require("../mappings/validate.map");
 const Movie = require("../models/movie.model");
+const deleteImage = require("../helper/delete.img");
 
 exports.create = (req, res) => {
+  const images = [];
+  const { files } = req;
+
+  if (files) {
+    images.push(files.file[0].filename);
+    images.push(files["file-cover"][0].filename);
+  } else {
+    images.push(req.file.filename);
+  }
+
   const validate = mapping.mapping(req, MovieCreateValSchema);
-  if (validate.valid)
+  if (validate.valid) {
+    for (let i = 0; i < images.length; i++) {
+      deleteImage(images[i]);
+    }
     return res.status(422).send({ message: validate.message });
+  }
 
   const {
     name,
@@ -20,19 +35,7 @@ exports.create = (req, res) => {
     genre,
     snyopsis,
     rating,
-    files,
   } = req.body;
-
-  const images = [];
-  console.log(files);
-
-  if (files) {
-    files.forEach((file) => {
-      images.push(file.filename);
-    });
-  } else {
-    images.push(req.file.filename);
-  }
 
   const movie = new Movie({
     name,
