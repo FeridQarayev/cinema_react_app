@@ -77,3 +77,16 @@ exports.update = async (req, res) => {
     .status(201)
     .send({ message: "Successfully updated movie!", data: newMovie });
 };
+
+exports.delete = async (req, res) => {
+  const validate = mapping.mapping(req, MovieUpdateValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const oldMovie = await Movie.findByIdAndDelete(req.body.movieId);
+  if (!oldMovie) return res.status(404).send({ message: "Movie not found!" });
+
+  return res
+    .status(200)
+    .send({ message: "Successfully deleted movie!", data: oldMovie });
+};
