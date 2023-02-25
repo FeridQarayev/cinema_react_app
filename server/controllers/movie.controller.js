@@ -1,5 +1,4 @@
-const MovieCreateValSchema = require("../schemas/movie.create.schema");
-const MovieUpdateValSchema = require("../schemas/movie.update.schema");
+const MovieSchema = require("../schemas/movie.schema");
 const mapping = require("../mappings/validate.map");
 const Movie = require("../models/movie.model");
 const deleteImage = require("../helper/delete.img");
@@ -15,7 +14,7 @@ exports.create = (req, res) => {
     images.push(req.file.filename);
   }
 
-  const validate = mapping.mapping(req, MovieCreateValSchema);
+  const validate = mapping.mapping(req, MovieSchema.MovieCreateValSchema);
   if (validate.valid) {
     for (let i = 0; i < images.length; i++) {
       deleteImage(images[i]);
@@ -61,7 +60,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const validate = mapping.mapping(req, MovieUpdateValSchema);
+  const validate = mapping.mapping(req, MovieSchema.MovieUpdateValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
@@ -79,7 +78,7 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const validate = mapping.mapping(req, MovieUpdateValSchema);
+  const validate = mapping.mapping(req, MovieSchema.MovieDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 

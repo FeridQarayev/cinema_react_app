@@ -19,5 +19,7 @@ module.exports = function (app) {
 
   app.put("/api/movie", controller.update);
 
+  app.delete("/api/movie", controller.delete);
+
   app.delete("/api/movie/image", upload.deleteFilesToFolder());
 };
