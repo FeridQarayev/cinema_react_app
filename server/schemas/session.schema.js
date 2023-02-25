@@ -13,3 +13,15 @@ exports.SessionCreateValSchema = Joi.object({
   }).required(),
   language: Joi.string().required(),
 });
+
+exports.SessionUpdateValSchema = Joi.object({
+  sessionId: Joi.joiObjectid().required(),
+  date: Joi.date(),
+  price: Joi.number().min(0).max(1000),
+  formats: Joi.object({
+    d2: Joi.boolean(),
+    d3: Joi.boolean(),
+    d4: Joi.boolean(),
+  }),
+  language: Joi.string(),
+});
