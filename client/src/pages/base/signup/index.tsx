@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import { Toaster, toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import backImg from '../../../images/constant/movie-collection.jpg';
 import { createUser } from '../../../services/create.user';
@@ -14,6 +14,7 @@ const RegisterSchema = Yup.object().shape({
 });
 
 function SignUp(): JSX.Element {
+  const navigate = useNavigate();
   return (
     <div className={styled.signup}>
       <main className={styled.signup__main} style={{ backgroundImage: `url(${String(backImg)})` }}>
@@ -41,6 +42,7 @@ function SignUp(): JSX.Element {
                             JSON.stringify({ ...res.data.data, password: undefined, email: undefined, lastName: undefined, __v: undefined })
                           );
                           toast.success(res.data.message);
+                          navigate('../home');
                         } else toast.error(res.data.message);
                       })
                       .catch((error) => {
