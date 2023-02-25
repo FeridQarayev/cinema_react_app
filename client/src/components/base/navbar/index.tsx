@@ -1,20 +1,29 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { verifyAdmin } from '../../../services/verify.admin';
 import { verifyToken } from '../../../services/verify.toke';
 import styled from './navbar.module.scss';
 
 function Navbar(): JSX.Element {
   const list = useRef<HTMLElement>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [verify, setVerify] = useState(false);
   const location = useLocation();
   const openBurger = (e: HTMLButtonElement): void => {
     if (list.current != null) list.current.classList.toggle(styled.active);
     e.classList.toggle(styled.active);
   };
-  let verify = false;
-  const user = JSON.parse(String(localStorage.getItem('user')));
-  void verifyToken(user.token).then((res) => {
-    if (res.status === 200) verify = true;
-  });
+  useEffect(() => {
+    const user = JSON.parse(String(localStorage.getItem('user')));
+    if (user !== undefined) {
+      void verifyAdmin(user._id).then((res) => {
+        if (res.status === 200) setIsAdmin(true);
+      });
+      void verifyToken(user.token).then((res) => {
+        if (res.status === 200) setVerify(true);
+      });
+    }
+  }, []);
   return (
     <Fragment>
       <header
@@ -42,18 +51,20 @@ function Navbar(): JSX.Element {
                     <li className={styled.header__container__body__menu__nav__list__ul__li}>
                       <Link to={'aboutus'}>About Us</Link>
                     </li>
-                    {verify && (
+                    {!verify && (
                       <li className={styled.header__container__body__menu__nav__list__ul__li}>
                         <Link to={'signup'}>Register</Link>
                       </li>
                     )}
-                    {/* <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Admin</Link>
-                    </li> */}
+                    {isAdmin && (
+                      <li className={styled.header__container__body__menu__nav__list__ul__li}>
+                        <Link to={'admin'}>Admin</Link>
+                      </li>
+                    )}
                   </ul>
                 </nav>
               </div>
-              <div className={styled.header__container__body__menu__login}>{verify && <Link to={'signin'}>Login</Link>}</div>
+              <div className={styled.header__container__body__menu__login}>{!verify && <Link to={'signin'}>Login</Link>}</div>
             </div>
           </div>
         </div>

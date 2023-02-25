@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 const Role = require("../models/role.model");
+var ObjectId = require("mongoose").Types.ObjectId;
 require("dotenv").config();
 
 const config = process.env;
@@ -33,15 +34,24 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
+// 63fa018d109564e49ad7729d
+// 63f9fc50109564e49ad77284
 
-isAdmin = (req, res, next) => {
+isAdmin = async (req, res, next) => {
   const { userId } = req.body;
 
   if (!userId) {
-    return res.status(400).send({ message: "User Id is required" });
+    return res.status(400).send({ message: "User Id is required!" });
   }
 
-  User.findById(userId).exec((err, user) => {
+  if (!ObjectId.isValid(userId)) {
+    return res.status(422).send({ message: "Validation Error!" });
+  }
+
+  const oldUser = await User.findById(userId);
+  if (!oldUser) return res.status(404).send({ message: "User not found!" });
+
+   User.findById(userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
