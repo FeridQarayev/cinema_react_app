@@ -87,26 +87,29 @@ function Navbar(): JSX.Element {
         <nav ref={list} className={styled.mobile_bar__nav}>
           <ul className={styled.mobile_bar__nav__ul}>
             <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Demos</Link>
+              <Link to={'schedule'}>Schedule</Link>
             </li>
             <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Movies</Link>
+              <Link to={'comingsoon'}>ComingSoon</Link>
             </li>
             <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Shows</Link>
+              <Link to={'aboutus'}>About Us</Link>
             </li>
-            <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Premium</Link>
-            </li>
-            <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Pages</Link>
-            </li>
-            <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Admin</Link>
-            </li>
-            <li className={styled.mobile_bar__nav__ul__li}>
-              <Link to={'home'}>Contact Us</Link>
-            </li>
+            {!verify && (
+              <>
+                <li className={styled.mobile_bar__nav__ul__li}>
+                  <Link to={'signup'}>Register</Link>
+                </li>
+                <li className={styled.mobile_bar__nav__ul__li}>
+                  <Link to={'signin'}>Login</Link>
+                </li>
+              </>
+            )}
+            {isAdmin && (
+              <li className={styled.mobile_bar__nav__ul__li}>
+                <Link to={'admin'}>Admin</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
