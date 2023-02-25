@@ -1,5 +1,8 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+const { promisify } = require("util");
+const readFileAsync = promisify(fs.unlink);
 
 const saveFilesToFolder = function (folder) {
   return async (req, res, next) => {
@@ -42,4 +45,27 @@ const saveFilesToFolder = function (folder) {
   };
 };
 
-module.exports = saveFilesToFolder;
+const deleteFilesToFolder = function () {
+  return async (req, res) => {
+    const { path } = req.body;
+    if (path) {
+      const deletedImg = await readFileAsync(
+        __dirname + "../../../client/src/images/movies/" + req.body.path,
+        (err, data) => {
+          if (err) return res.status(404).send({ message: err });
+          return res
+            .status(200)
+            .send({ message: "Deleted image!", data: data });
+        }
+      );
+    }
+    return res.status(422).send({ message: "path required!" });
+  };
+};
+
+const upload = {
+  saveFilesToFolder,
+  deleteFilesToFolder,
+};
+
+module.exports = upload;
