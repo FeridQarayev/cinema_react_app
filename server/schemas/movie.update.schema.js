@@ -1,6 +1,8 @@
 const Joi = require("joi");
+Joi.joiObjectid = require("joi-objectid")(Joi);
 
 const MovieUpdateValSchema = Joi.object({
+  movieId: Joi.joiObjectid().required(),
   name: Joi.string().min(3).max(70),
   actor: Joi.string().min(3).max(70),
   director: Joi.string().min(3).max(70),

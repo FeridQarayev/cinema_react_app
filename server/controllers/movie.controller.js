@@ -1,4 +1,5 @@
 const MovieCreateValSchema = require("../schemas/movie.create.schema");
+const MovieUpdateValSchema = require("../schemas/movie.update.schema");
 const mapping = require("../mappings/validate.map");
 const Movie = require("../models/movie.model");
 const deleteImage = require("../helper/delete.img");
@@ -59,6 +60,20 @@ exports.create = (req, res) => {
     .send({ message: "Movie created successfully", data: movie });
 };
 
-exports.update = (req, res) => {
-  
-}
+exports.update = async (req, res) => {
+  const validate = mapping.mapping(req, MovieUpdateValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const oldMovie = await Movie.findById(req.body.movieId);
+  if (!oldMovie) return res.status(404).send({ message: "Movie not found!" });
+
+  const newMovie = await Movie.findByIdAndUpdate(req.body.movieId, {
+    ...req.body,
+    movieId: undefined,
+  });
+
+  return res
+    .status(201)
+    .send({ message: "Successfully updated movie!", data: newMovie });
+};
