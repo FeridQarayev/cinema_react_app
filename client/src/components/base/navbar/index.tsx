@@ -28,31 +28,25 @@ function Navbar(): JSX.Element {
                 <nav className={styled.header__container__body__menu__nav__list}>
                   <ul className={styled.header__container__body__menu__nav__list__ul}>
                     <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Demos</Link>
+                      <Link to={'schedule'}>Schedule</Link>
                     </li>
                     <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Movies</Link>
+                      <Link to={'comingsoon'}>ComingSoon</Link>
                     </li>
                     <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Shows</Link>
+                      <Link to={'aboutus'}>About Us</Link>
                     </li>
                     <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Premium</Link>
+                      <Link to={'signup'}>Register</Link>
                     </li>
-                    <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Pages</Link>
-                    </li>
-                    <li className={styled.header__container__body__menu__nav__list__ul__li}>
+                    {/* <li className={styled.header__container__body__menu__nav__list__ul__li}>
                       <Link to={'home'}>Admin</Link>
-                    </li>
-                    <li className={styled.header__container__body__menu__nav__list__ul__li}>
-                      <Link to={'home'}>Contact Us</Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </nav>
               </div>
               <div className={styled.header__container__body__menu__login}>
-                <Link to={'home'}>Login</Link>
+                <Link to={'signin'}>Login</Link>
               </div>
             </div>
           </div>
