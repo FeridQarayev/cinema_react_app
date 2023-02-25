@@ -19,11 +19,7 @@ const movieSchema = new mongoose.Schema({
     ru: { type: Boolean, default: false },
     en: { type: Boolean, default: false },
   },
-  genre: [
-    {
-      name: { type: String, default: null },
-    },
-  ],
+  genre: { type: String, default: null },
   synopsis: { type: String, default: null },
   rating: { type: Number, default: null },
   image: { type: String, default: null },

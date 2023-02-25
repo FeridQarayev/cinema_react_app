@@ -19,11 +19,7 @@ const MovieCreateValSchema = Joi.object({
     ru: Joi.boolean().required(),
     en: Joi.boolean().required(),
   }),
-  genre: Joi.array().items(
-    Joi.object({
-      name: Joi.string().required(),
-    })
-  ),
+  genre: Joi.string().required(),
   synopsis: Joi.string().min(0).max(900).required(),
   rating: Joi.number().min(0).max(10).required(),
 });
