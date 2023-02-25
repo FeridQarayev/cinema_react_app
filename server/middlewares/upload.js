@@ -8,7 +8,6 @@ const saveFilesToFolder = function (folder) {
   return async (req, res, next) => {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {
-        console.log(file);
         cb(null, String(folder));
       },
       filename: function (req, file, cb) {
