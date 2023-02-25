@@ -12,6 +12,7 @@ require("./routes/auth.route")(app);
 require("./routes/cinema.route")(app);
 require("./routes/hall.route")(app);
 require("./routes/movie.route")(app);
+require("./routes/session.route")(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
