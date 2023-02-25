@@ -85,6 +85,8 @@ exports.delete = async (req, res) => {
   const oldMovie = await Movie.findByIdAndDelete(req.body.movieId);
   if (!oldMovie) return res.status(404).send({ message: "Movie not found!" });
 
+  oldMovie.image && deleteImage(oldMovie.image);
+  oldMovie.coverImage && deleteImage(oldMovie.coverImage);
   return res
     .status(200)
     .send({ message: "Successfully deleted movie!", data: oldMovie });
