@@ -4,6 +4,17 @@ const Movie = require("../models/movie.model");
 const Hall = require("../models/hall.model");
 const SessionSchema = require("../schemas/session.schema");
 
+exports.get = (req, res) => {
+  Session.find()
+    .populate("movie")
+    .populate("hall")
+    .exec((error, data) => {
+      if (error) return res.status(500).send({ error });
+
+      res.send(data);
+    });
+};
+
 exports.create = async (req, res) => {
   try {
     const validate = mapping.mapping(req, SessionSchema.SessionCreateValSchema);
