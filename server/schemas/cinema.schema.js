@@ -6,8 +6,8 @@ exports.CinemaCreateValSchema = Joi.object({
 });
 
 exports.CinemaUpdateValSchema = Joi.object({
-  cinemaId: Joi.joiObjectid(),
-  name: Joi.string().min(3).max(20),
+  cinemaId: Joi.joiObjectid().required(),
+  name: Joi.string().min(3).max(20).required(),
 });
 
 exports.CinemaDeleteValSchema = Joi.object({
