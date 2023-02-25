@@ -1,14 +1,16 @@
 import { Field, Form, Formik } from 'formik';
+import { Toaster, toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import backImg from '../../../images/constant/movie-collection.jpg';
+import { createUser } from '../../../services/create.user';
 import styled from './signup.module.scss';
 
 const RegisterSchema = Yup.object().shape({
   firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+  password: Yup.string().min(6, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
 
 function SignUp(): JSX.Element {
@@ -31,6 +33,15 @@ function SignUp(): JSX.Element {
                   }}
                   validationSchema={RegisterSchema}
                   onSubmit={(values, { resetForm }) => {
+                    void createUser(values)
+                      .then((res) => {
+                        console.log(res.data);
+                        if (res.status === 201) toast.success(res.data.message);
+                        else toast.error(res.data.message);
+                      })
+                      .catch((error) => {
+                        toast.error(error.response.data.message);
+                      });
                     // same shape as initial values
                     console.log(values);
                     resetForm();
@@ -78,6 +89,7 @@ function SignUp(): JSX.Element {
           </Link>
         </div>
       </main>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

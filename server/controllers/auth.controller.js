@@ -11,7 +11,7 @@ require("dotenv").config();
 exports.register = async (req, res) => {
   try {
     // Get user input
-    const { first_name, last_name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     const validate = mapping.mapping(req, registerValSchema);
     if (validate.valid)
@@ -20,7 +20,9 @@ exports.register = async (req, res) => {
     const oldUser = await User.findOne({ email });
 
     if (oldUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res
+        .status(409)
+        .send({ message: "User Already Exist. Please Login" });
     }
 
     //Encrypt user password
@@ -28,8 +30,8 @@ exports.register = async (req, res) => {
 
     // Create user in our database
     const user = await User.create({
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
     });
@@ -60,7 +62,10 @@ exports.register = async (req, res) => {
     user.token = token;
 
     // return new user
-    return res.status(201).json(user);
+    return res.status(201).send({
+      message: "Successfully registered!",
+      data: JSON.stringify(user),
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).send(err);
