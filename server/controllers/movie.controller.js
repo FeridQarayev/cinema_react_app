@@ -58,3 +58,7 @@ exports.create = (req, res) => {
     .status(200)
     .send({ message: "Movie created successfully", data: movie });
 };
+
+exports.update = (req, res) => {
+  
+}
