@@ -1,9 +1,7 @@
 const Hall = require("../models/hall.model");
 const Cinema = require("../models/cinema.model");
 const mapping = require("../mappings/validate.map");
-const HallCreateValSchema = require("../schemas/hall.create.schema");
-const HallUpdateValSchema = require("../schemas/hall.update.schema");
-const HallDeleteValSchema = require("../schemas/hall.delete.schema");
+const HallSchema = require("../schemas/hall.schema");
 
 exports.get = (req, res) => {
   Hall.find()
@@ -16,7 +14,7 @@ exports.get = (req, res) => {
 };
 
 exports.getById = async (req, res) => {
-  const validate = mapping.mapping(req, HallDeleteValSchema);
+  const validate = mapping.mapping(req, HallSchema.hallDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
@@ -32,7 +30,7 @@ exports.getById = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const validate = mapping.mapping(req, HallCreateValSchema);
+  const validate = mapping.mapping(req, HallSchema.hallCreateValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
@@ -67,7 +65,7 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const validate = mapping.mapping(req, HallUpdateValSchema);
+  const validate = mapping.mapping(req, HallSchema.hallUpdateValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
@@ -82,7 +80,7 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const validate = mapping.mapping(req, HallDeleteValSchema);
+  const validate = mapping.mapping(req, HallSchema.hallDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 
