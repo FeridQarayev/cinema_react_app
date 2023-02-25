@@ -7,12 +7,41 @@ const SessionSchema = require("../schemas/session.schema");
 exports.get = (req, res) => {
   Session.find()
     .populate("movie")
-    .populate("hall")
+    .populate({
+      path: "hall",
+      populate: {
+        path: "cinema",
+        model: "Cinema",
+      },
+    })
+
     .exec((error, data) => {
       if (error) return res.status(500).send({ error });
 
       res.send(data);
     });
+};
+
+exports.getById = async (req, res) => {
+  const validate = mapping.mapping(req, SessionSchema.SessionDeleteValSchema);
+  if (validate.valid)
+    return res.status(422).send({ message: validate.message });
+
+  const session = await Session.findById(req.body.sessionId)
+    .populate("movie")
+    .populate({
+      path: "hall",
+      populate: {
+        path: "cinema",
+        model: "Cinema",
+      },
+    });
+
+  if (!session) return res.status(404).send({ message: "Session not found!" });
+
+  return res
+    .status(200)
+    .send({ message: "Successfully find session!", data: session });
 };
 
 exports.create = async (req, res) => {
