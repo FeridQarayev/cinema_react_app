@@ -154,7 +154,7 @@ function HallAdmin(): JSX.Element {
         </div>
         <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
           <div className={styled.model__create}>
-            <h2 id="modal-modal-title">Update Cinema</h2>
+            <h2 id="modal-modal-title">Update Hall</h2>
             <div className={styled.model__create__form}>
               <Formik
                 initialValues={{
@@ -217,7 +217,7 @@ function HallAdmin(): JSX.Element {
 
       <Modal open={openCreate} onClose={handleOpenCreate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <div className={styled.model__create}>
-          <h2 id="modal-modal-title">Create New Cinema</h2>
+          <h2 id="modal-modal-title">Create New Hall</h2>
           <div className={styled.model__create__form}>
             <Formik
               initialValues={{

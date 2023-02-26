@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import type Movie from '../../../interfaces/movie';
+import { movieGetAll } from '../../../services/movie';
 import styled from './movie.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -32,13 +33,75 @@ function MovieAdmin(): JSX.Element {
   const handleOpenUpdate = (): void => {
     setopenUpdate((oldopen) => !oldopen);
   };
+
+  useEffect(() => {
+    void movieGetAll().then((res) => {
+      if (res.status === 200) setMovies(res.data);
+    });
+  }, []);
+
+  const columns = useMemo<Array<MRT_ColumnDef<Movie>>>(
+    () => [
+      {
+        accessorKey: '_id',
+        header: 'Id',
+      },
+      {
+        accessorKey: 'name',
+        header: 'Name',
+      },
+      {
+        accessorKey: 'actor',
+        header: 'Actor',
+      },
+      {
+        accessorKey: 'director',
+        header: 'Director',
+      },
+      {
+        accessorKey: 'duration',
+        header: 'Duration',
+      },
+      {
+        header: 'Actions',
+        muiTableHeadCellProps: {
+          align: 'center',
+        },
+        muiTableBodyCellProps: {
+          align: 'center',
+        },
+        Cell: ({ renderedCellValue, row }) => [
+          <div key={row.original._id}>
+            <button
+              onClick={() => {
+                openUpdateHall(row.original._id);
+              }}
+              className={styled.update}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                deleteHall(row.original._id);
+              }}
+              className={styled.delete}
+            >
+              Delete
+            </button>
+          </div>,
+        ],
+      },
+    ],
+    []
+  );
+
   return (
     <div className={styled.movie}>
       <div className={styled.movie__container}>
         <div className={styled.movie__container__title}>
           <div className={styled.movie__container__title__col}>
             <div>
-              <h2>Halls</h2>
+              <h2>Movies</h2>
             </div>
           </div>
         </div>
@@ -48,14 +111,14 @@ function MovieAdmin(): JSX.Element {
             data={halls}
             renderTopToolbarCustomActions={() => (
               <button onClick={handleOpenCreate} className={styled.new}>
-                Create New Hall
+                Create New Movie
               </button>
             )}
           />
         </div>
         <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
           <div className={styled.model__create}>
-            <h2 id="modal-modal-title">Update Cinema</h2>
+            <h2 id="modal-modal-title">Update Movie</h2>
             <div className={styled.model__create__form}>
               <Formik
                 initialValues={{
@@ -118,7 +181,7 @@ function MovieAdmin(): JSX.Element {
 
       <Modal open={openCreate} onClose={handleOpenCreate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <div className={styled.model__create}>
-          <h2 id="modal-modal-title">Create New Cinema</h2>
+          <h2 id="modal-modal-title">Create New Movie</h2>
           <div className={styled.model__create__form}>
             <Formik
               initialValues={{
