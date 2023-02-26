@@ -5,15 +5,19 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import type Hall from '../../../interfaces/new.hall';
+import { hallGetAll, hallGetById, hallCreate, hallUpdate, hallDelete } from '../../../services/hall';
 import styled from './hall.module.scss';
 
 const CreateSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required'),
+  name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required!'),
+  column: Yup.number().min(5).max(15).required('Required!'),
+  row: Yup.number().min(5).max(15).required('Required!'),
+  cinemaId: Yup.string().required('Required!'),
 });
 
 function HallAdmin(): JSX.Element {
-  const [cinemas, setCinemas] = useState<Hall[]>([]);
-  const [cinema, setCinema] = useState<Hall>();
+  const [halls, setHalls] = useState<Hall[]>([]);
+  const [hall, setHall] = useState<Hall>();
   const [openCreate, setopenCreate] = useState(false);
   const [openUpdate, setopenUpdate] = useState(false);
 
@@ -22,6 +26,41 @@ function HallAdmin(): JSX.Element {
   };
   const handleOpenUpdate = (): void => {
     setopenUpdate((oldopen) => !oldopen);
+  };
+
+  useEffect(() => {
+    void hallGetAll().then((res) => {
+      if (res.status === 200) setHalls(res.data);
+    });
+  }, []);
+
+  const deleteHall = (id: string): void => {
+    const alert = confirm('Are you sure you want to delete hall?');
+    if (alert)
+      void hallDelete(id)
+        .then((res) => {
+          if (res.status === 200) {
+            setHalls((datas) => datas.filter((data) => data._id !== id));
+            toast.success(res.data.message);
+          } else toast.error(res.data.message);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+  };
+
+  const openUpdateHall = (id: string): void => {
+    void hallGetById(id)
+      .then((res) => {
+        if (res.status === 200) {
+          setHall(res.data.data);
+          toast.success(res.data.message);
+          handleOpenUpdate();
+        } else toast.error(res.data.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
 
   const columns = useMemo<Array<MRT_ColumnDef<Hall>>>(
@@ -59,7 +98,7 @@ function HallAdmin(): JSX.Element {
           <div key={row.original._id}>
             <button
               onClick={() => {
-                openUpdateCinema(row.original._id);
+                openUpdateHall(row.original._id);
               }}
               className={styled.update}
             >
@@ -67,7 +106,7 @@ function HallAdmin(): JSX.Element {
             </button>
             <button
               onClick={() => {
-                deleteCinema(row.original._id);
+                deleteHall(row.original._id);
               }}
               className={styled.delete}
             >
@@ -86,17 +125,17 @@ function HallAdmin(): JSX.Element {
         <div className={styled.hall__container__title}>
           <div className={styled.hall__container__title__col}>
             <div>
-              <h2>Cinemas</h2>
+              <h2>Halls</h2>
             </div>
           </div>
         </div>
         <div className={styled.hall__container__body}>
           <MaterialReactTable
             columns={columns}
-            data={cinemas}
+            data={halls}
             renderTopToolbarCustomActions={() => (
               <button onClick={handleOpenCreate} className={styled.new}>
-                Create New Cinema
+                Create New Hall
               </button>
             )}
           />
@@ -107,16 +146,16 @@ function HallAdmin(): JSX.Element {
             <div className={styled.model__create__form}>
               <Formik
                 initialValues={{
-                  cinemaId: cinema?._id !== undefined ? cinema?._id : '',
-                  name: cinema?.name !== undefined ? cinema?.name : '',
+                  cinemaId: hall?._id !== undefined ? hall?._id : '',
+                  name: hall?.name !== undefined ? hall?.name : '',
                 }}
                 validationSchema={CreateSchema}
                 onSubmit={(values, { resetForm }) => {
-                  void cinemaUpdate(values)
+                  void hallUpdate(values)
                     .then((res) => {
                       if (res.status === 201) {
-                        setCinema(res.data.data);
-                        setCinemas((datas) => {
+                        setHall(res.data.data);
+                        setHalls((datas) => {
                           const uptaded = datas.find((data) => data._id === values.cinemaId);
                           uptaded?.name !== undefined && (uptaded.name = values.name);
                           return [...datas];
@@ -162,11 +201,11 @@ function HallAdmin(): JSX.Element {
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
-                void cinemaCreate(values)
+                void hallCreate(values)
                   .then((res) => {
                     if (res.status === 201) {
                       toast.success(res.data.message);
-                      setCinemas((datas) => [...datas, res.data.data]);
+                      setHalls((datas) => [...datas, res.data.data]);
                       handleOpenCreate();
                     } else toast.error(res.data.message);
                   })
