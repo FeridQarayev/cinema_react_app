@@ -4,7 +4,9 @@ import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
+import type Cinema from '../../../interfaces/new.cinema';
 import type Hall from '../../../interfaces/new.hall';
+import { cinemaGetAll } from '../../../services/cinema';
 import { hallGetAll, hallGetById, hallCreate, hallUpdate, hallDelete } from '../../../services/hall';
 import styled from './hall.module.scss';
 
@@ -15,8 +17,15 @@ const CreateSchema = Yup.object().shape({
   cinemaId: Yup.string().required('Required!'),
 });
 
+const UpdateSchema = Yup.object().shape({
+  name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required!'),
+  column: Yup.number().min(5).max(15).required('Required!'),
+  row: Yup.number().min(5).max(15).required('Required!'),
+});
+
 function HallAdmin(): JSX.Element {
   const [halls, setHalls] = useState<Hall[]>([]);
+  const [cinemas, setCinemas] = useState<Cinema[]>([]);
   const [hall, setHall] = useState<Hall>();
   const [openCreate, setopenCreate] = useState(false);
   const [openUpdate, setopenUpdate] = useState(false);
@@ -31,6 +40,9 @@ function HallAdmin(): JSX.Element {
   useEffect(() => {
     void hallGetAll().then((res) => {
       if (res.status === 200) setHalls(res.data);
+    });
+    void cinemaGetAll().then((res) => {
+      if (res.status === 200) setCinemas(res.data);
     });
   }, []);
 
@@ -198,21 +210,25 @@ function HallAdmin(): JSX.Element {
             <Formik
               initialValues={{
                 name: '',
+                column: '',
+                row: '',
+                cinemaId: '',
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
+                console.log(values);
                 void hallCreate(values)
                   .then((res) => {
                     if (res.status === 201) {
                       toast.success(res.data.message);
                       setHalls((datas) => [...datas, res.data.data]);
                       handleOpenCreate();
+                      resetForm();
                     } else toast.error(res.data.message);
                   })
                   .catch((error) => {
                     toast.error(error.response.data.message);
                   });
-                resetForm();
               }}
             >
               {({ errors, touched }) => (
@@ -220,6 +236,27 @@ function HallAdmin(): JSX.Element {
                   <div className={styled.model__create__form__group}>
                     <Field name="name" placeholder="Name" />
                     {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
+                  </div>
+                  <div className={styled.model__create__form__group}>
+                    <Field name="column" placeholder="Column" />
+                    {errors.column != null && (touched.column ?? false) ? <span>{errors.column}</span> : null}
+                  </div>
+                  <div className={styled.model__create__form__group}>
+                    <Field name="row" placeholder="Row" />
+                    {errors.row != null && (touched.row ?? false) ? <span>{errors.row}</span> : null}
+                  </div>
+                  <div className={styled.model__create__form__group}>
+                    <Field name="cinemaId" as="select" placeholder="Cinema">
+                      <option selected disabled hidden value="">
+                        Cinema
+                      </option>
+                      {cinemas.map((cinema) => (
+                        <option key={cinema._id} value={cinema._id}>
+                          {cinema.name}
+                        </option>
+                      ))}
+                    </Field>
+                    {errors.cinemaId != null && (touched.cinemaId ?? false) ? <span>{errors.cinemaId}</span> : null}
                   </div>
                   <div className={styled.model__create__form__btn}>
                     <button type="submit">Create</button>

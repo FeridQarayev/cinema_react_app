@@ -36,10 +36,6 @@ exports.create = async (req, res) => {
 
   const { name, column, row, cinemaId } = req.body;
 
-  const oldHall = await Hall.findOne({ name });
-
-  if (oldHall) return res.status(409).send({ message: "Hall already Exist!" });
-
   const newHall = await Hall.create({ name, column, row });
 
   const oldCinema = await Cinema.findByIdAndUpdate(cinemaId, {
