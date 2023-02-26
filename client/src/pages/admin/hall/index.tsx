@@ -158,28 +158,32 @@ function HallAdmin(): JSX.Element {
             <div className={styled.model__create__form}>
               <Formik
                 initialValues={{
-                  cinemaId: hall?._id !== undefined ? hall?._id : '',
+                  hallId: hall?._id !== undefined ? hall?._id : '',
                   name: hall?.name !== undefined ? hall?.name : '',
+                  column: hall?.column !== undefined ? hall?.column : '',
+                  row: hall?.row !== undefined ? hall?.row : '',
                 }}
-                validationSchema={CreateSchema}
+                validationSchema={UpdateSchema}
                 onSubmit={(values, { resetForm }) => {
                   void hallUpdate(values)
                     .then((res) => {
                       if (res.status === 201) {
                         setHall(res.data.data);
                         setHalls((datas) => {
-                          const uptaded = datas.find((data) => data._id === values.cinemaId);
+                          const uptaded = datas.find((data) => data._id === values.hallId);
                           uptaded?.name !== undefined && (uptaded.name = values.name);
+                          uptaded?.column !== undefined && (uptaded.column = Number(values.column));
+                          uptaded?.row !== undefined && (uptaded.row = Number(values.row));
                           return [...datas];
                         });
                         toast.success(res.data.message);
                         handleOpenUpdate();
+                        resetForm();
                       } else toast.error(res.data.message);
                     })
                     .catch((error) => {
                       toast.error(error.response.data.message);
                     });
-                  resetForm();
                 }}
               >
                 {({ errors, touched }) => (
@@ -187,6 +191,14 @@ function HallAdmin(): JSX.Element {
                     <div className={styled.model__create__form__group}>
                       <Field name="name" placeholder="Name" />
                       {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <Field name="column" placeholder="Column" />
+                      {errors.column != null && (touched.column ?? false) ? <span>{errors.column}</span> : null}
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <Field name="row" placeholder="Row" />
+                      {errors.row != null && (touched.row ?? false) ? <span>{errors.row}</span> : null}
                     </div>
                     <div className={styled.model__create__form__btn}>
                       <button type="submit">Update</button>
