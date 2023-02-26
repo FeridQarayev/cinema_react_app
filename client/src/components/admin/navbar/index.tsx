@@ -53,8 +53,10 @@ function Navbar(): JSX.Element {
                       <span>John David</span>
                     </Link>
                     <div className={styled.dropdown}>
-                      <Link to={'#'}>Log Out</Link>
-                      <Exit />
+                      <Link to={'#'}>
+                        Log Out
+                        <Exit />
+                      </Link>
                     </div>
                   </li>
                 </ul>
