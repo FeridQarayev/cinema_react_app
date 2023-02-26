@@ -259,7 +259,7 @@ function HallAdmin(): JSX.Element {
                   </div>
                   <div className={styled.model__create__form__group}>
                     <Field name="cinemaId" as="select" placeholder="Cinema">
-                      <option selected disabled hidden value="">
+                      <option hidden value="DEFAULT">
                         Cinema
                       </option>
                       {cinemas.map((cinema) => (
