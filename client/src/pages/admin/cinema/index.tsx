@@ -1,20 +1,35 @@
+import { Modal } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
 import type Cinema from '../../../interfaces/new.cinema';
 import { cinemaDelete } from '../../../services/cinema.delete';
 import { cinemaGetAll } from '../../../services/cinema.getall';
 import styled from './cinema.module.scss';
 
+const CreateSchema = Yup.object().shape({
+  name: Yup.string().min(1, 'Too Short!').max(20, 'Too Long!').required('Required'),
+});
+
 function CinemaAdmin(): JSX.Element {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = (): void => {
+    setOpen(true);
+  };
+  const handleClose = (): void => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     void cinemaGetAll().then((res) => {
       if (res.status === 200) setCinemas(res.data);
     });
   }, []);
+
   const deleteCinema = (id: string): void => {
     const alert = confirm('Are you sure you want to delete cinema?');
     if (alert)
@@ -89,14 +104,61 @@ function CinemaAdmin(): JSX.Element {
             columns={columns}
             data={cinemas}
             renderTopToolbarCustomActions={() => (
-              <Link to={'/create'} className={styled.new}>
+              <button onClick={handleOpen} className={styled.new}>
                 Create New Cinema
-              </Link>
+              </button>
             )}
           />
         </div>
       </div>
       <Toaster position="top-center" reverseOrder={false} />
+
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <div className={styled.model__create}>
+          <h2 id="modal-modal-title">Create New Cinema</h2>
+          <div className={styled.model__create__form}>
+            <Formik
+              initialValues={{
+                name: '',
+              }}
+              validationSchema={CreateSchema}
+              onSubmit={(values, { resetForm }) => {
+                // void createUser(values)
+                //   .then((res) => {
+                //     if (res.status === 201) {
+
+                //       toast.success(res.data.message);
+                //       navigate('../home');
+                //     } else toast.error(res.data.message);
+                //   })
+                //   .catch((error) => {
+                //     toast.error(error.response.data.message);
+                //   });
+                resetForm();
+              }}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <div className={styled.model__create__form__group}>
+                    <Field name="name" placeholder="Name" />
+                    {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
+                  </div>
+                  <div className={styled.model__create__form__btn}>
+                    <button type="submit">Create</button>
+                    <button type="button" onClick={handleClose}>
+                      Cancel
+                    </button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+            <div className={styled.model__create__form__actions}>
+              <button></button>
+              <button></button>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
