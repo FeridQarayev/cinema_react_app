@@ -8,6 +8,7 @@ import type Cinema from '../../../interfaces/new.cinema';
 import { cinemaCreate } from '../../../services/cinema.create';
 import { cinemaDelete } from '../../../services/cinema.delete';
 import { cinemaGetAll } from '../../../services/cinema.getall';
+import { cinemaGetById } from '../../../services/cinema.getbyid';
 import styled from './cinema.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -16,6 +17,7 @@ const CreateSchema = Yup.object().shape({
 
 function CinemaAdmin(): JSX.Element {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
+  const [cinema, setCinema] = useState<Cinema>();
   const [openCreate, setopenCreate] = useState(false);
   const [openUpdate, setopenUpdate] = useState(false);
 
@@ -47,6 +49,20 @@ function CinemaAdmin(): JSX.Element {
         });
   };
 
+  const openUpdateCinema = (id: string): void => {
+    void cinemaGetById(id)
+      .then((res) => {
+        if (res.status === 200) {
+          setCinema(res.data.data);
+          toast.success(res.data.message);
+          handleOpenUpdate();
+        } else toast.error(res.data.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
+
   const columns = useMemo<Array<MRT_ColumnDef<Cinema>>>(
     () => [
       {
@@ -76,7 +92,7 @@ function CinemaAdmin(): JSX.Element {
           <div key={row.original._id}>
             <button
               onClick={() => {
-                handleOpenUpdate();
+                openUpdateCinema(row.original._id);
               }}
               className={styled.update}
             >
@@ -144,7 +160,7 @@ function CinemaAdmin(): JSX.Element {
                 {({ errors, touched }) => (
                   <Form>
                     <div className={styled.model__create__form__group}>
-                      <Field name="name" placeholder="Name" />
+                      <Field name="name" placeholder="Name" value={cinema?.name} />
                       {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
                     </div>
                     <div className={styled.model__create__form__btn}>
