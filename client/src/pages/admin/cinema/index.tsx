@@ -6,17 +6,19 @@ import { Toaster, toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import type Cinema from '../../../interfaces/new.cinema';
+import { cinemaCreate } from '../../../services/cinema.create';
 import { cinemaDelete } from '../../../services/cinema.delete';
 import { cinemaGetAll } from '../../../services/cinema.getall';
 import styled from './cinema.module.scss';
 
 const CreateSchema = Yup.object().shape({
-  name: Yup.string().min(1, 'Too Short!').max(20, 'Too Long!').required('Required'),
+  name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required'),
 });
 
 function CinemaAdmin(): JSX.Element {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
   const [open, setOpen] = useState(false);
+
   const handleOpen = (): void => {
     setOpen(true);
   };
@@ -123,17 +125,16 @@ function CinemaAdmin(): JSX.Element {
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
-                // void createUser(values)
-                //   .then((res) => {
-                //     if (res.status === 201) {
-
-                //       toast.success(res.data.message);
-                //       navigate('../home');
-                //     } else toast.error(res.data.message);
-                //   })
-                //   .catch((error) => {
-                //     toast.error(error.response.data.message);
-                //   });
+                void cinemaCreate(values)
+                  .then((res) => {
+                    if (res.status === 201) {
+                      toast.success(res.data.message);
+                      setCinemas((datas) => [...datas, res.data.data]);
+                    } else toast.error(res.data.message);
+                  })
+                  .catch((error) => {
+                    toast.error(error.response.data.message);
+                  });
                 resetForm();
               }}
             >
