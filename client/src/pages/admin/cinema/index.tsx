@@ -5,10 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import type Cinema from '../../../interfaces/new.cinema';
-import { cinemaCreate } from '../../../services/cinema.create';
-import { cinemaDelete } from '../../../services/cinema.delete';
-import { cinemaGetAll } from '../../../services/cinema.getall';
-import { cinemaGetById } from '../../../services/cinema.getbyid';
+import { cinemaGetAll, cinemaGetById, cinemaCreate, cinemaDelete } from '../../../services/cinema';
 import styled from './cinema.module.scss';
 
 const CreateSchema = Yup.object().shape({
