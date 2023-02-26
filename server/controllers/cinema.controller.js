@@ -69,7 +69,7 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const validate = mapping.mapping(req, CinemaSchema.CinemaUpdateValSchema);
+  const validate = mapping.mapping(req, CinemaSchema.CinemaDeleteValSchema);
   if (validate.valid)
     return res.status(422).send({ message: validate.message });
 

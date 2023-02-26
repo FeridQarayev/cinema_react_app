@@ -1,7 +1,9 @@
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useMemo, useState } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import type Cinema from '../../../interfaces/new.cinema';
+import { cinemaDelete } from '../../../services/cinema.delete';
 import { cinemaGetAll } from '../../../services/cinema.getall';
 import styled from './cinema.module.scss';
 
@@ -10,20 +12,28 @@ function CinemaAdmin(): JSX.Element {
 
   useEffect(() => {
     void cinemaGetAll().then((res) => {
-      console.log(res.data);
-      if (res.status === 200) {
-        setCinemas(res.data);
-      }
+      if (res.status === 200) setCinemas(res.data);
     });
   }, []);
   const deleteCinema = (id: string): void => {
-    console.log(id);
+    const alert = confirm('Are you sure you want to delete cinema?');
+    if (alert)
+      void cinemaDelete(id)
+        .then((res) => {
+          if (res.status === 200) {
+            setCinemas((datas) => datas.filter((data) => data._id !== id));
+            toast.success(res.data.message);
+          } else toast.error(res.data.message);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
   };
 
   const columns = useMemo<Array<MRT_ColumnDef<Cinema>>>(
     () => [
       {
-        accessorFn: (row) => row._id,
+        accessorKey: '_id',
         header: 'Id',
       },
       {
@@ -36,7 +46,6 @@ function CinemaAdmin(): JSX.Element {
         Cell: ({ renderedCellValue, row }) => [row.original.halls.map((hall, index) => <span key={index}>{hall.name}, </span>)],
       },
       {
-        accessorKey: '_id',
         header: 'Actions',
         align: 'right',
         style: { color: 'red' },
@@ -47,7 +56,7 @@ function CinemaAdmin(): JSX.Element {
           align: 'center',
         },
         Cell: ({ renderedCellValue, row }) => [
-          <>
+          <div key={row.original._id}>
             <Link to={`update/${row.original._id}`} className={styled.update}>
               Edit
             </Link>
@@ -59,7 +68,7 @@ function CinemaAdmin(): JSX.Element {
             >
               Delete
             </button>
-          </>,
+          </div>,
         ],
       },
     ],
@@ -87,6 +96,7 @@ function CinemaAdmin(): JSX.Element {
           />
         </div>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
