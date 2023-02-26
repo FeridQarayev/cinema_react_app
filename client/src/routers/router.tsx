@@ -62,7 +62,7 @@ export const ROUTES = [
         element: <HomeAdmin />,
       },
       {
-        path: 'movie',
+        path: 'cinema',
         element: <MovieCinema />,
       },
     ],
