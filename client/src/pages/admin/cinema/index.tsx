@@ -3,7 +3,6 @@ import { Field, Form, Formik } from 'formik';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import type Cinema from '../../../interfaces/new.cinema';
 import { cinemaCreate } from '../../../services/cinema.create';
@@ -17,13 +16,14 @@ const CreateSchema = Yup.object().shape({
 
 function CinemaAdmin(): JSX.Element {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
-  const [open, setOpen] = useState(false);
+  const [openCreate, setopenCreate] = useState(false);
+  const [openUpdate, setopenUpdate] = useState(false);
 
-  const handleOpen = (): void => {
-    setOpen(true);
+  const handleOpenCreate = (): void => {
+    setopenCreate((oldopen) => !oldopen);
   };
-  const handleClose = (): void => {
-    setOpen(false);
+  const handleOpenUpdate = (): void => {
+    setopenUpdate((oldopen) => !oldopen);
   };
 
   useEffect(() => {
@@ -74,9 +74,14 @@ function CinemaAdmin(): JSX.Element {
         },
         Cell: ({ renderedCellValue, row }) => [
           <div key={row.original._id}>
-            <Link to={`update/${row.original._id}`} className={styled.update}>
+            <button
+              onClick={() => {
+                handleOpenUpdate();
+              }}
+              className={styled.update}
+            >
               Edit
-            </Link>
+            </button>
             <button
               onClick={() => {
                 deleteCinema(row.original._id);
@@ -106,16 +111,58 @@ function CinemaAdmin(): JSX.Element {
             columns={columns}
             data={cinemas}
             renderTopToolbarCustomActions={() => (
-              <button onClick={handleOpen} className={styled.new}>
+              <button onClick={handleOpenCreate} className={styled.new}>
                 Create New Cinema
               </button>
             )}
           />
         </div>
+        <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+          <div className={styled.model__create}>
+            <h2 id="modal-modal-title">Update Cinema</h2>
+            <div className={styled.model__create__form}>
+              <Formik
+                initialValues={{
+                  name: '',
+                }}
+                validationSchema={CreateSchema}
+                onSubmit={(values, { resetForm }) => {
+                  void cinemaCreate(values)
+                    .then((res) => {
+                      if (res.status === 201) {
+                        toast.success(res.data.message);
+                        setCinemas((datas) => [...datas, res.data.data]);
+                        handleOpenUpdate();
+                      } else toast.error(res.data.message);
+                    })
+                    .catch((error) => {
+                      toast.error(error.response.data.message);
+                    });
+                  resetForm();
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Form>
+                    <div className={styled.model__create__form__group}>
+                      <Field name="name" placeholder="Name" />
+                      {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
+                    </div>
+                    <div className={styled.model__create__form__btn}>
+                      <button type="submit">Create</button>
+                      <button type="button" onClick={handleOpenUpdate}>
+                        Cancel
+                      </button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          </div>
+        </Modal>
       </div>
       <Toaster position="top-center" reverseOrder={false} />
 
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <Modal open={openCreate} onClose={handleOpenCreate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <div className={styled.model__create}>
           <h2 id="modal-modal-title">Create New Cinema</h2>
           <div className={styled.model__create__form}>
@@ -130,7 +177,7 @@ function CinemaAdmin(): JSX.Element {
                     if (res.status === 201) {
                       toast.success(res.data.message);
                       setCinemas((datas) => [...datas, res.data.data]);
-                      handleClose();
+                      handleOpenCreate();
                     } else toast.error(res.data.message);
                   })
                   .catch((error) => {
@@ -147,7 +194,7 @@ function CinemaAdmin(): JSX.Element {
                   </div>
                   <div className={styled.model__create__form__btn}>
                     <button type="submit">Create</button>
-                    <button type="button" onClick={handleClose}>
+                    <button type="button" onClick={handleOpenCreate}>
                       Cancel
                     </button>
                   </div>
