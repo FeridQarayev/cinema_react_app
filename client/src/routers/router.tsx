@@ -1,5 +1,6 @@
 import AdminRoot from '../pages/admin/AdminRoot';
-import MovieCinema from '../pages/admin/cinema';
+import CinemaAdmin from '../pages/admin/cinema';
+import HallAdmin from '../pages/admin/hall';
 import HomeAdmin from '../pages/admin/home';
 import AboutUs from '../pages/base/aboutus';
 import BaseRoot from '../pages/base/BaseRoot';
@@ -63,7 +64,11 @@ export const ROUTES = [
       },
       {
         path: 'cinema',
-        element: <MovieCinema />,
+        element: <CinemaAdmin />,
+      },
+      {
+        path: 'hall',
+        element: <HallAdmin />,
       },
     ],
   },

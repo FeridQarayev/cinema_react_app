@@ -15,21 +15,21 @@ function Navbar(): JSX.Element {
           <h4>My Cinema</h4>
           <ul className={styled.navbar__body__list}>
             <li className={styled.navbar__body__list__item}>
-              <Link to={'#'}>
+              <Link to={''}>
                 <Gauge />
                 <span>Dashboard</span>
               </Link>
             </li>
             <li className={styled.navbar__body__list__item}>
-              <Link to={'#'}>
+              <Link to={'cinema'}>
                 <Cinema />
                 <span>Cinema</span>
               </Link>
             </li>
             <li className={styled.navbar__body__list__item}>
-              <Link to={'#'}>
+              <Link to={'hall'}>
                 <Gauge />
-                <span>Dashboard</span>
+                <span>Hall</span>
               </Link>
             </li>
             <li className={styled.navbar__body__list__item}>
