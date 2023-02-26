@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import type Movie from '../../../interfaces/movie';
-import { movieGetAll } from '../../../services/movie';
+import { movieGetAll, movieGetById, movieCreate, movieUpdate, movieDelete } from '../../../services/movie';
 import styled from './movie.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -40,6 +40,34 @@ function MovieAdmin(): JSX.Element {
     });
   }, []);
 
+  const deleteMovie = (id: string): void => {
+    const alert = confirm('Are you sure you want to delete hall?');
+    if (alert)
+      void movieDelete(id)
+        .then((res) => {
+          if (res.status === 200) {
+            setMovies((datas) => datas.filter((data) => data._id !== id));
+            toast.success(res.data.message);
+          } else toast.error(res.data.message);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+  };
+
+  const openUpdateMovie = (id: string): void => {
+    void movieGetById(id)
+      .then((res) => {
+        if (res.status === 200) {
+          setMovie(res.data.data);
+          toast.success(res.data.message);
+          handleOpenUpdate();
+        } else toast.error(res.data.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
   const columns = useMemo<Array<MRT_ColumnDef<Movie>>>(
     () => [
       {
@@ -74,7 +102,7 @@ function MovieAdmin(): JSX.Element {
           <div key={row.original._id}>
             <button
               onClick={() => {
-                openUpdateHall(row.original._id);
+                openUpdateMovie(row.original._id);
               }}
               className={styled.update}
             >
@@ -82,7 +110,7 @@ function MovieAdmin(): JSX.Element {
             </button>
             <button
               onClick={() => {
-                deleteHall(row.original._id);
+                deleteMovie(row.original._id);
               }}
               className={styled.delete}
             >
@@ -108,7 +136,7 @@ function MovieAdmin(): JSX.Element {
         <div className={styled.movie__container__body}>
           <MaterialReactTable
             columns={columns}
-            data={halls}
+            data={movies}
             renderTopToolbarCustomActions={() => (
               <button onClick={handleOpenCreate} className={styled.new}>
                 Create New Movie
@@ -129,11 +157,11 @@ function MovieAdmin(): JSX.Element {
                 }}
                 validationSchema={UpdateSchema}
                 onSubmit={(values, { resetForm }) => {
-                  void hallUpdate(values)
+                  void movieUpdate(values)
                     .then((res) => {
                       if (res.status === 201) {
-                        setHall(res.data.data);
-                        setHalls((datas) => {
+                        setMovie(res.data.data);
+                        setMovies((datas) => {
                           const uptaded = datas.find((data) => data._id === values.hallId);
                           uptaded?.name !== undefined && (uptaded.name = values.name);
                           uptaded?.column !== undefined && (uptaded.column = Number(values.column));
@@ -193,11 +221,11 @@ function MovieAdmin(): JSX.Element {
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
                 console.log(values);
-                void hallCreate(values)
+                void movieCreate(values)
                   .then((res) => {
                     if (res.status === 201) {
                       toast.success(res.data.message);
-                      setHalls((datas) => [...datas, res.data.data]);
+                      setMovies((datas) => [...datas, res.data.data]);
                       handleOpenCreate();
                       resetForm();
                     } else toast.error(res.data.message);
@@ -220,19 +248,6 @@ function MovieAdmin(): JSX.Element {
                   <div className={styled.model__create__form__group}>
                     <Field name="row" placeholder="Row" />
                     {errors.row != null && (touched.row ?? false) ? <span>{errors.row}</span> : null}
-                  </div>
-                  <div className={styled.model__create__form__group}>
-                    <Field name="cinemaId" as="select" placeholder="Cinema">
-                      <option hidden value="DEFAULT">
-                        Cinema
-                      </option>
-                      {cinemas.map((cinema) => (
-                        <option key={cinema._id} value={cinema._id}>
-                          {cinema.name}
-                        </option>
-                      ))}
-                    </Field>
-                    {errors.cinemaId != null && (touched.cinemaId ?? false) ? <span>{errors.cinemaId}</span> : null}
                   </div>
                   <div className={styled.model__create__form__btn}>
                     <button type="submit">Create</button>
