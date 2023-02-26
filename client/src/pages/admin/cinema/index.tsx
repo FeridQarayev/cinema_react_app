@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import type Cinema from '../../../interfaces/new.cinema';
-import { cinemaGetAll, cinemaGetById, cinemaCreate, cinemaDelete } from '../../../services/cinema';
+import { cinemaGetAll, cinemaGetById, cinemaCreate, cinemaUpdate, cinemaDelete } from '../../../services/cinema';
 import styled from './cinema.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -136,15 +136,21 @@ function CinemaAdmin(): JSX.Element {
             <div className={styled.model__create__form}>
               <Formik
                 initialValues={{
-                  name: '',
+                  cinemaId: cinema?._id !== undefined ? cinema?._id : '',
+                  name: cinema?.name !== undefined ? cinema?.name : '',
                 }}
                 validationSchema={CreateSchema}
                 onSubmit={(values, { resetForm }) => {
-                  void cinemaCreate(values)
+                  void cinemaUpdate(values)
                     .then((res) => {
                       if (res.status === 201) {
+                        setCinema(res.data.data);
+                        setCinemas((datas) => {
+                          const uptaded = datas.find((data) => data._id === values.cinemaId);
+                          uptaded?.name !== undefined && (uptaded.name = values.name);
+                          return [...datas];
+                        });
                         toast.success(res.data.message);
-                        setCinemas((datas) => [...datas, res.data.data]);
                         handleOpenUpdate();
                       } else toast.error(res.data.message);
                     })
@@ -157,11 +163,11 @@ function CinemaAdmin(): JSX.Element {
                 {({ errors, touched }) => (
                   <Form>
                     <div className={styled.model__create__form__group}>
-                      <Field name="name" placeholder="Name" value={cinema?.name} />
+                      <Field name="name" placeholder="Name" />
                       {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
                     </div>
                     <div className={styled.model__create__form__btn}>
-                      <button type="submit">Create</button>
+                      <button type="submit">Update</button>
                       <button type="button" onClick={handleOpenUpdate}>
                         Cancel
                       </button>
