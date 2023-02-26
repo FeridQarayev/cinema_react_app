@@ -4,7 +4,9 @@ import adminImg from '../../../images/admin/admin-image-png-3.png';
 import backImg from '../../../images/admin/pattern_h.png';
 import { ReactComponent as Exit } from '../../../svgs/arrow-right-from-bracket-solid.svg';
 import { ReactComponent as Cinema } from '../../../svgs/building-solid.svg';
+import { ReactComponent as Film } from '../../../svgs/film-solid.svg';
 import { ReactComponent as Gauge } from '../../../svgs/gauge-high-solid.svg';
+import { ReactComponent as Hall } from '../../../svgs/gopuram-solid.svg';
 import styled from './navbar.module.scss';
 
 function Navbar(): JSX.Element {
@@ -28,14 +30,14 @@ function Navbar(): JSX.Element {
             </li>
             <li className={styled.navbar__body__list__item}>
               <Link to={'hall'}>
-                <Gauge />
+                <Hall />
                 <span>Hall</span>
               </Link>
             </li>
             <li className={styled.navbar__body__list__item}>
-              <Link to={'#'}>
-                <Cinema />
-                <span>Cinema</span>
+              <Link to={'movie'}>
+                <Film />
+                <span>Movie</span>
               </Link>
             </li>
           </ul>

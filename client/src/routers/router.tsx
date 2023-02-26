@@ -2,6 +2,7 @@ import AdminRoot from '../pages/admin/AdminRoot';
 import CinemaAdmin from '../pages/admin/cinema';
 import HallAdmin from '../pages/admin/hall';
 import HomeAdmin from '../pages/admin/home';
+import MovieAdmin from '../pages/admin/movie';
 import AboutUs from '../pages/base/aboutus';
 import BaseRoot from '../pages/base/BaseRoot';
 import ComingSoon from '../pages/base/comingsoon';
@@ -69,6 +70,10 @@ export const ROUTES = [
       {
         path: 'hall',
         element: <HallAdmin />,
+      },
+      {
+        path: 'movie',
+        element: <MovieAdmin />,
       },
     ],
   },
