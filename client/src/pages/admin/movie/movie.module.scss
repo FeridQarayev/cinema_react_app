@@ -1,0 +1,205 @@
+.movie {
+  width: 100%;
+  min-height: 100vh;
+  transition: ease all 0.3s;
+  position: relative;
+  padding: 60px 10px 25px 305px;
+  background: #f8f8f8;
+  &__container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    &__title {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px px;
+      margin-left: -15px;
+      &__col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+        div {
+          background: #fff;
+          margin-top: 0;
+          margin-bottom: 30px;
+          padding: 25px 35px 22px 38px;
+          box-shadow: 1px 0 5px rgb(0 0 0 / 10%);
+          margin-left: -40px;
+          margin-right: -40px;
+          position: relative;
+          h2 {
+            font-size: 20px;
+            font-weight: 500;
+            color: #15283c;
+            line-height: 20px;
+            position: relative;
+          }
+        }
+      }
+    }
+    &__body {
+      //   display: flex;
+      //   flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+      width: 100%;
+    }
+  }
+}
+
+.update {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  border: 1px solid transparent;
+  padding: 0.1rem 0.75rem;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  margin-right: 7px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+  }
+}
+.delete {
+  color: #fff;
+  background-color: #dc3545;
+  cursor: pointer;
+  border-color: #dc3545;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.1rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+}
+.new {
+  color: #fff;
+  background-color: #198754;
+  border-color: #198754;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid #198754;
+  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.model__create {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  border: 1px solid #000;
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px 30px 10px 30px;
+  &__form {
+    margin-top: 25px;
+    &__group {
+      margin-bottom: 1rem;
+      label {
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+      select {
+        width: 100%;
+        padding: 10px 20px;
+        color: #666;
+        border: 1px solid #e3e3e3;
+        border-radius: 5px;
+        height: auto;
+        box-shadow: none;
+        display: block;
+        font-size: 1rem;
+        line-height: 1.5;
+        background-color: #fff;
+        background-clip: padding-box;
+        outline: 0 !important;
+        overflow: visible;
+        transition: border-co;
+      }
+      input {
+        width: 100%;
+        padding: 10px 20px;
+        color: #666;
+        border: 1px solid #e3e3e3;
+        border-radius: 5px;
+        height: auto;
+        box-shadow: none;
+        display: block;
+        font-size: 1rem;
+        line-height: 1.5;
+        background-color: #fff;
+        background-clip: padding-box;
+        outline: 0 !important;
+        overflow: visible;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+      span {
+        color: red;
+        font-weight: 500;
+      }
+    }
+    &__btn {
+      text-align: right;
+      margin-top: 30px;
+      //   transform: translateX(10px);
+      button {
+        background: #9352b3;
+        border-radius: 0.25rem;
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        font-size: 12px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #fff;
+        overflow: hidden;
+        padding: 0 15px;
+        position: relative;
+        font-weight: 600;
+        border: 0;
+        transition: all 0.5s ease;
+        line-height: 35px;
+        margin: 0 !important;
+        &:nth-child(1) {
+          background: #9352b3;
+          margin-right: 5px !important;
+        }
+        &:nth-child(2) {
+          background-color: grey;
+        }
+      }
+    }
+  }
+}
