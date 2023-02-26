@@ -26,12 +26,14 @@ exports.getById = async (req, res) => {
 };
 
 exports.create = (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
   const images = [];
   const { files } = req;
 
   if (files) {
     images.push(files.file[0].filename);
-    images.push(files["file-cover"][0].filename);
+    images.push(files["fileCover"][0].filename);
   } else {
     images.push(req.file.filename);
   }

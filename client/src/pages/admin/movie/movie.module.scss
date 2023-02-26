@@ -110,6 +110,14 @@
   margin-bottom: 20px;
   cursor: pointer;
 }
+form {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+article {
+  width: 250px;
+}
 
 .model__create {
   position: absolute;
@@ -123,8 +131,26 @@
   padding: 20px 30px 10px 30px;
   &__form {
     margin-top: 25px;
+    nav {
+      display: flex;
+      gap: 10px;
+      &:nth-child(2) {
+        gap: 5px;
+      }
+    }
     &__group {
       margin-bottom: 1rem;
+      &__check {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        input {
+          height: 20px !important;
+          padding: 0 !important;
+          width: 20px !important;
+          margin-top: 3px !important;
+        }
+      }
       label {
         font-weight: 500;
         display: inline-block;
@@ -157,7 +183,7 @@
         box-shadow: none;
         display: block;
         font-size: 1rem;
-        line-height: 1.5;
+        line-height: 1;
         background-color: #fff;
         background-clip: padding-box;
         outline: 0 !important;
