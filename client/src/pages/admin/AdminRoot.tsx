@@ -6,7 +6,6 @@ function AdminRoot(): JSX.Element {
     <>
       <Navbar />
       <Outlet />
-      {/* <Footer /> */}
     </>
   );
 }
