@@ -13,4 +13,4 @@ export const hallCreate = async (hall: { name: string }): Promise<AxiosResponse<
 export const hallUpdate = async (hall: { name: string; hallId: string }): Promise<AxiosResponse<{ message: string; data: Hall }>> =>
   await axios.put(`${BASE_URL}/hall`, hall);
 
-export const hallDelete = async (hallId: string): Promise<AxiosResponse> => await axios.delete(`${BASE_URL}/cinema`, { data: { hallId } });
+export const hallDelete = async (hallId: string): Promise<AxiosResponse> => await axios.delete(`${BASE_URL}/hall`, { data: { hallId } });
