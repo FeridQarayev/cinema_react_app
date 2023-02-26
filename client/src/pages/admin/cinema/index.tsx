@@ -130,6 +130,7 @@ function CinemaAdmin(): JSX.Element {
                     if (res.status === 201) {
                       toast.success(res.data.message);
                       setCinemas((datas) => [...datas, res.data.data]);
+                      handleClose();
                     } else toast.error(res.data.message);
                   })
                   .catch((error) => {
@@ -153,10 +154,6 @@ function CinemaAdmin(): JSX.Element {
                 </Form>
               )}
             </Formik>
-            <div className={styled.model__create__form__actions}>
-              <button></button>
-              <button></button>
-            </div>
           </div>
         </div>
       </Modal>
