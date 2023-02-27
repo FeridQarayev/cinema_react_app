@@ -5,7 +5,7 @@ import type Hall from './new.hall';
 export default interface Session {
   _id: string;
   name: string;
-  date: Date;
+  date: string;
   price: number;
   language: string;
   formats: Formats;
@@ -13,7 +13,7 @@ export default interface Session {
   movie: Movie;
   reserved: Array<{
     col: number;
-    row: number
+    row: number;
   }>;
   __v: number;
 }

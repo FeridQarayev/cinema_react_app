@@ -25,12 +25,6 @@ const CreateSchema = Yup.object().shape({
     .required('Required!'),
 });
 
-const UpdateSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required!'),
-  column: Yup.number().min(5).max(15).required('Required!'),
-  row: Yup.number().min(5).max(15).required('Required!'),
-});
-
 function SessionAdmin(): JSX.Element {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -93,25 +87,32 @@ function SessionAdmin(): JSX.Element {
         accessorKey: '_id',
         header: 'Id',
       },
-      //   {
-      //     accessorKey: 'movie.name',
-      //     header: 'Name',
-      //   },
       {
-        accessorKey: 'date',
-        header: 'Column',
+        accessorKey: 'movie.name',
+        header: 'Movie',
       },
       {
-        accessorKey: 'price',
-        header: 'Price',
+        accessorKey: 'hall.cinema.name',
+        header: 'Cinema',
+      },
+      {
+        accessorKey: 'hall.name',
+        header: 'Hall',
+      },
+      {
+        accessorKey: 'date',
+        header: 'Date',
       },
       {
         accessorKey: 'language',
         header: 'Language',
       },
       {
+        header: 'Price',
+        Cell: ({ renderedCellValue, row }) => [<span key={row.original._id}>{row.original.price} AZN</span>],
+      },
+      {
         header: 'Actions',
-        align: 'right',
         muiTableHeadCellProps: {
           align: 'center',
         },
@@ -164,7 +165,7 @@ function SessionAdmin(): JSX.Element {
             )}
           />
         </div>
-        {/* <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
           <div className={styled.model__create}>
             <h2 id="modal-modal-title">Update Session</h2>
             <div className={styled.model__create__form}>
@@ -174,20 +175,30 @@ function SessionAdmin(): JSX.Element {
                   date: session?.date !== undefined ? session?.date : '',
                   price: session?.price !== undefined ? session?.price : '',
                   language: session?.language !== undefined ? session?.language : '',
+                  formats: {
+                    d2: session?.formats?.d2 ?? false ? session?.formats.d2 : false,
+                    d3: session?.formats?.d3 ?? false ? session?.formats.d3 : false,
+                    d4: session?.formats?.d4 ?? false ? session?.formats.d4 : false,
+                  },
                 }}
-                validationSchema={UpdateSchema}
+                validationSchema={CreateSchema}
                 onSubmit={(values, { resetForm }) => {
                   void sessionUpdate(values)
                     .then((res) => {
                       if (res.status === 201) {
                         setSession(res.data.data);
-                        // setSessions((datas) => {
-                        //   const uptaded = datas.find((data) => data._id === values.sessionId);
-                        //   uptaded?.date !== undefined && (uptaded.date.toString() = values.date);
-                        //   uptaded?.price !== undefined && (uptaded.price = Number(values.price));
-                        //   uptaded?.language !== undefined && (uptaded.language.toString() = Number(values.language));
-                        //   return [...datas];
-                        // });
+                        setSessions((datas) => {
+                          const uptaded = datas.find((data) => data._id === values.sessionId);
+                          uptaded?.date !== undefined && (uptaded.date = values.date);
+                          uptaded?.price !== undefined && (uptaded.price = Number(values.price));
+                          uptaded?.language !== undefined && (uptaded.language = values.language);
+                          if (uptaded !== undefined) {
+                            uptaded.formats.d2 = values.formats.d2 !== undefined ? values.formats.d2 : false;
+                            uptaded.formats.d3 = values.formats.d3 !== undefined ? values.formats.d3 : false;
+                            uptaded.formats.d4 = values.formats.d4 !== undefined ? values.formats.d4 : false;
+                          }
+                          return [...datas];
+                        });
                         toast.success(res.data.message);
                         handleOpenUpdate();
                         resetForm();
@@ -201,17 +212,66 @@ function SessionAdmin(): JSX.Element {
                 {({ errors, touched }) => (
                   <Form>
                     <div className={styled.model__create__form__group}>
-                      <Field name="name" placeholder="Name" />
-                      {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
+                      <Field name="date" placeholder="Time" type="time" />
+                      {errors.date != null && (touched.date ?? false) ? <span>{errors.date}</span> : null}
                     </div>
                     <div className={styled.model__create__form__group}>
-                      <Field name="column" placeholder="Column" />
-                      {errors.column != null && (touched.column ?? false) ? <span>{errors.column}</span> : null}
+                      <Field name="price" placeholder="Price" type="number" />
+                      {errors.price != null && (touched.price ?? false) ? <span>{errors.price}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
-                      <Field name="row" placeholder="Row" />
-                      {errors.row != null && (touched.row ?? false) ? <span>{errors.row}</span> : null}
-                    </div>
+                    <nav>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="language">AZ</label>
+                          <Field name="language" type="radio" value="AZ" />
+                          {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                        </div>
+                      </div>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="language">TU</label>
+                          <Field name="language" type="radio" value="TU" />
+                          {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                        </div>
+                      </div>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="language">RU</label>
+                          <Field name="language" type="radio" value="RU" />
+                          {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                        </div>
+                      </div>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="language">EN</label>
+                          <Field name="language" type="radio" value="EN" />
+                          {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                        </div>
+                      </div>
+                    </nav>
+                    <nav>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="formats.d2">2D</label>
+                          <Field name="formats.d2" type="checkbox" />
+                          {errors.formats?.d2 != null && (touched.formats?.d2 ?? false) ? <span>{errors.formats?.d2}</span> : null}
+                        </div>
+                      </div>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="formats.d3">3D</label>
+                          <Field name="formats.d3" type="checkbox" />
+                          {errors.formats?.d3 != null && (touched.formats?.d3 ?? false) ? <span>{errors.formats?.d3}</span> : null}
+                        </div>
+                      </div>
+                      <div className={styled.model__create__form__group}>
+                        <div className={styled.model__create__form__group__check}>
+                          <label htmlFor="formats.d4">4D</label>
+                          <Field name="formats.d4" type="checkbox" />
+                          {errors.formats?.d4 != null && (touched.formats?.d4 ?? false) ? <span>{errors.formats?.d4}</span> : null}
+                        </div>
+                      </div>
+                    </nav>
                     <div className={styled.model__create__form__btn}>
                       <button type="submit">Update</button>
                       <button type="button" onClick={handleOpenUpdate}>
@@ -223,7 +283,7 @@ function SessionAdmin(): JSX.Element {
               </Formik>
             </div>
           </div>
-        </Modal> */}
+        </Modal>
       </div>
       <Toaster position="top-center" reverseOrder={false} />
 

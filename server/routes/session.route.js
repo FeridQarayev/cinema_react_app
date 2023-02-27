@@ -3,7 +3,7 @@ const controller = require("../controllers/session.controller");
 module.exports = function (app) {
   app.get("/api/session", controller.get);
 
-  app.get("/api/session/id", controller.getById);
+  app.post("/api/session/id", controller.getById);
 
   app.post("/api/session", controller.create);
 
