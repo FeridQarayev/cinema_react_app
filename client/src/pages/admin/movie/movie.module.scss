@@ -197,6 +197,8 @@
     }
     &__btn {
       text-align: right;
+      display: flex;
+      align-items: end;
       margin-top: 30px;
       //   transform: translateX(10px);
       button {

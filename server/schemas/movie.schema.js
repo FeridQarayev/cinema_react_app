@@ -21,7 +21,7 @@ exports.MovieCreateValSchema = Joi.object({
     en: Joi.boolean().required(),
   }).required(),
   genre: Joi.string().required(),
-  synopsis: Joi.string().min(0).max(900).required(),
+  synopsis: Joi.string().min(1).max(900).required(),
   rating: Joi.number().min(0).max(10).required(),
 });
 

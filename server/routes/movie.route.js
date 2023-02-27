@@ -5,7 +5,7 @@ const upload = require("../middlewares/upload");
 module.exports = function (app) {
   app.get("/api/movie", controller.get);
 
-  app.get("/api/movie/id", controller.getById);
+  app.post("/api/movie/id", controller.getById);
 
   app.post(
     "/api/movie",

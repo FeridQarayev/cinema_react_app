@@ -55,7 +55,7 @@ exports.create = (req, res) => {
     formats,
     languages,
     genre,
-    snyopsis,
+    synopsis,
     rating,
   } = req.body;
 
@@ -70,7 +70,7 @@ exports.create = (req, res) => {
     formats,
     languages,
     genre,
-    snyopsis,
+    synopsis,
     rating,
     image: images[0],
     coverImage: images[1] ? images[1] : "",

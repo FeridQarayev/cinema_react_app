@@ -10,7 +10,9 @@ export const movieGetById = async (movieId: string): Promise<AxiosResponse<{ mes
 export const movieCreate = async (movie: { name: string }): Promise<AxiosResponse<{ message: string; data: Movie }>> =>
   await axios({ method: 'post', url: `${BASE_URL}/movie`, data: movie, headers: { 'Content-Type': 'multipart/form-data' } });
 
-export const movieUpdate = async (movie: { name: string; movieId: string }): Promise<AxiosResponse<{ message: string; data: Movie }>> =>
-  await axios.put(`${BASE_URL}/movie`, movie);
+export const movieUpdate = async (movie: { name: string; movieId: string }): Promise<AxiosResponse<{ message: string; data: Movie }>> => {
+  console.log(movie);
+  return await axios.put(`${BASE_URL}/movie`, movie);
+};
 
 export const movieDelete = async (movieId: string): Promise<AxiosResponse> => await axios.delete(`${BASE_URL}/movie`, { data: { movieId } });

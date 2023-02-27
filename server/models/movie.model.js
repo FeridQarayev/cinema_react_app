@@ -20,7 +20,7 @@ const movieSchema = new mongoose.Schema({
     en: { type: Boolean, default: false },
   },
   genre: { type: String, default: null },
-  synopsis: { type: String, default: null },
+  synopsis: { type: String },
   rating: { type: Number, default: null },
   image: { type: String, default: null },
   coverImage: { type: String, default: null },
