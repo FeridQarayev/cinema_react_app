@@ -19,13 +19,15 @@ function Navbar(): JSX.Element {
       void verifyAdmin(user._id)
         .then((res) => {
           if (res.status === 200) setIsAdmin(true);
+          else setIsAdmin(false);
         })
         .catch(() => {
-          setIsAdmin(false);
+          setIsAdmin((oldadmin) => (oldadmin = false));
         });
       void verifyToken(user.token)
         .then((res) => {
           if (res.status === 200) setVerify(true);
+          else setVerify(false);
         })
         .catch(() => {
           setVerify(false);
