@@ -35,7 +35,7 @@ export const ROUTES = [
         element: <AboutUs />,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         element: <Detail />,
       },
       {

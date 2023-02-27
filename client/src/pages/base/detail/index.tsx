@@ -1,14 +1,25 @@
-import React from 'react';
-import avatarBack from '../../../images/moviebanner/avatar-the-way-of-water-2022-movies-avatar-2-sam-3440x1440-8979.jpg';
-import avatar from '../../../images/movies/avatarthewayofwater700x1000.350x0.jpg';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import type IMovie from '../../../interfaces/movie';
+import { movieGetById } from '../../../services/movie';
 import { ReactComponent as Clock } from '../../../svgs/clock-regular.svg';
 import styled from './detail.module.scss';
 
 function Detail(): JSX.Element {
+  const [movie, setMovie] = useState<IMovie>();
+  const { id } = useParams();
+
+  useEffect(() => {
+    id !== undefined &&
+      movieGetById(id).then((res) => {
+        setMovie(res.data.data);
+      });
+  }, []);
+  const duration = movie?.duration.split(':');
   return (
     <div className={styled.detail}>
       <section className={styled.detail__up}>
-        <img src={avatarBack} alt="avatar" />
+        <img src={movie !== undefined ? require(`../../../images/movies/${String(movie?.coverImage)}`) : ''} alt={movie?.name} />
       </section>
 
       <section className={styled.detail__body}>
@@ -18,56 +29,55 @@ function Detail(): JSX.Element {
               <div className={styled.detail__body__container__row__content__movie}>
                 <div className={styled.detail__body__container__row__content__movie__left}>
                   <div className={styled.detail__body__container__row__content__movie__left__img}>
-                    <img src={avatar} alt="Avatar" />
+                    <img src={movie !== undefined ? require(`../../../images/movies/${String(movie?.image)}`) : ''} alt={movie?.name} />
                   </div>
                 </div>
                 <div className={styled.detail__body__container__row__content__movie__right}>
                   <div className={styled.detail__body__container__row__content__movie__right__info}>
-                    <h1>Avatar: The Way of Water</h1>
+                    <h1>{movie?.name}</h1>
                     <div className={styled.detail__body__container__row__content__movie__right__info__pg}>
                       <span>G</span>
                       <span>
-                        <Clock /> 02 hours 00 minutes
+                        <Clock /> {duration?.[0]} hours {duration?.[1]} minutes
                       </span>
                     </div>
                     <ul className={styled.detail__body__container__row__content__movie__right__info__list}>
                       <li>
                         <label>Actor: </label>
-                        <span>Sam Worthington (Jake Sully), Zoe Saldaña (Neytiri Sully)</span>
+                        <span>{movie?.actor}</span>
                       </li>
                       <li>
                         <label>Director: </label>
-                        <span>Grace Belly, Mae West</span>
+                        <span>{movie?.director}</span>
                       </li>
                       <li>
                         <label>Genre: </label>
-                        <span>Action, Comic</span>
+                        <span>{movie?.genre}</span>
                       </li>
                       <li>
                         <label>Release: </label>
-                        <span>February 15, 2022</span>
+                        <span>{movie !== undefined && new Date(movie.sessionTime).toDateString()}</span>
                       </li>
                       <li>
                         <label>Language: </label>
-                        <span>English</span>
+                        <span>
+                          {(movie?.languages.az ?? false) && 'AZ '}
+                          {(movie?.languages.tu ?? false) && 'TU '}
+                          {(movie?.languages.ru ?? false) && 'RU '}
+                          {(movie?.languages.en ?? false) && 'EN '}
+                        </span>
                       </li>
                       <li>
                         <label>IMDB Rating: </label>
-                        <span>8.5</span>
+                        &nbsp;
+                        <span>{movie?.rating}</span>
                       </li>
                     </ul>
                   </div>
                   <div className={styled.detail__body__container__row__content__movie__right__action}></div>
                   <div className={styled.detail__body__container__row__content__movie__right__desc}>
                     <h3>Synopsis</h3>
-                    <p>
-                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                      quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-                      sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-                      quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                      incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                      corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
-                    </p>
+                    <p>{movie?.synopsis}</p>
                   </div>
                 </div>
               </div>

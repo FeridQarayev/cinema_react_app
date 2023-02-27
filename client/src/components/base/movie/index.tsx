@@ -12,6 +12,7 @@ import { ReactComponent as EnglishFlag } from '../../../svgs/united-kingdom-flag
 import styled from './movie.module.scss';
 
 function Movie(props: { data: IMovie }): JSX.Element {
+  const duration = props.data?.duration.split(':');
   return (
     <div className={styled.movie}>
       <article className={styled.movie__body}>
@@ -87,7 +88,7 @@ function Movie(props: { data: IMovie }): JSX.Element {
             </p>
             <p>
               <strong>Duration: </strong>
-              {props.data.duration}
+              {duration?.[0]} hours {duration?.[1]} minutes
             </p>
           </div>
           <div className={styled.movie__body__hover__lang}>
@@ -104,7 +105,7 @@ function Movie(props: { data: IMovie }): JSX.Element {
               <PlaySvg />
               Trailer
             </Link>
-            <Link to={'#'}>
+            <Link to={`/detail/${props.data._id}`}>
               <InfoSvg />
               Detail
             </Link>
