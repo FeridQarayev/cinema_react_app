@@ -36,10 +36,16 @@ const CreateSchema = Yup.object().shape({
       en: Yup.bool().required('Required!'),
     })
     .required('Required!'),
-  file: Yup.mixed().required('A file is required'),
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  // .test('fileFormat', 'Unsupported Format', (value) => value && SUPPORTED_FORMATS.includes(value.type)),
-  fileCover: Yup.mixed().required('A file is required'),
+  file: Yup.mixed()
+    .required('A file is required')
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    .test('fileFormat', 'Unsupported Format', (value: string) => value.length > 0 && SUPPORTED_FORMATS.includes(value.type)),
+  fileCover: Yup.mixed()
+    .required('A file is required')
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    .test('fileFormat', 'Unsupported Format', (value: string) => value.length > 0 && SUPPORTED_FORMATS.includes(value.type)),
 });
 
 const UpdateSchema = Yup.object().shape({
@@ -266,24 +272,14 @@ function MovieAdmin(): JSX.Element {
                   ru: false,
                   en: false,
                 },
-                file: {
-                  name: '',
-                  lastModified: '',
-                  lastModifiedDate: '',
-                  type: '',
-                  size: '',
-                  webkitRelativePath: '',
-                },
-                // file: '',
-                // fileCover: '',
-                fileCover: {
-                  name: '',
-                  lastModified: '',
-                  lastModifiedDate: '',
-                  type: '',
-                  size: '',
-                  webkitRelativePath: '',
-                },
+                file: '',
+                fileCover: '',
+                // name: null,
+                // lastModified: '',
+                // lastModifiedDate: '',
+                // type: '',
+                // size: '',
+                // webkitRelativePath: '',
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
@@ -417,24 +413,26 @@ function MovieAdmin(): JSX.Element {
                         name="file.filename"
                         placeholder="Image"
                         type="file"
+                        accept="image/png, image/jpeg"
                         onChange={(event: { currentTarget: { files: unknown[] } }) => {
                           setFieldValue('file', event.currentTarget.files[0]);
                           console.log(event.currentTarget.files[0]);
                         }}
                       />
-                      {errors.file != null && (touched.file?.name ?? false) ? <span>{errors.file.name}</span> : null}
+                      {errors.file != null && (touched.file ?? false) ? <span>{errors.file}</span> : null}
                     </div>
                     <div className={styled.model__create__form__group}>
                       <Field
                         name="fileCover.filename"
                         placeholder="Image Cover"
+                        accept="image/png, image/jpeg"
                         type="file"
                         onChange={(event: { currentTarget: { files: unknown[] } }) => {
                           setFieldValue('fileCover', event.currentTarget.files[0]);
                           console.log(event.currentTarget.files[0]);
                         }}
                       />
-                      {errors.fileCover != null && (touched.fileCover?.name ?? false) ? <span>{errors.fileCover.name}</span> : null}
+                      {errors.fileCover != null && (touched.fileCover ?? false) ? <span>{errors.fileCover}</span> : null}
                     </div>
                     <div className={styled.model__create__form__btn}>
                       <button type="submit">Create</button>
