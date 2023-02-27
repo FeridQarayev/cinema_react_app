@@ -3,9 +3,11 @@ import { Field, Form, Formik } from 'formik';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import type Cinema from '../../../interfaces/new.cinema';
 import { cinemaGetAll, cinemaGetById, cinemaCreate, cinemaUpdate, cinemaDelete } from '../../../services/cinema';
+import { verifyAdmin } from '../../../services/verify.admin';
 import styled from './cinema.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -25,7 +27,18 @@ function CinemaAdmin(): JSX.Element {
     setopenUpdate((oldopen) => !oldopen);
   };
 
+  const user = JSON.parse(String(localStorage.getItem('user')));
+  const navigate = useNavigate();
   useEffect(() => {
+    if (user !== undefined && user !== null) {
+      void verifyAdmin(user._id)
+        .then((res) => {
+          if (res.status !== 200) navigate('../../aboutus');
+        })
+        .catch(() => {
+          navigate('../../aboutus');
+        });
+    }
     void cinemaGetAll().then((res) => {
       if (res.status === 200) setCinemas(res.data);
     });

@@ -10,13 +10,12 @@ function Home(): JSX.Element {
     if (user !== undefined && user !== null) {
       void verifyAdmin(user._id)
         .then((res) => {
-          if (res.status !== 200) navigate('../home');
+          if (res.status !== 200) navigate('../../aboutus');
         })
         .catch(() => {
-          navigate('../home');
+          navigate('../../aboutus');
         });
     }
-    console.log(user);
   }, [user]);
   return <div>Home</div>;
 }
