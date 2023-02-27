@@ -13,6 +13,6 @@ exports.CinemaUpdateValSchema = Joi.object({
 });
 
 exports.CinemaDeleteValSchema = Joi.object({
-  userId: Joi.joiObjectid().required(),
+  userId: Joi.joiObjectid(),
   cinemaId: Joi.joiObjectid().required(),
 });
