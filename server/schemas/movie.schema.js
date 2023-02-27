@@ -2,6 +2,7 @@ const Joi = require("joi");
 Joi.joiObjectid = require("joi-objectid")(Joi);
 
 exports.MovieCreateValSchema = Joi.object({
+  userId: Joi.joiObjectid(),
   name: Joi.string().min(3).max(70).required(),
   actor: Joi.string().min(3).max(70).required(),
   director: Joi.string().min(3).max(70).required(),
@@ -26,6 +27,7 @@ exports.MovieCreateValSchema = Joi.object({
 });
 
 exports.MovieUpdateValSchema = Joi.object({
+  userId: Joi.joiObjectid().required(),
   movieId: Joi.joiObjectid().required(),
   name: Joi.string().min(3).max(70),
   actor: Joi.string().min(3).max(70),
@@ -51,5 +53,6 @@ exports.MovieUpdateValSchema = Joi.object({
 });
 
 exports.MovieDeleteValSchema = Joi.object({
+  userId: Joi.joiObjectid(),
   movieId: Joi.joiObjectid().required(),
 });

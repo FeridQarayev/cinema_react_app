@@ -10,12 +10,17 @@ module.exports = function (app) {
   app.post(
     "/api/movie",
     upload.saveFilesToFolder("../client/src/images/movies"),
+    [auth.verifyToken, auth.isAdmin],
     controller.create
   );
 
-  app.put("/api/movie", controller.update);
+  app.put("/api/movie", [auth.verifyToken, auth.isAdmin], controller.update);
 
-  app.delete("/api/movie", controller.delete);
+  app.delete("/api/movie", [auth.verifyToken, auth.isAdmin], controller.delete);
 
-  app.delete("/api/movie/image", upload.deleteFilesToFolder());
+  app.delete(
+    "/api/movie/image",
+    [auth.verifyToken, auth.isAdmin],
+    upload.deleteFilesToFolder()
+  );
 };
