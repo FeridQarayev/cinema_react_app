@@ -110,16 +110,8 @@
   margin-bottom: 20px;
   cursor: pointer;
 }
-form {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-}
-article {
-  width: 250px;
-}
 
-.model__create {
+.modal__create {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -129,6 +121,14 @@ article {
   border-radius: 20px;
   background-color: #fff;
   padding: 20px 30px 10px 30px;
+  form {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+  article {
+    width: 250px;
+  }
   &__form {
     margin-top: 25px;
     nav {

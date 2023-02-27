@@ -177,10 +177,10 @@ function MovieAdmin(): JSX.Element {
             )}
           />
         </div>
-        <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-          <div className={styled.model__create}>
-            <h2 id="modal-modal-title">Update Movie</h2>
-            <div className={styled.model__create__form}>
+        <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-titlee" aria-describedby="modal-modal-descriptionn">
+          <div className={styled.modal__create}>
+            <h2 id="modal-modal-titlee">Update Movie</h2>
+            <div className={styled.modal__create__form}>
               <Formik
                 initialValues={{
                   //   hallId: hall?._id !== undefined ? hall?._id : '',
@@ -218,19 +218,19 @@ function MovieAdmin(): JSX.Element {
               >
                 {({ errors, touched }) => (
                   <Form>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <Field name="name" placeholder="Name" />
                       {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <Field name="column" placeholder="Column" />
                       {errors.column != null && (touched.column ?? false) ? <span>{errors.column}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <Field name="row" placeholder="Row" />
                       {errors.row != null && (touched.row ?? false) ? <span>{errors.row}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__btn}>
+                    <div className={styled.modal__create__form__btn}>
                       <button type="submit">Update</button>
                       <button type="button" onClick={handleOpenUpdate}>
                         Cancel
@@ -246,9 +246,9 @@ function MovieAdmin(): JSX.Element {
       <Toaster position="top-center" reverseOrder={false} />
 
       <Modal open={openCreate} onClose={handleOpenCreate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <div className={styled.model__create}>
+        <div className={styled.modal__create}>
           <h2 id="modal-modal-title">Create New Movie</h2>
-          <div className={styled.model__create__form}>
+          <div className={styled.modal__create__form}>
             <Formik
               initialValues={{
                 name: '',
@@ -301,65 +301,65 @@ function MovieAdmin(): JSX.Element {
               {({ errors, touched, setFieldValue }) => (
                 <Form>
                   <article>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="name">Name</label>
                       <Field name="name" placeholder="Name" />
                       {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="actor">Actor</label>
                       <Field name="actor" placeholder="Actor" />
                       {errors.actor != null && (touched.actor ?? false) ? <span>{errors.actor}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="director">Director</label>
                       <Field name="director" placeholder="Director" />
                       {errors.director != null && (touched.director ?? false) ? <span>{errors.director}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="duration">Duration</label>
                       <Field name="duration" placeholder="Duration" type="time" />
                       {errors.duration != null && (touched.duration ?? false) ? <span>{errors.duration}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="ageLimit">Age Limit</label>
                       <Field name="ageLimit" type="number" placeholder="Age Limit" />
                       {errors.ageLimit != null && (touched.ageLimit ?? false) ? <span>{errors.ageLimit}</span> : null}
                     </div>
                   </article>
                   <article>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="sessionTime">Session Time</label>
                       <Field name="sessionTime" placeholder="Session Time" type="date" />
                       {errors.sessionTime != null && (touched.sessionTime ?? false) ? <span>{errors.sessionTime}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="sessionTimeOut">Session Time Out</label>
                       <Field name="sessionTimeOut" placeholder="Session Time Out" type="date" />
                       {errors.sessionTimeOut != null && (touched.sessionTimeOut ?? false) ? <span>{errors.sessionTimeOut}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="genre">Genre</label>
                       <Field name="genre" placeholder="Genre" />
                       {errors.genre != null && (touched.genre ?? false) ? <span>{errors.genre}</span> : null}
                     </div>
                     <nav>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="formats.d2">2D</label>
                           <Field name="formats.d2" type="checkbox" />
                           {errors.formats?.d2 != null && (touched.formats?.d2 ?? false) ? <span>{errors.formats?.d2}</span> : null}
                         </div>
                       </div>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="formats.d3">3D</label>
                           <Field name="formats.d3" type="checkbox" />
                           {errors.formats?.d3 != null && (touched.formats?.d3 ?? false) ? <span>{errors.formats?.d3}</span> : null}
                         </div>
                       </div>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="formats.d4">4D</label>
                           <Field name="formats.d4" type="checkbox" />
                           {errors.formats?.d4 != null && (touched.formats?.d4 ?? false) ? <span>{errors.formats?.d4}</span> : null}
@@ -368,47 +368,47 @@ function MovieAdmin(): JSX.Element {
                     </nav>
                   </article>
                   <article>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="synopsis">Synopsis</label>
                       <Field name="synopsis" placeholder="Synopsis" />
                       {errors.synopsis != null && (touched.synopsis ?? false) ? <span>{errors.synopsis}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <label htmlFor="rating">Rating</label>
                       <Field name="rating" type="number" placeholder="Rating" />
                       {errors.rating != null && (touched.rating ?? false) ? <span>{errors.rating}</span> : null}
                     </div>
                     <nav>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="languages.az">AZ</label>
                           <Field name="languages.az" type="checkbox" />
                           {errors.languages?.az != null && (touched.languages?.az ?? false) ? <span>{errors.languages?.az}</span> : null}
                         </div>
                       </div>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="languages.tu">TU</label>
                           <Field name="languages.tu" type="checkbox" />
                           {errors.languages?.tu != null && (touched.languages?.tu ?? false) ? <span>{errors.languages?.tu}</span> : null}
                         </div>
                       </div>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="languages.ru">RU</label>
                           <Field name="languages.ru" type="checkbox" />
                           {errors.languages?.ru != null && (touched.languages?.ru ?? false) ? <span>{errors.languages?.ru}</span> : null}
                         </div>
                       </div>
-                      <div className={styled.model__create__form__group}>
-                        <div className={styled.model__create__form__group__check}>
+                      <div className={styled.modal__create__form__group}>
+                        <div className={styled.modal__create__form__group__check}>
                           <label htmlFor="languages.en">EN</label>
                           <Field name="languages.en" type="checkbox" />
                           {errors.languages?.en != null && (touched.languages?.en ?? false) ? <span>{errors.languages?.en}</span> : null}
                         </div>
                       </div>
                     </nav>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <Field
                         name="file.filename"
                         placeholder="Image"
@@ -421,7 +421,7 @@ function MovieAdmin(): JSX.Element {
                       />
                       {errors.file != null && (touched.file ?? false) ? <span>{errors.file}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__group}>
+                    <div className={styled.modal__create__form__group}>
                       <Field
                         name="fileCover.filename"
                         placeholder="Image Cover"
@@ -434,7 +434,7 @@ function MovieAdmin(): JSX.Element {
                       />
                       {errors.fileCover != null && (touched.fileCover ?? false) ? <span>{errors.fileCover}</span> : null}
                     </div>
-                    <div className={styled.model__create__form__btn}>
+                    <div className={styled.modal__create__form__btn}>
                       <button type="submit">Create</button>
                       <button type="button" onClick={handleOpenCreate}>
                         Cancel
