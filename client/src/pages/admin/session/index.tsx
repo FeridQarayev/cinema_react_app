@@ -4,17 +4,25 @@ import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import * as Yup from 'yup';
-import type Cinema from '../../../interfaces/new.cinema';
+import type Movie from '../../../interfaces/movie';
 import type Hall from '../../../interfaces/new.hall';
 import type Session from '../../../interfaces/session';
-import { cinemaGetAll } from '../../../services/cinema';
+import { hallGetAll } from '../../../services/hall';
+import { movieGetAll } from '../../../services/movie';
+import { sessionGetAll, sessionGetById, sessionCreate, sessionUpdate, sessionDelete } from '../../../services/session';
 import styled from './session.module.scss';
 
 const CreateSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required!'),
-  column: Yup.number().min(5).max(15).required('Required!'),
-  row: Yup.number().min(5).max(15).required('Required!'),
-  cinemaId: Yup.string().required('Required!'),
+  language: Yup.string().min(1, 'Too Short!').max(2, 'Too Long!').required('Required!'),
+  date: Yup.string().required('Required!'),
+  price: Yup.number().min(0).max(1000).required('Required!'),
+  formats: Yup.object()
+    .shape({
+      d2: Yup.bool(),
+      d3: Yup.bool(),
+      d4: Yup.bool(),
+    })
+    .required('Required!'),
 });
 
 const UpdateSchema = Yup.object().shape({
@@ -25,6 +33,8 @@ const UpdateSchema = Yup.object().shape({
 
 function SessionAdmin(): JSX.Element {
   const [sessions, setSessions] = useState<Session[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [halls, setHalls] = useState<Hall[]>([]);
   const [session, setSession] = useState<Session>();
   const [openCreate, setopenCreate] = useState(false);
   const [openUpdate, setopenUpdate] = useState(false);
@@ -37,13 +47,45 @@ function SessionAdmin(): JSX.Element {
   };
 
   useEffect(() => {
-    void hallGetAll().then((res) => {
+    void sessionGetAll().then((res) => {
       if (res.status === 200) setSessions(res.data);
     });
-    // void cinemaGetAll().then((res) => {
-    //   if (res.status === 200) setCinemas(res.data);
-    // });
+    void movieGetAll().then((res) => {
+      if (res.status === 200) setMovies(res.data);
+    });
+    void hallGetAll().then((res) => {
+      if (res.status === 200) setHalls(res.data);
+    });
   }, []);
+
+  const deleteHall = (id: string): void => {
+    const alert = confirm('Are you sure you want to delete hall?');
+    if (alert)
+      void sessionDelete(id)
+        .then((res) => {
+          if (res.status === 200) {
+            setSessions((datas) => datas.filter((data) => data._id !== id));
+            toast.success(res.data.message);
+          } else toast.error(res.data.message);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+  };
+
+  const openUpdateHall = (id: string): void => {
+    void sessionGetById(id)
+      .then((res) => {
+        if (res.status === 200) {
+          setSession(res.data.data);
+          toast.success(res.data.message);
+          handleOpenUpdate();
+        } else toast.error(res.data.message);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
 
   const columns = useMemo<Array<MRT_ColumnDef<Session>>>(
     () => [
@@ -51,21 +93,21 @@ function SessionAdmin(): JSX.Element {
         accessorKey: '_id',
         header: 'Id',
       },
-      {
-        accessorKey: 'name',
-        header: 'Name',
-      },
+      //   {
+      //     accessorKey: 'movie.name',
+      //     header: 'Name',
+      //   },
       {
         accessorKey: 'date',
         header: 'Column',
       },
       {
         accessorKey: 'price',
-        header: 'Row',
+        header: 'Price',
       },
       {
         accessorKey: 'language',
-        header: 'Cinema',
+        header: 'Language',
       },
       {
         header: 'Actions',
@@ -122,30 +164,30 @@ function SessionAdmin(): JSX.Element {
             )}
           />
         </div>
-        <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        {/* <Modal open={openUpdate} onClose={handleOpenUpdate} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
           <div className={styled.model__create}>
             <h2 id="modal-modal-title">Update Session</h2>
             <div className={styled.model__create__form}>
               <Formik
                 initialValues={{
-                  hallId: hall?._id !== undefined ? hall?._id : '',
-                  name: hall?.name !== undefined ? hall?.name : '',
-                  column: hall?.column !== undefined ? hall?.column : '',
-                  row: hall?.row !== undefined ? hall?.row : '',
+                  sessionId: session?._id !== undefined ? session?._id : '',
+                  date: session?.date !== undefined ? session?.date : '',
+                  price: session?.price !== undefined ? session?.price : '',
+                  language: session?.language !== undefined ? session?.language : '',
                 }}
                 validationSchema={UpdateSchema}
                 onSubmit={(values, { resetForm }) => {
-                  void hallUpdate(values)
+                  void sessionUpdate(values)
                     .then((res) => {
                       if (res.status === 201) {
                         setSession(res.data.data);
-                        setSessions((datas) => {
-                          const uptaded = datas.find((data) => data._id === values.hallId);
-                          uptaded?.name !== undefined && (uptaded.name = values.name);
-                          uptaded?.column !== undefined && (uptaded.column = Number(values.column));
-                          uptaded?.row !== undefined && (uptaded.row = Number(values.row));
-                          return [...datas];
-                        });
+                        // setSessions((datas) => {
+                        //   const uptaded = datas.find((data) => data._id === values.sessionId);
+                        //   uptaded?.date !== undefined && (uptaded.date.toString() = values.date);
+                        //   uptaded?.price !== undefined && (uptaded.price = Number(values.price));
+                        //   uptaded?.language !== undefined && (uptaded.language.toString() = Number(values.language));
+                        //   return [...datas];
+                        // });
                         toast.success(res.data.message);
                         handleOpenUpdate();
                         resetForm();
@@ -181,7 +223,7 @@ function SessionAdmin(): JSX.Element {
               </Formik>
             </div>
           </div>
-        </Modal>
+        </Modal> */}
       </div>
       <Toaster position="top-center" reverseOrder={false} />
 
@@ -191,15 +233,21 @@ function SessionAdmin(): JSX.Element {
           <div className={styled.model__create__form}>
             <Formik
               initialValues={{
-                name: '',
-                column: '',
-                row: '',
-                cinemaId: '',
+                movieId: '',
+                hallId: '',
+                date: '',
+                price: '',
+                language: '',
+                formats: {
+                  d2: false,
+                  d3: false,
+                  d4: false,
+                },
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
                 console.log(values);
-                void hallCreate(values)
+                void sessionCreate(values)
                   .then((res) => {
                     if (res.status === 201) {
                       toast.success(res.data.message);
@@ -216,30 +264,92 @@ function SessionAdmin(): JSX.Element {
               {({ errors, touched }) => (
                 <Form>
                   <div className={styled.model__create__form__group}>
-                    <Field name="name" placeholder="Name" />
-                    {errors.name != null && (touched.name ?? false) ? <span>{errors.name}</span> : null}
+                    <Field name="date" placeholder="Name" type="time" />
+                    {errors.date != null && (touched.date ?? false) ? <span>{errors.date}</span> : null}
                   </div>
                   <div className={styled.model__create__form__group}>
-                    <Field name="column" placeholder="Column" />
-                    {errors.column != null && (touched.column ?? false) ? <span>{errors.column}</span> : null}
-                  </div>
-                  <div className={styled.model__create__form__group}>
-                    <Field name="row" placeholder="Row" />
-                    {errors.row != null && (touched.row ?? false) ? <span>{errors.row}</span> : null}
-                  </div>
-                  <div className={styled.model__create__form__group}>
-                    <Field name="cinemaId" as="select" placeholder="Cinema">
+                    <Field name="movieId" as="select" placeholder="Movie">
                       <option hidden value="DEFAULT">
-                        Cinema
+                        Movies
                       </option>
-                      {/* {cinemas.map((cinema) => (
-                        <option key={cinema._id} value={cinema._id}>
-                          {cinema.name}
+                      {movies.map((movie) => (
+                        <option key={movie._id} value={movie._id}>
+                          {movie.name}
                         </option>
-                      ))} */}
+                      ))}
                     </Field>
-                    {errors.cinemaId != null && (touched.cinemaId ?? false) ? <span>{errors.cinemaId}</span> : null}
+                    {errors.movieId != null && (touched.movieId ?? false) ? <span>{errors.movieId}</span> : null}
                   </div>
+                  <div className={styled.model__create__form__group}>
+                    <Field name="hallId" as="select" placeholder="Hall">
+                      <option hidden value="DEFAULT">
+                        Halls
+                      </option>
+                      {halls.map((hall) => (
+                        <option key={hall._id} value={hall._id}>
+                          {hall.name}
+                        </option>
+                      ))}
+                    </Field>
+                    {errors.hallId != null && (touched.hallId ?? false) ? <span>{errors.hallId}</span> : null}
+                  </div>
+                  <div className={styled.model__create__form__group}>
+                    <Field name="price" placeholder="Price" type="number" />
+                    {errors.price != null && (touched.price ?? false) ? <span>{errors.price}</span> : null}
+                  </div>
+                  <nav>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="language">AZ</label>
+                        <Field name="language" type="radio" value="AZ" />
+                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                      </div>
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="language">TU</label>
+                        <Field name="language" type="radio" value="TU" />
+                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                      </div>
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="language">RU</label>
+                        <Field name="language" type="radio" value="RU" />
+                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                      </div>
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="language">EN</label>
+                        <Field name="language" type="radio" value="EN" />
+                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
+                      </div>
+                    </div>
+                  </nav>
+                  <nav>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="formats.d2">2D</label>
+                        <Field name="formats.d2" type="checkbox" />
+                        {errors.formats?.d2 != null && (touched.formats?.d2 ?? false) ? <span>{errors.formats?.d2}</span> : null}
+                      </div>
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="formats.d3">3D</label>
+                        <Field name="formats.d3" type="checkbox" />
+                        {errors.formats?.d3 != null && (touched.formats?.d3 ?? false) ? <span>{errors.formats?.d3}</span> : null}
+                      </div>
+                    </div>
+                    <div className={styled.model__create__form__group}>
+                      <div className={styled.model__create__form__group__check}>
+                        <label htmlFor="formats.d4">4D</label>
+                        <Field name="formats.d4" type="checkbox" />
+                        {errors.formats?.d4 != null && (touched.formats?.d4 ?? false) ? <span>{errors.formats?.d4}</span> : null}
+                      </div>
+                    </div>
+                  </nav>
                   <div className={styled.model__create__form__btn}>
                     <button type="submit">Create</button>
                     <button type="button" onClick={handleOpenCreate}>

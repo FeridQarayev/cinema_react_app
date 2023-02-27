@@ -123,12 +123,21 @@
   padding: 20px 30px 10px 30px;
   &__form {
     margin-top: 25px;
+    nav {
+      display: flex;
+      gap: 10px;
+    }
     &__group {
       margin-bottom: 1rem;
       label {
         font-weight: 500;
         display: inline-block;
         margin-bottom: 0.5rem;
+        margin-right: 10px;
+      }
+      &__check {
+        display: flex;
+        align-items: center;
       }
       select {
         width: 100%;

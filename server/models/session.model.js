@@ -9,7 +9,7 @@ const sessionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Hall",
   },
-  date: { type: Date },
+  date: { type: String },
   price: { type: Number, default: 0 },
   formats: {
     d2: { type: Boolean, default: false },

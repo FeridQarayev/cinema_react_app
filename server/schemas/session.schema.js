@@ -4,7 +4,7 @@ Joi.joiObjectid = require("joi-objectid")(Joi);
 exports.SessionCreateValSchema = Joi.object({
   movieId: Joi.joiObjectid().required(),
   hallId: Joi.joiObjectid().required(),
-  date: Joi.date().required(),
+  date: Joi.string().required(),
   price: Joi.number().min(0).max(1000).required(),
   formats: Joi.object({
     d2: Joi.boolean().required(),
@@ -16,7 +16,7 @@ exports.SessionCreateValSchema = Joi.object({
 
 exports.SessionUpdateValSchema = Joi.object({
   sessionId: Joi.joiObjectid().required(),
-  date: Joi.date(),
+  date: Joi.string(),
   price: Joi.number().min(0).max(1000),
   formats: Joi.object({
     d2: Joi.boolean(),
