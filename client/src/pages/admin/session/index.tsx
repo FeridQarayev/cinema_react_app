@@ -112,6 +112,19 @@ function SessionAdmin(): JSX.Element {
         Cell: ({ renderedCellValue, row }) => [<span key={row.original._id}>{row.original.price} AZN</span>],
       },
       {
+        header: 'Formats',
+        muiTableHeadCellProps: {
+          align: 'center',
+        },
+        muiTableBodyCellProps: {
+          align: 'center',
+        },
+        Cell: ({ renderedCellValue, row }) =>
+          [[row.original.formats.d2 ? '2D' : undefined, row.original.formats.d3 ? '3D' : undefined, row.original.formats.d4 ? '4D' : undefined]].map(
+            (format, index) => <span key={index}>{format}</span>
+          ),
+      },
+      {
         header: 'Actions',
         muiTableHeadCellProps: {
           align: 'center',
