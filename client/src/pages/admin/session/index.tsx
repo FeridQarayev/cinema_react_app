@@ -45,73 +45,73 @@ function SessionAdmin(): JSX.Element {
     // });
   }, []);
 
-   const columns = useMemo<Array<MRT_ColumnDef<Session>>>(
-     () => [
-       {
-         accessorKey: '_id',
-         header: 'Id',
-       },
-       {
-         accessorKey: 'name',
-         header: 'Name',
-       },
-       {
-         accessorKey: 'date',
-         header: 'Column',
-       },
-       {
-         accessorKey: 'price',
-         header: 'Row',
-       },
-       {
-         accessorKey: 'language',
-         header: 'Cinema',
-       },
-       {
-         header: 'Actions',
-         align: 'right',
-         muiTableHeadCellProps: {
-           align: 'center',
-         },
-         muiTableBodyCellProps: {
-           align: 'center',
-         },
-         Cell: ({ renderedCellValue, row }) => [
-           <div key={row.original._id}>
-             <button
-               onClick={() => {
-                 openUpdateHall(row.original._id);
-               }}
-               className={styled.update}
-             >
-               Edit
-             </button>
-             <button
-               onClick={() => {
-                 deleteHall(row.original._id);
-               }}
-               className={styled.delete}
-             >
-               Delete
-             </button>
-           </div>,
-         ],
-       },
-     ],
-     []
-   );
+  const columns = useMemo<Array<MRT_ColumnDef<Session>>>(
+    () => [
+      {
+        accessorKey: '_id',
+        header: 'Id',
+      },
+      {
+        accessorKey: 'name',
+        header: 'Name',
+      },
+      {
+        accessorKey: 'date',
+        header: 'Column',
+      },
+      {
+        accessorKey: 'price',
+        header: 'Row',
+      },
+      {
+        accessorKey: 'language',
+        header: 'Cinema',
+      },
+      {
+        header: 'Actions',
+        align: 'right',
+        muiTableHeadCellProps: {
+          align: 'center',
+        },
+        muiTableBodyCellProps: {
+          align: 'center',
+        },
+        Cell: ({ renderedCellValue, row }) => [
+          <div key={row.original._id}>
+            <button
+              onClick={() => {
+                openUpdateHall(row.original._id);
+              }}
+              className={styled.update}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                deleteHall(row.original._id);
+              }}
+              className={styled.delete}
+            >
+              Delete
+            </button>
+          </div>,
+        ],
+      },
+    ],
+    []
+  );
 
   return (
-    <div className={styled.hall}>
-      <div className={styled.hall__container}>
-        <div className={styled.hall__container__title}>
-          <div className={styled.hall__container__title__col}>
+    <div className={styled.session}>
+      <div className={styled.session__container}>
+        <div className={styled.session__container__title}>
+          <div className={styled.session__container__title__col}>
             <div>
               <h2>Sessions</h2>
             </div>
           </div>
         </div>
-        <div className={styled.hall__container__body}>
+        <div className={styled.session__container__body}>
           <MaterialReactTable
             columns={columns}
             data={sessions}
