@@ -38,7 +38,7 @@ const saveFilesToFolder = function (folder) {
     ]);
 
     upload(req, res, (err) => {
-      if (err) return res.status(422).send({ message: err });
+      if (err) return res.status(422).send({ message: err.message });
       next();
     });
   };

@@ -8,6 +8,8 @@ import type Movie from '../../../interfaces/movie';
 import { movieGetAll, movieGetById, movieCreate, movieUpdate, movieDelete } from '../../../services/movie';
 import styled from './movie.module.scss';
 
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+
 const CreateSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').max(70, 'Too Long!').required('Required!'),
   actor: Yup.string().min(3, 'Too Short!').max(70, 'Too Long!').required('Required!'),
@@ -34,8 +36,10 @@ const CreateSchema = Yup.object().shape({
       en: Yup.bool().required('Required!'),
     })
     .required('Required!'),
-  file: Yup.string().required('Required!'),
-  fileCover: Yup.string().required('Required!'),
+  file: Yup.mixed().required('A file is required'),
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  // .test('fileFormat', 'Unsupported Format', (value) => value && SUPPORTED_FORMATS.includes(value.type)),
+  fileCover: Yup.mixed().required('A file is required'),
 });
 
 const UpdateSchema = Yup.object().shape({
@@ -262,17 +266,29 @@ function MovieAdmin(): JSX.Element {
                   ru: false,
                   en: false,
                 },
-                file: '',
-                fileCover: '',
+                file: {
+                  name: '',
+                  lastModified: '',
+                  lastModifiedDate: '',
+                  type: '',
+                  size: '',
+                  webkitRelativePath: '',
+                },
+                // file: '',
+                // fileCover: '',
+                fileCover: {
+                  name: '',
+                  lastModified: '',
+                  lastModifiedDate: '',
+                  type: '',
+                  size: '',
+                  webkitRelativePath: '',
+                },
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { resetForm }) => {
-                const bodyFormData = new FormData();
-                bodyFormData.append('file', values.file);
-                bodyFormData.append('fileCover', values.fileCover);
-                bodyFormData.append('name', values.name);
                 console.log(values);
-                void movieCreate(bodyFormData)
+                void movieCreate(values)
                   .then((res) => {
                     if (res.status === 200) {
                       toast.success(res.data.message);
@@ -286,7 +302,7 @@ function MovieAdmin(): JSX.Element {
                   });
               }}
             >
-              {({ errors, touched }) => (
+              {({ errors, touched, setFieldValue }) => (
                 <Form>
                   <article>
                     <div className={styled.model__create__form__group}>
@@ -397,12 +413,28 @@ function MovieAdmin(): JSX.Element {
                       </div>
                     </nav>
                     <div className={styled.model__create__form__group}>
-                      <Field name="file" placeholder="Image" type="file" />
-                      {errors.file != null && (touched.file ?? false) ? <span>{errors.file}</span> : null}
+                      <Field
+                        name="file.filename"
+                        placeholder="Image"
+                        type="file"
+                        onChange={(event: { currentTarget: { files: unknown[] } }) => {
+                          setFieldValue('file', event.currentTarget.files[0]);
+                          console.log(event.currentTarget.files[0]);
+                        }}
+                      />
+                      {errors.file != null && (touched.file?.name ?? false) ? <span>{errors.file.name}</span> : null}
                     </div>
                     <div className={styled.model__create__form__group}>
-                      <Field name="fileCover" placeholder="Image Cover" type="file" />
-                      {errors.fileCover != null && (touched.fileCover ?? false) ? <span>{errors.fileCover}</span> : null}
+                      <Field
+                        name="fileCover.filename"
+                        placeholder="Image Cover"
+                        type="file"
+                        onChange={(event: { currentTarget: { files: unknown[] } }) => {
+                          setFieldValue('fileCover', event.currentTarget.files[0]);
+                          console.log(event.currentTarget.files[0]);
+                        }}
+                      />
+                      {errors.fileCover != null && (touched.fileCover?.name ?? false) ? <span>{errors.fileCover.name}</span> : null}
                     </div>
                     <div className={styled.model__create__form__btn}>
                       <button type="submit">Create</button>

@@ -26,8 +26,6 @@ exports.getById = async (req, res) => {
 };
 
 exports.create = (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
   const images = [];
   const { files } = req;
 
