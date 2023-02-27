@@ -2,6 +2,7 @@ const Joi = require("joi");
 Joi.joiObjectid = require("joi-objectid")(Joi);
 
 exports.SessionCreateValSchema = Joi.object({
+  userId: Joi.joiObjectid().required(),
   movieId: Joi.joiObjectid().required(),
   hallId: Joi.joiObjectid().required(),
   date: Joi.string().required(),
@@ -15,6 +16,7 @@ exports.SessionCreateValSchema = Joi.object({
 });
 
 exports.SessionUpdateValSchema = Joi.object({
+  userId: Joi.joiObjectid().required(),
   sessionId: Joi.joiObjectid().required(),
   date: Joi.string(),
   price: Joi.number().min(0).max(1000),
@@ -27,5 +29,6 @@ exports.SessionUpdateValSchema = Joi.object({
 });
 
 exports.SessionDeleteValSchema = Joi.object({
+  userId: Joi.joiObjectid(),
   sessionId: Joi.joiObjectid().required(),
 });

@@ -388,29 +388,26 @@ function SessionAdmin(): JSX.Element {
                       <div className={styled.model__create__form__group__check}>
                         <label htmlFor="language">AZ</label>
                         <Field name="language" type="radio" value="AZ" />
-                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
                       </div>
                     </div>
                     <div className={styled.model__create__form__group}>
                       <div className={styled.model__create__form__group__check}>
                         <label htmlFor="language">TU</label>
                         <Field name="language" type="radio" value="TU" />
-                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
                       </div>
                     </div>
                     <div className={styled.model__create__form__group}>
                       <div className={styled.model__create__form__group__check}>
                         <label htmlFor="language">RU</label>
                         <Field name="language" type="radio" value="RU" />
-                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
                       </div>
                     </div>
                     <div className={styled.model__create__form__group}>
                       <div className={styled.model__create__form__group__check}>
                         <label htmlFor="language">EN</label>
                         <Field name="language" type="radio" value="EN" />
-                        {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
                       </div>
+                      {errors.language != null && (touched.language ?? false) ? <span>{errors.language}</span> : null}
                     </div>
                   </nav>
                   <nav>

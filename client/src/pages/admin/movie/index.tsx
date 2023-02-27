@@ -113,7 +113,6 @@ function MovieAdmin(): JSX.Element {
           toast.error(error.response.data.message);
         });
   };
-  console.log(movie);
 
   const openUpdateMovie = (id: string): void => {
     void movieGetById(id)
