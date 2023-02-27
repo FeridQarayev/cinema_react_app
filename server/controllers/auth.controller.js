@@ -115,6 +115,6 @@ exports.login = (req, res) => {
 
       user.token = token;
 
-      return res.status(200).json(user);
+      return res.status(200).send({ message: "Welcome!", data: user });
     });
 };

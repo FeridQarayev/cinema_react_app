@@ -1,7 +1,9 @@
 import { Field, Form, Formik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import backImg from '../../../images/constant/movie-collection.jpg';
+import { loginUser } from '../../../services/login';
 import styled from './signin.module.scss';
 
 const LoginSchema = Yup.object().shape({
@@ -10,6 +12,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 function SignIn(): JSX.Element {
+  const navigate = useNavigate();
   return (
     <div className={styled.signin}>
       <main className={styled.signin__main} style={{ backgroundImage: `url(${String(backImg)})` }}>
@@ -27,8 +30,17 @@ function SignIn(): JSX.Element {
                   }}
                   validationSchema={LoginSchema}
                   onSubmit={(values, { resetForm }) => {
-                    // same shape as initial values
-                    console.log(values);
+                    void loginUser(values)
+                      .then((res) => {
+                        if (res.status === 200) {
+                          localStorage.setItem('user', JSON.stringify({ ...res.data.data, password: undefined, email: undefined, __v: undefined }));
+                          toast.success(res.data.message);
+                          navigate('../home');
+                        } else toast.error(res.data.message);
+                      })
+                      .catch((error) => {
+                        toast.error(error.response.data.message);
+                      });
                     resetForm();
                   }}
                 >
@@ -64,6 +76,7 @@ function SignIn(): JSX.Element {
           </Link>
         </div>
       </main>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

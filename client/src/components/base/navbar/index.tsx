@@ -13,17 +13,25 @@ function Navbar(): JSX.Element {
     if (list.current != null) list.current.classList.toggle(styled.active);
     e.classList.toggle(styled.active);
   };
+  const user = JSON.parse(String(localStorage.getItem('user')));
   useEffect(() => {
-    const user = JSON.parse(String(localStorage.getItem('user')));
-    if (user !== undefined) {
-      void verifyAdmin(user._id).then((res) => {
-        if (res.status === 200) setIsAdmin(true);
-      });
-      void verifyToken(user.token).then((res) => {
-        if (res.status === 200) setVerify(true);
-      });
+    if (user !== undefined && user !== null) {
+      void verifyAdmin(user._id)
+        .then((res) => {
+          if (res.status === 200) setIsAdmin(true);
+        })
+        .catch(() => {
+          setIsAdmin(false);
+        });
+      void verifyToken(user.token)
+        .then((res) => {
+          if (res.status === 200) setVerify(true);
+        })
+        .catch(() => {
+          setVerify(false);
+        });
     }
-  }, []);
+  }, [user]);
   return (
     <Fragment>
       <header

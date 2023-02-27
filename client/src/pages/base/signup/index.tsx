@@ -39,7 +39,7 @@ function SignUp(): JSX.Element {
                         if (res.status === 201) {
                           localStorage.setItem(
                             'user',
-                            JSON.stringify({ ...res.data.data, password: undefined, email: undefined, lastName: undefined, __v: undefined })
+                            JSON.stringify({ ...res.data.data, password: undefined, email: undefined, __v: undefined })
                           );
                           toast.success(res.data.message);
                           navigate('../home');
