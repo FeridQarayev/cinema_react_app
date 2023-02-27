@@ -9,7 +9,7 @@ import type Cinema from '../../../interfaces/new.cinema';
 import type Hall from '../../../interfaces/new.hall';
 import { cinemaGetAll } from '../../../services/cinema';
 import { hallGetAll, hallGetById, hallCreate, hallUpdate, hallDelete } from '../../../services/hall';
-import { verifyAdmin } from '../../../services/verify.admin';
+import { verifyAdminWithToken } from '../../../services/verify.admin';
 import styled from './hall.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -39,18 +39,15 @@ function HallAdmin(): JSX.Element {
     setopenUpdate((oldopen) => !oldopen);
   };
 
-  const user = JSON.parse(String(localStorage.getItem('user')));
   const navigate = useNavigate();
   useEffect(() => {
-    if (user !== undefined && user !== null) {
-      void verifyAdmin(user._id)
-        .then((res) => {
-          if (res.status !== 200) navigate('../../aboutus');
-        })
-        .catch(() => {
-          navigate('../../aboutus');
-        });
-    }
+    void verifyAdminWithToken()
+      .then((res) => {
+        if (res.status !== 200) navigate('../../aboutus');
+      })
+      .catch(() => {
+        navigate('../../aboutus');
+      });
     void hallGetAll().then((res) => {
       if (res.status === 200) setHalls(res.data);
     });

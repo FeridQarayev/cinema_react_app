@@ -11,7 +11,7 @@ import type Session from '../../../interfaces/session';
 import { hallGetAll } from '../../../services/hall';
 import { movieGetAll } from '../../../services/movie';
 import { sessionGetAll, sessionGetById, sessionCreate, sessionUpdate, sessionDelete } from '../../../services/session';
-import { verifyAdmin } from '../../../services/verify.admin';
+import { verifyAdminWithToken } from '../../../services/verify.admin';
 import styled from './session.module.scss';
 
 const CreateSchema = Yup.object().shape({
@@ -42,18 +42,15 @@ function SessionAdmin(): JSX.Element {
     setopenUpdate((oldopen) => !oldopen);
   };
 
-  const user = JSON.parse(String(localStorage.getItem('user')));
   const navigate = useNavigate();
   useEffect(() => {
-    if (user !== undefined && user !== null) {
-      void verifyAdmin(user._id)
-        .then((res) => {
-          if (res.status !== 200) navigate('../../aboutus');
-        })
-        .catch(() => {
-          navigate('../../aboutus');
-        });
-    }
+    void verifyAdminWithToken()
+      .then((res) => {
+        if (res.status !== 200) navigate('../../aboutus');
+      })
+      .catch(() => {
+        navigate('../../aboutus');
+      });
     void sessionGetAll().then((res) => {
       if (res.status === 200) setSessions(res.data);
     });
