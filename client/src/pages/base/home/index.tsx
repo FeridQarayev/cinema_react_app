@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
@@ -14,6 +15,8 @@ import secretImg from '../../../images/watch-more/secret.png';
 import wakandaImg from '../../../images/watch-more/wakanda.png';
 import womenkingImg from '../../../images/watch-more/woman_king.png';
 import worryImg from '../../../images/watch-more/worry.png';
+import type IMovie from '../../../interfaces/movie';
+import { movieGetAll } from '../../../services/movie';
 import { ReactComponent as PlaySvg } from '../../../svgs/circle-play-solid.svg';
 import { ReactComponent as PatternSvg } from '../../../svgs/pattern-logo.svg';
 import starhalfsvg from '../../../svgs/star-half-solid.svg';
@@ -22,6 +25,12 @@ import { ReactComponent as WatchSvg } from '../../../svgs/watch-more.svg';
 import styled from './home.module.scss';
 
 function Home(): JSX.Element {
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  useEffect(() => {
+    void movieGetAll().then((res) => {
+      setMovies(res.data);
+    });
+  }, []);
   return (
     <div className={styled.home}>
       <Slider />
@@ -50,7 +59,7 @@ function Home(): JSX.Element {
                 <span>Club</span> and enjoy free UNLIMITED tickets, up to 15% off food items, exclusive access to events
               </div>
               <div className={styled.home__more__container__content__info__action}>
-                <Link to={'#'}>
+                <Link to={'/schedule'}>
                   <span>Get Started</span>
                 </Link>
               </div>
