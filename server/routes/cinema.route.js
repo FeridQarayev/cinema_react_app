@@ -1,5 +1,5 @@
 const controller = require("../controllers/cinema.controller");
-// const auth = require("../middlewares/auth");
+const auth = require("../middlewares/auth");
 
 module.exports = function (app) {
   //   app.post("/api/cinema", [auth.verifyToken, auth.isAdmin], controller.create);
@@ -7,9 +7,13 @@ module.exports = function (app) {
 
   app.post("/api/cinema/id", controller.getById);
 
-  app.post("/api/cinema", controller.create);
+  app.post("/api/cinema", [auth.verifyToken, auth.isAdmin], controller.create);
 
-  app.put("/api/cinema", controller.update);
+  app.put("/api/cinema", [auth.verifyToken, auth.isAdmin], controller.update);
 
-  app.delete("/api/cinema", controller.delete);
+  app.delete(
+    "/api/cinema",
+    [auth.verifyToken, auth.isAdmin],
+    controller.delete
+  );
 };

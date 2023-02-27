@@ -16,7 +16,7 @@ function Home(): JSX.Element {
           navigate('../../aboutus');
         });
     }
-  }, [user]);
+  }, []);
   return <div>Home</div>;
 }
 

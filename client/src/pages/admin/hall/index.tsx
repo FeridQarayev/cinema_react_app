@@ -57,7 +57,7 @@ function HallAdmin(): JSX.Element {
     void cinemaGetAll().then((res) => {
       if (res.status === 200) setCinemas(res.data);
     });
-  }, [user]);
+  }, []);
 
   const deleteHall = (id: string): void => {
     const alert = confirm('Are you sure you want to delete hall?');

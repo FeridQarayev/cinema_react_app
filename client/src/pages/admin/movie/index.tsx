@@ -97,7 +97,7 @@ function MovieAdmin(): JSX.Element {
     void movieGetAll().then((res) => {
       if (res.status === 200) setMovies(res.data);
     });
-  }, [user]);
+  }, []);
 
   const deleteMovie = (id: string): void => {
     const alert = confirm('Are you sure you want to delete hall?');

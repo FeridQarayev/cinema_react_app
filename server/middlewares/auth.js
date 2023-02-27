@@ -8,23 +8,13 @@ const config = process.env;
 
 const verifyToken = (req, res, next) => {
   const token =
-    req.body.token ||
-    req.query.token ||
-    req.headers["x-access-token"] ||
-    req.session.token;
+    req.body.token || req.query.token || req.headers["x-access-token"];
 
   if (!token) {
     return res
       .status(403)
       .send({ message: "A token is required for authentication" });
   }
-  //   try {
-  //     const decoded = jwt.verify(token, config.TOKEN_KEY);
-  //     req.user = decoded;
-  //   } catch (err) {
-  //     return res.status(401).send("Invalid Token");
-  //   }
-  //   return next();
 
   jwt.verify(token, config.TOKEN_KEY, (err, decoded) => {
     if (err) {
@@ -34,8 +24,6 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
-// 63fa018d109564e49ad7729d
-// 63f9fc50109564e49ad77284
 
 isAdmin = async (req, res, next) => {
   const { userId } = req.body;
@@ -51,7 +39,7 @@ isAdmin = async (req, res, next) => {
   const oldUser = await User.findById(userId);
   if (!oldUser) return res.status(404).send({ message: "User not found!" });
 
-   User.findById(userId).exec((err, user) => {
+  User.findById(userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;

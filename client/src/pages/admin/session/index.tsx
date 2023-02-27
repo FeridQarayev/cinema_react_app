@@ -63,7 +63,7 @@ function SessionAdmin(): JSX.Element {
     void hallGetAll().then((res) => {
       if (res.status === 200) setHalls(res.data);
     });
-  }, [user]);
+  }, []);
 
   const deleteHall = (id: string): void => {
     const alert = confirm('Are you sure you want to delete hall?');

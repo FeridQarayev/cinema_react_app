@@ -33,7 +33,7 @@ function Navbar(): JSX.Element {
           setVerify(false);
         });
     }
-  }, [user]);
+  }, []);
   return (
     <Fragment>
       <header
