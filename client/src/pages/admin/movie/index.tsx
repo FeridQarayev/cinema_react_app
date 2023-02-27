@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import type Movie from '../../../interfaces/movie';
 import { movieGetAll, movieGetById, movieCreate, movieUpdate, movieDelete } from '../../../services/movie';
 import styled from './movie.module.scss';
-// import imagees from '../../../images/movies'
 
 const CreateSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').max(70, 'Too Long!').required('Required!'),

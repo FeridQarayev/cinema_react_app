@@ -58,6 +58,11 @@
             font-family: 'Poppins', sans-serif;
           }
         }
+        &:nth-child(1) {
+          svg {
+            fill: #009688 !important;
+          }
+        }
         &:nth-child(2) {
           svg {
             fill: #ff5722;
@@ -71,6 +76,11 @@
         &:nth-child(4) {
           svg {
             fill: #9c27b0;
+          }
+        }
+        &:nth-child(1) {
+          svg {
+            fill: #ff9800;
           }
         }
       }
