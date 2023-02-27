@@ -11,6 +11,7 @@ import { ReactComponent as Ticket } from '../../../svgs/ticket-solid.svg';
 import styled from './navbar.module.scss';
 
 function Navbar(): JSX.Element {
+  const user: { firstName: string; lastName: string } = JSON.parse(String(localStorage.getItem('user')));
   return (
     <>
       <nav className={styled.navbar} style={{ backgroundImage: `url(${String(backImg)})` }}>
@@ -59,10 +60,19 @@ function Navbar(): JSX.Element {
                   <li>
                     <Link to={'#'}>
                       <img src={adminImg} alt="admin" />
-                      <span>John David</span>
+                      <span>
+                        {user?.firstName}
+                        &nbsp;
+                        {user?.lastName}
+                      </span>
                     </Link>
                     <div className={styled.dropdown}>
-                      <Link to={'#'}>
+                      <Link
+                        to={'../home'}
+                        onClick={() => {
+                          localStorage.removeItem('user');
+                        }}
+                      >
                         Log Out
                         <Exit />
                       </Link>
