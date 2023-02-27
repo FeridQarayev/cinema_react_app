@@ -198,7 +198,7 @@
     &__btn {
       text-align: right;
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       margin-top: 30px;
       //   transform: translateX(10px);
       button {
@@ -229,5 +229,13 @@
         }
       }
     }
+  }
+}
+.tableimg {
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }

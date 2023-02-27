@@ -7,8 +7,7 @@ import * as Yup from 'yup';
 import type Movie from '../../../interfaces/movie';
 import { movieGetAll, movieGetById, movieCreate, movieUpdate, movieDelete } from '../../../services/movie';
 import styled from './movie.module.scss';
-
-const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+// import imagees from '../../../images/movies'
 
 const CreateSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').max(70, 'Too Long!').required('Required!'),
@@ -120,7 +119,28 @@ function MovieAdmin(): JSX.Element {
   const columns = useMemo<Array<MRT_ColumnDef<Movie>>>(
     () => [
       {
+        accessorKey: 'image',
+        header: 'Image',
+        muiTableHeadCellProps: {
+          align: 'center',
+        },
+        muiTableBodyCellProps: {
+          align: 'center',
+        },
+        Cell: ({ renderedCellValue, row }) => [
+          <div key={row.original._id} className={styled.tableimg}>
+            <img src={require(`../../../images/movies/${row.original.image}`)} alt="movie" />
+          </div>,
+        ],
+      },
+      {
         accessorKey: '_id',
+        muiTableHeadCellProps: {
+          align: 'left',
+        },
+        muiTableBodyCellProps: {
+          align: 'left',
+        },
         header: 'Id',
       },
       {
@@ -128,12 +148,12 @@ function MovieAdmin(): JSX.Element {
         header: 'Name',
       },
       {
-        accessorKey: 'actor',
-        header: 'Actor',
+        accessorKey: 'ageLimit',
+        header: 'Age Limit',
       },
       {
-        accessorKey: 'director',
-        header: 'Director',
+        accessorKey: 'rating',
+        header: 'Rating',
       },
       {
         accessorKey: 'duration',
