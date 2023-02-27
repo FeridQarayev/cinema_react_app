@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Movie from '../../../components/base/movie';
 import Slider from '../../../components/base/slider';
-import avatarMImg from '../../../images/movies/avatarthewayofwater700x1000.350x0.jpg';
-import movieImg from '../../../images/movies/img_20-360x618_c.jpg';
-import quantumImg from '../../../images/movies/quantamania.350x0.jpg';
 import seperatorImg from '../../../images/movies/seperator-bg.png';
 import paralImg from '../../../images/parallax/banner-7.jpg';
 import banner from '../../../images/slider/banner-3.png';
@@ -129,13 +126,9 @@ function Home(): JSX.Element {
                 <div className={styled.home__today__container__body__container__content__con}>
                   <div className={styled.home__today__container__body__container__content__con__grid}>
                     <div className={styled.home__today__container__body__container__content__con__grid__row}>
-                      <Movie img={quantumImg} />
-                      <Movie img={movieImg} />
-                      <Movie img={movieImg} />
-                      <Movie img={quantumImg} />
-                      <Movie img={avatarMImg} />
-                      <Movie img={quantumImg} />
-                      <Movie img={avatarMImg} />
+                      {movies.map((movie) => (
+                        <Movie key={movie._id} data={movie} />
+                      ))}
                     </div>
                   </div>
                 </div>

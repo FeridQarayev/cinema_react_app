@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import type IMovie from '../../../interfaces/movie';
 import { ReactComponent as D2 } from '../../../svgs/2d-label-icon.svg';
 import { ReactComponent as D3 } from '../../../svgs/3d-label-icon.svg';
 import { ReactComponent as AzerbaijanFlag } from '../../../svgs/azerbaijan-flag-icon.svg';
@@ -10,41 +11,54 @@ import { ReactComponent as TurkeyFlag } from '../../../svgs/turkey-flag-icon.svg
 import { ReactComponent as EnglishFlag } from '../../../svgs/united-kingdom-flag-icon.svg';
 import styled from './movie.module.scss';
 
-function Movie(props: { img: string }): JSX.Element {
+function Movie(props: { data: IMovie }): JSX.Element {
   return (
     <div className={styled.movie}>
       <article className={styled.movie__body}>
         <div className={styled.movie__body__img}>
-          <img src={props.img} alt="movie" />
+          <img src={require(`../../../images/movies/${String(props.data.image)}`)} alt="movie" />
           <div className={styled.movie__body__img__info}>
             <span>G</span>
           </div>
         </div>
         <div className={styled.movie__body__content}>
-          <h4>Kubo and the Two Strings</h4>
+          <h4>{props.data.name}</h4>
           <div className={styled.movie__body__content__date}>
             <strong>Release:</strong>
-            February 15, 2022
+            &nbsp;
+            {new Date(props.data.sessionTime).toDateString()}
           </div>
           <div className={styled.movie__body__content__icons}>
-            <div className={styled.movie__body__content__icons__2d}>
-              <D2 />
-            </div>
-            <div className={styled.movie__body__content__icons__3d}>
-              <D3 />
-            </div>
-            <div className={styled.movie__body__content__icons__tr}>
-              <TurkeyFlag />
-            </div>
-            <div className={styled.movie__body__content__icons__az}>
-              <AzerbaijanFlag />
-            </div>
-            <div className={styled.movie__body__content__icons__en}>
-              <EnglishFlag />
-            </div>
-            <div className={styled.movie__body__content__icons__ru}>
-              <RusFlag />
-            </div>
+            {props.data.formats.d2 && (
+              <div className={styled.movie__body__content__icons__2d}>
+                <D2 />
+              </div>
+            )}
+            {props.data.formats.d3 && (
+              <div className={styled.movie__body__content__icons__3d}>
+                <D3 />
+              </div>
+            )}
+            {props.data.languages.tu && (
+              <div className={styled.movie__body__content__icons__tr}>
+                <TurkeyFlag />
+              </div>
+            )}
+            {props.data.languages.az && (
+              <div className={styled.movie__body__content__icons__az}>
+                <AzerbaijanFlag />
+              </div>
+            )}
+            {props.data.languages.en && (
+              <div className={styled.movie__body__content__icons__en}>
+                <EnglishFlag />
+              </div>
+            )}
+            {props.data.languages.ru && (
+              <div className={styled.movie__body__content__icons__ru}>
+                <RusFlag />
+              </div>
+            )}
           </div>
           <div className={styled.movie__body__content__btn}>
             <Link to={'#'}>
@@ -59,34 +73,31 @@ function Movie(props: { img: string }): JSX.Element {
         </div>
         <div className={styled.movie__body__hover}>
           <h4>
-            <Link to={'#'}>Kubo and the Two Strings</Link>
+            <Link to={'#'}>{props.data.name}</Link>
           </h4>
           <span className={styled.movie__body__hover__pg}>G</span>
           <div className={styled.movie__body__hover__text}>
             <p>
               <strong>Relase: </strong>
-              February 15, 2022
+              {new Date(props.data.sessionTime).toDateString()}
             </p>
             <p>
               <strong>Genre: </strong>
-              <span>Cartoon, </span>
-              <span>Comic</span>
+              <span>{props.data.genre}</span>
             </p>
             <p>
               <strong>Duration: </strong>
-              02 hours 00 minutes
+              {props.data.duration}
             </p>
-            {/* <p>
-              <strong>Language: </strong>
-              English
-            </p> */}
           </div>
           <div className={styled.movie__body__hover__lang}>
-            <span>AZ</span>
-            <span>EN</span>
+            {props.data.languages.az && <span>AZ</span>}
+            {props.data.languages.tu && <span>TU</span>}
+            {props.data.languages.ru && <span>RU</span>}
+            {props.data.languages.en && <span>EN</span>}
           </div>
           <div className={styled.movie__body__hover__age}>
-            <p>12 +</p>
+            <p>{props.data.ageLimit} +</p>
           </div>
           <div className={styled.movie__body__hover__btn}>
             <Link to={'#'}>
