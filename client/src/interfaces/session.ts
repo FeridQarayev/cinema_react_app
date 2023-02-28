@@ -1,15 +1,15 @@
-import type Formats from './formats';
-import type Movie from './movie';
-import type Hall from './new.hall';
+import type IFormats from './formats';
+import type IHall from './hall';
+import type IMovie from './movie';
 
-export default interface Session {
+export default interface ISession {
   _id: string;
   date: string;
   price: number;
   language: string;
-  formats: Formats;
-  hall: Hall;
-  movie: Movie;
+  formats: IFormats;
+  hall: IHall;
+  movie: IMovie;
   reserved: Array<{
     col: number;
     row: number;

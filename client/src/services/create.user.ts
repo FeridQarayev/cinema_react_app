@@ -1,5 +1,5 @@
 import axios, { type AxiosResponse } from 'axios';
 import { BASE_URL } from '../constants/consts';
-import type User from '../interfaces/user';
+import type IUser from '../interfaces/user';
 
-export const createUser = async (user: User): Promise<AxiosResponse> => await axios.post(`${BASE_URL}/register`, user);
+export const createUser = async (user: IUser): Promise<AxiosResponse> => await axios.post(`${BASE_URL}/register`, user);

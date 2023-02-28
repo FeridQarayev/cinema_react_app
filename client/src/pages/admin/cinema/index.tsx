@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import type Cinema from '../../../interfaces/new.cinema';
+import type Cinema from '../../../interfaces/cinema';
 import { cinemaGetAll, cinemaGetById, cinemaCreate, cinemaUpdate, cinemaDelete } from '../../../services/cinema';
 import { verifyAdminWithToken } from '../../../services/verify.admin';
 import styled from './cinema.module.scss';

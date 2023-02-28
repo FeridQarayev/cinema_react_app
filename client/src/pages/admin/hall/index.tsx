@@ -5,8 +5,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import type Cinema from '../../../interfaces/new.cinema';
-import type Hall from '../../../interfaces/new.hall';
+import type ICinema from '../../../interfaces/cinema';
+import type IHall from '../../../interfaces/hall';
 import { cinemaGetAll } from '../../../services/cinema';
 import { hallGetAll, hallGetById, hallCreate, hallUpdate, hallDelete } from '../../../services/hall';
 import { verifyAdminWithToken } from '../../../services/verify.admin';
@@ -14,21 +14,21 @@ import styled from './hall.module.scss';
 
 const CreateSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required!'),
-  column: Yup.number().min(5).max(15).required('Required!'),
-  row: Yup.number().min(5).max(15).required('Required!'),
+  column: Yup.number().min(5).max(10).required('Required!'),
+  row: Yup.number().min(5).max(10).required('Required!'),
   cinemaId: Yup.string().required('Required!'),
 });
 
 const UpdateSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Required!'),
-  column: Yup.number().min(5).max(15).required('Required!'),
-  row: Yup.number().min(5).max(15).required('Required!'),
+  column: Yup.number().min(5).max(10).required('Required!'),
+  row: Yup.number().min(5).max(10).required('Required!'),
 });
 
 function HallAdmin(): JSX.Element {
-  const [halls, setHalls] = useState<Hall[]>([]);
-  const [cinemas, setCinemas] = useState<Cinema[]>([]);
-  const [hall, setHall] = useState<Hall>();
+  const [halls, setHalls] = useState<IHall[]>([]);
+  const [cinemas, setCinemas] = useState<ICinema[]>([]);
+  const [hall, setHall] = useState<IHall>();
   const [openCreate, setopenCreate] = useState(false);
   const [openUpdate, setopenUpdate] = useState(false);
 
@@ -85,7 +85,7 @@ function HallAdmin(): JSX.Element {
       });
   };
 
-  const columns = useMemo<Array<MRT_ColumnDef<Hall>>>(
+  const columns = useMemo<Array<MRT_ColumnDef<IHall>>>(
     () => [
       {
         accessorKey: '_id',

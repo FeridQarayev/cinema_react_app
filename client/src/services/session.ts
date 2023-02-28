@@ -1,16 +1,16 @@
 import axios, { type AxiosResponse } from 'axios';
 import { BASE_URL } from '../constants/consts';
-import type Session from '../interfaces/session';
+import type ISession from '../interfaces/session';
 
 let user: { token: string; _id: string } = JSON.parse(String(localStorage.getItem('user')));
 user === undefined && user === null && (user = { token: '', _id: '' });
 
-export const sessionGetAll = async (): Promise<AxiosResponse<Session[]>> => await axios.get(`${BASE_URL}/session`);
+export const sessionGetAll = async (): Promise<AxiosResponse<ISession[]>> => await axios.get(`${BASE_URL}/session`);
 
-export const sessionGetById = async (sessionId: string): Promise<AxiosResponse<{ message: string; data: Session }>> =>
+export const sessionGetById = async (sessionId: string): Promise<AxiosResponse<{ message: string; data: ISession }>> =>
   await axios.post(`${BASE_URL}/session/id`, { sessionId });
 
-export const sessionCreate = async (session: { language: string }): Promise<AxiosResponse<{ message: string; data: Session }>> =>
+export const sessionCreate = async (session: { language: string }): Promise<AxiosResponse<{ message: string; data: ISession }>> =>
   await axios.post(
     `${BASE_URL}/session`,
     { ...session, userId: user._id },
@@ -21,7 +21,7 @@ export const sessionCreate = async (session: { language: string }): Promise<Axio
     }
   );
 
-export const sessionUpdate = async (session: { sessionId: string }): Promise<AxiosResponse<{ message: string; data: Session }>> =>
+export const sessionUpdate = async (session: { sessionId: string }): Promise<AxiosResponse<{ message: string; data: ISession }>> =>
   await axios.put(
     `${BASE_URL}/session`,
     { ...session, userId: user._id },

@@ -16,78 +16,14 @@ import bottomLeft from '../../../images/schedule/bottom-left.png';
 import bottomRight from '../../../images/schedule/bottom-right.png';
 import middleDown from '../../../images/schedule/glasses-1.png';
 import topLeft from '../../../images/schedule/top-left.png';
-import type DropLanguages from '../../../interfaces/droplanguages';
-import type ICinema from '../../../interfaces/new.cinema';
+import type ICinema from '../../../interfaces/cinema';
+import type IDropLanguages from '../../../interfaces/droplanguages';
+import type IPlace from '../../../interfaces/place';
 import type ISession from '../../../interfaces/session';
 import { cinemaGetAll } from '../../../services/cinema';
 import { sessionGetAll } from '../../../services/session';
 import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
-
-interface IPlace {
-  column: number;
-  row: number;
-  price: number;
-  reserved: Array<{ col: number; row: number }>;
-}
-
-// const data: MovieList[] = [
-//   {
-//     id: 1,
-//     name: 'John',
-//     sessions: new Date().toLocaleTimeString(),
-//     sessionsDay: new Date().toLocaleDateString(),
-//     cinema: {
-//       id: 1,
-//       name: '28 Mall',
-//     },
-//     hall: 'Hall 1',
-//     formats: {
-//       d2: true,
-//       d3: true,
-//       d4: true,
-//     },
-//     languages: {
-//       az: false,
-//       tu: true,
-//       ru: true,
-//       en: false,
-//     },
-//     price: 12,
-//     places: 1,
-//   },
-// ];
-
-// const bordereds: Hall = {
-//   column: 10,
-//   row: 8,
-//   price: 0,
-//   reserved: [
-//     {
-//       reservedCol: 2,
-//       reservedRow: 3,
-//     },
-//     {
-//       reservedCol: 1,
-//       reservedRow: 3,
-//     },
-//     {
-//       reservedCol: 2,
-//       reservedRow: 4,
-//     },
-//   ],
-// };
-// const borderedss: Hall = {
-//   column: 5,
-//   row: 3,
-//   price: 0,
-//   reserved: [
-//     {
-//       reservedCol: 1,
-//       reservedRow: 3,
-//     },
-//   ],
-// };
 
 const modalStyle = {
   position: 'absolute',
@@ -121,7 +57,7 @@ const dropDays = [
   getDateByDay(3).toLocaleDateString(),
 ];
 
-const dropLanguages: DropLanguages[] = [
+const dropLanguages: IDropLanguages[] = [
   { id: '0', name: 'Language' },
   { id: 'az', name: 'Azerbaijan' },
   { id: 'tu', name: 'Turkish' },
@@ -156,8 +92,6 @@ function Schedule(): JSX.Element {
     setArr({ column: session.hall.column, row: session.hall.row, price: session.price, reserved: session.reserved });
     setSession(session);
   };
-  // console.log(sessions);
-  // console.log(session);
   const handleClose = (): void => {
     setOpen(false);
   };
@@ -197,7 +131,6 @@ function Schedule(): JSX.Element {
       {
         accessorKey: 'movie.name',
         header: 'Name',
-        muiTableHeadCellProps: { sx: { color: 'green' } },
       },
       {
         accessorFn: (row) => row.date,
@@ -266,11 +199,23 @@ function Schedule(): JSX.Element {
         accessorFn: (row) => row.price,
         id: 'price',
         header: 'Price',
+        muiTableHeadCellProps: {
+          align: 'center',
+        },
+        muiTableBodyCellProps: {
+          align: 'center',
+        },
         /* eslint-disable react/prop-types */
         Cell: ({ cell }) => <Box component="span">{cell.getValue<number>()} AZN</Box>,
       },
       {
         accessorFn: (row) => row.reserved,
+        muiTableHeadCellProps: {
+          align: 'center',
+        },
+        muiTableBodyCellProps: {
+          align: 'center',
+        },
         id: 'places',
         header: 'Buy Now',
         /* eslint-disable react/prop-types */

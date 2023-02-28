@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse } from 'axios';
 import { BASE_URL } from '../constants/consts';
-import type Hall from '../interfaces/new.hall';
+import type Hall from '../interfaces/hall';
 
 let user: { token: string; _id: string } = JSON.parse(String(localStorage.getItem('user')));
 user === undefined && user === null && (user = { token: '', _id: '' });

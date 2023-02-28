@@ -1,16 +1,16 @@
 import axios, { type AxiosResponse } from 'axios';
 import { BASE_URL } from '../constants/consts';
-import type Movie from '../interfaces/movie';
+import type IMovie from '../interfaces/movie';
 
 let user: { token: string; _id: string } = JSON.parse(String(localStorage.getItem('user')));
 user === undefined && user === null && (user = { token: '', _id: '' });
 
-export const movieGetAll = async (): Promise<AxiosResponse<Movie[]>> => await axios.get(`${BASE_URL}/movie`);
+export const movieGetAll = async (): Promise<AxiosResponse<IMovie[]>> => await axios.get(`${BASE_URL}/movie`);
 
-export const movieGetById = async (movieId: string): Promise<AxiosResponse<{ message: string; data: Movie }>> =>
+export const movieGetById = async (movieId: string): Promise<AxiosResponse<{ message: string; data: IMovie }>> =>
   await axios.post(`${BASE_URL}/movie/id`, { movieId });
 
-export const movieCreate = async (movie: { name: string }): Promise<AxiosResponse<{ message: string; data: Movie }>> =>
+export const movieCreate = async (movie: { name: string }): Promise<AxiosResponse<{ message: string; data: IMovie }>> =>
   await axios.post(
     `${BASE_URL}/movie`,
     { ...movie, userId: user._id },
@@ -23,7 +23,7 @@ export const movieCreate = async (movie: { name: string }): Promise<AxiosRespons
 //   headers: { 'Content-Type': 'multipart/form-data'},
 // });
 
-export const movieUpdate = async (movie: { name: string; movieId: string }): Promise<AxiosResponse<{ message: string; data: Movie }>> => {
+export const movieUpdate = async (movie: { name: string; movieId: string }): Promise<AxiosResponse<{ message: string; data: IMovie }>> => {
   console.log(movie);
   return await axios.put(
     `${BASE_URL}/movie`,

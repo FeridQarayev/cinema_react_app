@@ -5,9 +5,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import type Movie from '../../../interfaces/movie';
-import type Hall from '../../../interfaces/new.hall';
-import type Session from '../../../interfaces/session';
+import type IHall from '../../../interfaces/hall';
+import type IMovie from '../../../interfaces/movie';
+import type ISession from '../../../interfaces/session';
 import { hallGetAll } from '../../../services/hall';
 import { movieGetAll } from '../../../services/movie';
 import { sessionGetAll, sessionGetById, sessionCreate, sessionUpdate, sessionDelete } from '../../../services/session';
@@ -28,10 +28,10 @@ const CreateSchema = Yup.object().shape({
 });
 
 function SessionAdmin(): JSX.Element {
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [halls, setHalls] = useState<Hall[]>([]);
-  const [session, setSession] = useState<Session>();
+  const [sessions, setSessions] = useState<ISession[]>([]);
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  const [halls, setHalls] = useState<IHall[]>([]);
+  const [session, setSession] = useState<ISession>();
   const [openCreate, setopenCreate] = useState(false);
   const [openUpdate, setopenUpdate] = useState(false);
 
@@ -91,7 +91,7 @@ function SessionAdmin(): JSX.Element {
       });
   };
 
-  const columns = useMemo<Array<MRT_ColumnDef<Session>>>(
+  const columns = useMemo<Array<MRT_ColumnDef<ISession>>>(
     () => [
       {
         accessorKey: '_id',

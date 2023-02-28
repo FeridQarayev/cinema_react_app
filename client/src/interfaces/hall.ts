@@ -1,9 +1,10 @@
-export default interface Hall {
+import type ICinema from './cinema';
+
+export default interface IHall {
+  _id: string;
+  name: string;
   column: number;
   row: number;
-  price: number;
-  reserved: Array<{
-    reservedCol: number;
-    reservedRow: number;
-  }>;
+  __v: number;
+  cinema: ICinema;
 }

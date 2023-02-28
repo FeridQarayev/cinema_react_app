@@ -1,7 +1,7 @@
-import type Formats from './formats';
-import type Languages from './languages';
+import type IFormats from './formats';
+import type ILanguages from './languages';
 
-export default interface Movie {
+export default interface IMovie {
   _id: string;
   name: string;
   actor: string;
@@ -10,8 +10,8 @@ export default interface Movie {
   ageLimit: number;
   sessionTime: Date;
   sessionTimeOut: Date;
-  formats: Formats;
-  languages: Languages;
+  formats: IFormats;
+  languages: ILanguages;
   genre: string;
   synopsis: string;
   rating: number;
