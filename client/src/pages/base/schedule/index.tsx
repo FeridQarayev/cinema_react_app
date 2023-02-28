@@ -16,10 +16,7 @@ import bottomLeft from '../../../images/schedule/bottom-left.png';
 import bottomRight from '../../../images/schedule/bottom-right.png';
 import middleDown from '../../../images/schedule/glasses-1.png';
 import topLeft from '../../../images/schedule/top-left.png';
-import type Cinema from '../../../interfaces/cinema';
 import type DropLanguages from '../../../interfaces/droplanguages';
-import type Hall from '../../../interfaces/hall';
-import type MovieList from '../../../interfaces/movielist';
 import type ICinema from '../../../interfaces/new.cinema';
 import type ISession from '../../../interfaces/session';
 import { cinemaGetAll } from '../../../services/cinema';
@@ -34,176 +31,32 @@ interface IPlace {
   reserved: Array<{ col: number; row: number }>;
 }
 
-const data: MovieList[] = [
-  {
-    id: 1,
-    name: 'John',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: new Date().toLocaleDateString(),
-    cinema: {
-      id: 1,
-      name: '28 Mall',
-    },
-    hall: 'Hall 1',
-    formats: {
-      d2: true,
-      d3: true,
-      d4: true,
-    },
-    languages: {
-      az: false,
-      tu: true,
-      ru: true,
-      en: false,
-    },
-    price: 12,
-    places: 1,
-  },
-  {
-    id: 2,
-    name: 'Ant-Man and the Wasp: Quantumania',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: getDateByDay(1).toLocaleDateString(),
-    cinema: {
-      id: 2,
-      name: 'Deniz Mall',
-    },
-    hall: 'Hall 2',
-    formats: {
-      d2: true,
-      d3: false,
-      d4: true,
-    },
-    languages: {
-      az: false,
-      tu: true,
-      ru: false,
-      en: true,
-    },
-    price: 18,
-    places: 2,
-  },
-  {
-    id: 3,
-    name: 'Plane',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: getDateByDay(-2).toLocaleDateString(),
-    cinema: {
-      id: 3,
-      name: 'Amburan Mall',
-    },
-    hall: 'Hall 4',
-    formats: {
-      d2: true,
-      d3: true,
-      d4: false,
-    },
-    languages: {
-      az: true,
-      tu: true,
-      ru: false,
-      en: false,
-    },
-    price: 7,
-    places: 3,
-  },
-  {
-    id: 4,
-    name: 'Kino',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: getDateByDay(3).toLocaleDateString(),
-    cinema: {
-      id: 2,
-      name: 'Deniz Mall',
-    },
-    hall: 'Hall 4',
-    formats: {
-      d2: true,
-      d3: true,
-      d4: false,
-    },
-    languages: {
-      az: true,
-      tu: true,
-      ru: false,
-      en: false,
-    },
-    price: 7,
-    places: 3,
-  },
-  {
-    id: 5,
-    name: 'Film',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: getDateByDay(0).toLocaleDateString(),
-    cinema: {
-      id: 3,
-      name: 'Amburan Mall',
-    },
-    hall: 'Hall 4',
-    formats: {
-      d2: true,
-      d3: false,
-      d4: false,
-    },
-    languages: {
-      az: false,
-      tu: false,
-      ru: false,
-      en: true,
-    },
-    price: 7,
-    places: 3,
-  },
-  {
-    id: 6,
-    name: 'Movie',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: getDateByDay(0).toLocaleDateString(),
-    cinema: {
-      id: 3,
-      name: 'Amburan Mall',
-    },
-    hall: 'Hall 4',
-    formats: {
-      d2: true,
-      d3: true,
-      d4: false,
-    },
-    languages: {
-      az: true,
-      tu: false,
-      ru: false,
-      en: false,
-    },
-    price: 7,
-    places: 3,
-  },
-  {
-    id: 7,
-    name: 'Kink Kong',
-    sessions: new Date().toLocaleTimeString(),
-    sessionsDay: new Date().toLocaleDateString(),
-    cinema: {
-      id: 4,
-      name: 'Nakhcivan',
-    },
-    hall: 'Hall 8',
-    formats: {
-      d2: false,
-      d3: false,
-      d4: true,
-    },
-    languages: {
-      az: false,
-      tu: true,
-      ru: true,
-      en: false,
-    },
-    price: 8,
-    places: 1,
-  },
-];
+// const data: MovieList[] = [
+//   {
+//     id: 1,
+//     name: 'John',
+//     sessions: new Date().toLocaleTimeString(),
+//     sessionsDay: new Date().toLocaleDateString(),
+//     cinema: {
+//       id: 1,
+//       name: '28 Mall',
+//     },
+//     hall: 'Hall 1',
+//     formats: {
+//       d2: true,
+//       d3: true,
+//       d4: true,
+//     },
+//     languages: {
+//       az: false,
+//       tu: true,
+//       ru: true,
+//       en: false,
+//     },
+//     price: 12,
+//     places: 1,
+//   },
+// ];
 
 // const bordereds: Hall = {
 //   column: 10,
@@ -299,43 +152,44 @@ function Schedule(): JSX.Element {
   };
   const handleOpen = (session: ISession): void => {
     setOpen(true);
-    // bordereds.price = session.price;
-    // borderedss.price = session.price;
     setPrice(0);
     setArr({ column: session.hall.column, row: session.hall.row, price: session.price, reserved: session.reserved });
     setSession(session);
   };
-  console.log(sessions);
-  console.log(session);
+  // console.log(sessions);
+  // console.log(session);
   const handleClose = (): void => {
     setOpen(false);
   };
   useEffect(() => {
-    void sessionGetAll().then((res) => {
-      setSessions(res.data);
-    });
+    void sessionGetAll()
+      .then((res) => {
+        setSessions(res.data);
+      })
+      .then(() => {
+        setSessions((mov) =>
+          mov.filter(
+            (row) =>
+              new Date(row.date).toLocaleDateString() === day &&
+              (cinema !== '0' ? row.hall.cinema._id === cinema : true) &&
+              (language !== '0'
+                ? (language.includes('az') && row.language.includes('AZ')) ||
+                  (language.includes('tu') && row.language.includes('TU')) ||
+                  (language.includes('ru') && row.language.includes('RU')) ||
+                  (language.includes('en') && row.language.includes('EN'))
+                : true)
+          )
+        );
+      });
     void cinemaGetAll().then((res) => {
       setCinemas(res.data);
     });
-
     container.current?.addEventListener('mousemove', (e) => {
       divTags.current.forEach((divTag) => {
         divTag != null && (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`));
       });
     });
-    setSessions((mov) =>
-      mov.filter(
-        (row) =>
-          row.date.includes(day) &&
-          (cinema !== '0' ? row.hall.cinema._id === cinema : true) &&
-          (language !== '0'
-            ? (language.includes('az') && row.language.includes('AZ')) ||
-              (language.includes('tu') && row.language.includes('TU')) ||
-              (language.includes('ru') && row.language.includes('RU')) ||
-              (language.includes('en') && row.language.includes('EN'))
-            : true)
-      )
-    );
+
     price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
   }, [price, day, cinema, language]);
   const columns = useMemo<Array<MRT_ColumnDef<ISession>>>(
@@ -349,6 +203,8 @@ function Schedule(): JSX.Element {
         accessorFn: (row) => row.date,
         id: 'sessions',
         header: 'Sessions',
+        /* eslint-disable react/prop-types */
+        Cell: ({ cell }) => <Box component="span">{new Date(cell.getValue<string>()).toLocaleTimeString()}</Box>,
       },
       {
         accessorFn: (row) => row.hall.cinema.name,
@@ -727,8 +583,7 @@ function Schedule(): JSX.Element {
           <div className={styled.modal}>
             {session?.movie.name}
             <br />
-            {session?.date}
-            {/* , {session?.sessions} */}
+            {session !== undefined ? new Date(session?.date).toLocaleString() : ''}
             <br />
             {session?.hall.cinema.name}, {session?.hall.name}
             <div className={styled.up__icon}>

@@ -235,7 +235,7 @@ function SessionAdmin(): JSX.Element {
                 {({ errors, touched }) => (
                   <Form>
                     <div className={styled.model__create__form__group}>
-                      <Field name="date" placeholder="Time" type="time" />
+                      <Field name="date" placeholder="Time" type="datetime-local" />
                       {errors.date != null && (touched.date ?? false) ? <span>{errors.date}</span> : null}
                     </div>
                     <div className={styled.model__create__form__group}>
@@ -347,7 +347,7 @@ function SessionAdmin(): JSX.Element {
               {({ errors, touched }) => (
                 <Form>
                   <div className={styled.model__create__form__group}>
-                    <Field name="date" placeholder="Name" type="time" />
+                    <Field name="date" placeholder="Name" type="datetime-local" />
                     {errors.date != null && (touched.date ?? false) ? <span>{errors.date}</span> : null}
                   </div>
                   <div className={styled.model__create__form__group}>
