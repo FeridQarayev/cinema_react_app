@@ -20,8 +20,19 @@ import type Cinema from '../../../interfaces/cinema';
 import type DropLanguages from '../../../interfaces/droplanguages';
 import type Hall from '../../../interfaces/hall';
 import type MovieList from '../../../interfaces/movielist';
+import type ICinema from '../../../interfaces/new.cinema';
+import type ISession from '../../../interfaces/session';
+import { cinemaGetAll } from '../../../services/cinema';
+import { sessionGetAll } from '../../../services/session';
 import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
+
+interface IPlace {
+  column: number;
+  row: number;
+  price: number;
+  reserved: Array<{ col: number; row: number }>;
+}
 
 const data: MovieList[] = [
   {
@@ -194,36 +205,36 @@ const data: MovieList[] = [
   },
 ];
 
-const bordereds: Hall = {
-  column: 10,
-  row: 8,
-  price: 0,
-  reserved: [
-    {
-      reservedCol: 2,
-      reservedRow: 3,
-    },
-    {
-      reservedCol: 1,
-      reservedRow: 3,
-    },
-    {
-      reservedCol: 2,
-      reservedRow: 4,
-    },
-  ],
-};
-const borderedss: Hall = {
-  column: 5,
-  row: 3,
-  price: 0,
-  reserved: [
-    {
-      reservedCol: 1,
-      reservedRow: 3,
-    },
-  ],
-};
+// const bordereds: Hall = {
+//   column: 10,
+//   row: 8,
+//   price: 0,
+//   reserved: [
+//     {
+//       reservedCol: 2,
+//       reservedRow: 3,
+//     },
+//     {
+//       reservedCol: 1,
+//       reservedRow: 3,
+//     },
+//     {
+//       reservedCol: 2,
+//       reservedRow: 4,
+//     },
+//   ],
+// };
+// const borderedss: Hall = {
+//   column: 5,
+//   row: 3,
+//   price: 0,
+//   reserved: [
+//     {
+//       reservedCol: 1,
+//       reservedRow: 3,
+//     },
+//   ],
+// };
 
 const modalStyle = {
   position: 'absolute',
@@ -256,32 +267,6 @@ const dropDays = [
   getDateByDay(2).toLocaleDateString(),
   getDateByDay(3).toLocaleDateString(),
 ];
-const dropCinemas: Cinema[] = [
-  {
-    id: 0,
-    name: 'Cinema',
-  },
-  {
-    id: 1,
-    name: '28 Mall',
-  },
-  {
-    id: 2,
-    name: 'Deniz Mall',
-  },
-  {
-    id: 3,
-    name: 'Amburan Mall',
-  },
-  {
-    id: 4,
-    name: 'Nakhcivan',
-  },
-  {
-    id: 5,
-    name: 'Metro Prak',
-  },
-];
 
 const dropLanguages: DropLanguages[] = [
   { id: '0', name: 'Language' },
@@ -294,80 +279,89 @@ function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
-  const [arr, setArr] = useState<Hall>({ column: 0, row: 0, price: 0, reserved: [{ reservedCol: 0, reservedRow: 0 }] });
+  const [arr, setArr] = useState<IPlace>({ column: 0, row: 0, price: 0, reserved: [{ col: 0, row: 0 }] });
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
-  const [movie, setMovie] = useState<MovieList>();
-  const [movies, setMovies] = useState<MovieList[]>(data);
+  const [session, setSession] = useState<ISession>();
+  const [sessions, setSessions] = useState<ISession[]>([]);
   const [day, setDay] = useState(new Date().toLocaleDateString());
-  const [cinema, setCinema] = useState(0);
+  const [cinemas, setCinemas] = useState<ICinema[]>([]);
+  const [cinema, setCinema] = useState('0');
   const [language, setLanguage] = useState('0');
   const handleChangeDay = (event: SelectChangeEvent): void => {
     setDay(event.target.value);
   };
   const handleChangeCinema = (event: SelectChangeEvent): void => {
-    setCinema(Number(event.target.value));
+    setCinema(event.target.value);
   };
   const handleChangeLanguage = (event: SelectChangeEvent): void => {
     setLanguage(event.target.value);
   };
-  const handleOpen = (num: number, movie: MovieList): void => {
+  const handleOpen = (session: ISession): void => {
     setOpen(true);
-    bordereds.price = movie.price;
-    borderedss.price = movie.price;
+    // bordereds.price = session.price;
+    // borderedss.price = session.price;
     setPrice(0);
-    num === 1 ? setArr(bordereds) : setArr(borderedss);
-    setMovie(movie);
+    setArr({ column: session.hall.column, row: session.hall.row, price: session.price, reserved: session.reserved });
+    setSession(session);
   };
+  console.log(sessions);
+  console.log(session);
   const handleClose = (): void => {
     setOpen(false);
   };
   useEffect(() => {
+    void sessionGetAll().then((res) => {
+      setSessions(res.data);
+    });
+    void cinemaGetAll().then((res) => {
+      setCinemas(res.data);
+    });
+
     container.current?.addEventListener('mousemove', (e) => {
       divTags.current.forEach((divTag) => {
         divTag != null && (divTag.style.transform = String(`perspective(600px) translate3d(${-e.clientX / 100}px, ${-e.clientY / 100}px, 0px)`));
       });
     });
-    setMovies(data);
-    setMovies((mov) =>
+    setSessions((mov) =>
       mov.filter(
         (row) =>
-          row.sessionsDay.includes(day) &&
-          (cinema !== 0 ? row.cinema.id === cinema : true) &&
+          row.date.includes(day) &&
+          (cinema !== '0' ? row.hall.cinema._id === cinema : true) &&
           (language !== '0'
-            ? (language.includes('az') && row.languages.az) ||
-              (language.includes('tu') && row.languages.tu) ||
-              (language.includes('ru') && row.languages.ru) ||
-              (language.includes('en') && row.languages.en)
+            ? (language.includes('az') && row.language.includes('AZ')) ||
+              (language.includes('tu') && row.language.includes('TU')) ||
+              (language.includes('ru') && row.language.includes('RU')) ||
+              (language.includes('en') && row.language.includes('EN'))
             : true)
       )
     );
     price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
   }, [price, day, cinema, language]);
-  const columns = useMemo<Array<MRT_ColumnDef<MovieList>>>(
+  const columns = useMemo<Array<MRT_ColumnDef<ISession>>>(
     () => [
       {
-        accessorKey: 'name',
+        accessorKey: 'movie.name',
         header: 'Name',
         muiTableHeadCellProps: { sx: { color: 'green' } },
       },
       {
-        accessorFn: (row) => row.sessions,
+        accessorFn: (row) => row.date,
         id: 'sessions',
         header: 'Sessions',
       },
       {
-        accessorFn: (row) => row.cinema.name,
+        accessorFn: (row) => row.hall.cinema.name,
         id: 'cinema',
         header: 'Cinema',
       },
       {
-        accessorFn: (row) => row.hall,
+        accessorFn: (row) => row.hall.name,
         id: 'hall',
         header: 'Hall',
       },
       {
-        accessorFn: (row) => [row.languages, row.formats],
+        accessorFn: (row) => [row.language, row.formats],
         id: 'formats',
         header: 'Formats',
         /* eslint-disable react/prop-types */
@@ -393,32 +387,22 @@ function Schedule(): JSX.Element {
                 </Box>
               )
           ),
-          [
-            row.original.languages.az && 'AZ',
-            row.original.languages.tu && 'TU',
-            row.original.languages.en && 'EN',
-            row.original.languages.ru && 'RU',
-          ].map(
-            (value, index) =>
-              value !== false && (
-                <Box
-                  key={index}
-                  component="span"
-                  sx={() => {
-                    return {
-                      borderRadius: '4px',
-                      border: '#000 solid 1px',
-                      color: '#000',
-                      padding: '0 3px',
-                      margin: '0px 5px',
-                      fontWeight: 'bolder',
-                    };
-                  }}
-                >
-                  {value}
-                </Box>
-              )
-          ),
+          <Box
+            key={row.original._id}
+            component="span"
+            sx={() => {
+              return {
+                borderRadius: '4px',
+                border: '#000 solid 1px',
+                color: '#000',
+                padding: '0 3px',
+                margin: '0px 5px',
+                fontWeight: 'bolder',
+              };
+            }}
+          >
+            {row.original.language}
+          </Box>,
         ],
         /* eslint-enable react/prop-types */
       },
@@ -428,10 +412,9 @@ function Schedule(): JSX.Element {
         header: 'Price',
         /* eslint-disable react/prop-types */
         Cell: ({ cell }) => <Box component="span">{cell.getValue<number>()} AZN</Box>,
-        /* eslint-enable react/prop-types */
       },
       {
-        accessorFn: (row) => row.places,
+        accessorFn: (row) => row.reserved,
         id: 'places',
         header: 'Buy Now',
         /* eslint-disable react/prop-types */
@@ -439,7 +422,7 @@ function Schedule(): JSX.Element {
           <Box
             component="div"
             onClick={() => {
-              handleOpen(cell.getValue<number>(), row.original);
+              handleOpen(row.original);
             }}
             sx={() => {
               return {
@@ -473,7 +456,6 @@ function Schedule(): JSX.Element {
             </Box>
           </Box>
         ),
-        /* eslint-enable react/prop-types */
       },
     ],
     []
@@ -487,25 +469,25 @@ function Schedule(): JSX.Element {
       : setPrice((prc) => prc - placePrice);
   };
 
-  const sortedBorder = (hall: Hall): JSX.Element[] => {
+  const sortedBorder = (place: IPlace): JSX.Element[] => {
     const totalLiBordered: JSX.Element[] = [];
     const totalLiEmpty: JSX.Element[] = [];
     let toppx = 341;
     const rightpx = 20;
-    for (let i = 1; i <= hall.column; i++) {
+    for (let i = 1; i <= place.column; i++) {
       let leftpx = 95;
       const borderedLiLeft: JSX.Element = createElement(
         'li',
         { key: i, className: styled.modal__body__list__border },
         createElement('b', { style: { top: String(`${toppx}px`) } }, i)
       );
-      for (let z = 1; z <= hall.row; z++) {
+      for (let z = 1; z <= place.row; z++) {
         const emptyLi: JSX.Element = createElement(
           'li',
           {
             key: ((z + 73) / 9) * ((((i + 4) * 99) / 4) * 3),
             className:
-              hall.reserved.find((r) => r.reservedRow === z && r.reservedCol === i)?.reservedCol === undefined
+              place.reserved.find((r) => r.row === z && r.col === i)?.col === undefined
                 ? styled.modal__body__list__empty
                 : styled.modal__body__list__reserv,
           },
@@ -518,7 +500,7 @@ function Schedule(): JSX.Element {
               style: { left: String(`${leftpx}px`), top: String(`${toppx}px`) },
               row: z,
               column: i,
-              price: hall.price,
+              price: place.price,
             },
             z
           )
@@ -678,14 +660,15 @@ function Schedule(): JSX.Element {
               }}
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              value={cinema.toString()}
+              value={cinema}
               onChange={handleChangeCinema}
               autoWidth
               label="Cinema"
             >
-              {dropCinemas.map((cinema) => (
-                <MenuItem key={cinema.id} value={cinema.id}>
-                  {cinema.name}
+              <MenuItem value="0">Cinema</MenuItem>
+              {cinemas.map((cinem) => (
+                <MenuItem key={cinem._id} value={cinem._id}>
+                  {cinem.name}
                 </MenuItem>
               ))}
             </Select>
@@ -735,20 +718,21 @@ function Schedule(): JSX.Element {
           </FormControl>
         </div>
         <div className={styled.schedule__table__body}>
-          <MaterialReactTable columns={columns} data={movies} />
+          <MaterialReactTable columns={columns} data={sessions} />
         </div>
       </div>
 
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={modalStyle}>
           <div className={styled.modal}>
-            {movie?.name}
+            {session?.movie.name}
             <br />
-            {movie?.sessionsDay}, {movie?.sessions}
+            {session?.date}
+            {/* , {session?.sessions} */}
             <br />
-            {movie?.cinema.name}, {movie?.hall}
+            {session?.hall.cinema.name}, {session?.hall.name}
             <div className={styled.up__icon}>
-              {movie?.formats.d4 === true && (
+              {session?.formats.d4 === true && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
@@ -757,7 +741,7 @@ function Schedule(): JSX.Element {
                   <img src={fourDxImg} alt="4DX" />
                 </span>
               )}
-              {movie?.formats.d3 === true && (
+              {session?.formats.d3 === true && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
@@ -766,7 +750,7 @@ function Schedule(): JSX.Element {
                   <img src={d3} alt="3D" />
                 </span>
               )}
-              {movie?.formats.d2 === true && (
+              {session?.formats.d2 === true && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
@@ -775,7 +759,7 @@ function Schedule(): JSX.Element {
                   <img src={d2} alt="2d" />
                 </span>
               )}
-              {movie?.languages.az === true && (
+              {session?.language === 'AZ' && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
@@ -784,16 +768,16 @@ function Schedule(): JSX.Element {
                   <img src={azImg} alt="AZ" />
                 </span>
               )}
-              {movie?.languages.tu === true && (
+              {session?.language === 'TU' && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
                     Film Türk dilində nümayiş olunur
                   </span>
-                  <img src={turImg} alt="Tu" />
+                  <img src={turImg} alt="TU" />
                 </span>
               )}
-              {movie?.languages.ru === true && (
+              {session?.language === 'RU' && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
@@ -802,7 +786,7 @@ function Schedule(): JSX.Element {
                   <img src={ruImg} alt="RU" />
                 </span>
               )}
-              {movie?.languages.en === true && (
+              {session?.language === 'EN' && (
                 <span className={styled.hover__text}>
                   <span className={styled.hover__text__content}>
                     <b></b>
