@@ -2,6 +2,7 @@ import { Box, FormControl, InputLabel, MenuItem, Modal } from '@mui/material';
 import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState, createElement } from 'react';
+import { Link } from 'react-router-dom';
 import azImg from '../../../images/constant/ni_aze_white.png';
 import enImg from '../../../images/constant/ni_eng_white.png';
 import fourDxImg from '../../../images/constant/ni_fourdx_white.png';
@@ -77,6 +78,12 @@ function Schedule(): JSX.Element {
   const [cinemas, setCinemas] = useState<ICinema[]>([]);
   const [cinema, setCinema] = useState('0');
   const [language, setLanguage] = useState('0');
+  const [reserveds, setReserveds] = useState<
+    Array<{
+      selectedCol: number;
+      selectedRow: number;
+    }>
+  >([]);
   const handleChangeDay = (event: SelectChangeEvent): void => {
     setDay(event.target.value);
   };
@@ -89,6 +96,7 @@ function Schedule(): JSX.Element {
   const handleOpen = (session: ISession): void => {
     setOpen(true);
     setPrice(0);
+    setReserveds([]);
     setArr({ column: session.hall.column, row: session.hall.row, price: session.price, reserved: session.reserved });
     setSession(session);
   };
@@ -264,10 +272,16 @@ function Schedule(): JSX.Element {
 
   const selectPlace = (place: React.MouseEvent<HTMLSpanElement>): void => {
     const placePrice = parseInt(String(place.currentTarget.getAttribute('price')));
+    const selectedCol = parseInt(String(place.currentTarget.getAttribute('column')));
+    const selectedRow = parseInt(String(place.currentTarget.getAttribute('row')));
     place.currentTarget.classList.toggle(styled.modal__body__list__select);
-    place.currentTarget.classList.value === styled.modal__body__list__select
-      ? setPrice((prc) => placePrice + prc)
-      : setPrice((prc) => prc - placePrice);
+    if (place.currentTarget.classList.value === styled.modal__body__list__select) {
+      setReserveds((rez) => [...rez, { selectedCol, selectedRow }]);
+      setPrice((prc) => placePrice + prc);
+    } else {
+      setReserveds((rez) => rez.filter((r) => r.selectedCol !== selectedCol || r.selectedRow !== selectedRow));
+      setPrice((prc) => prc - placePrice);
+    }
   };
 
   const sortedBorder = (place: IPlace): JSX.Element[] => {
@@ -630,7 +644,7 @@ function Schedule(): JSX.Element {
                     </p>
                   </div>
                   <div ref={buyBtn} className={styled.modal__footer__container__bottom__btn}>
-                    <a href="#">Tesdiqlemek</a>
+                    <Link to={'/home'}>Tesdiqlemek</Link>
                   </div>
                 </div>
               </div>
