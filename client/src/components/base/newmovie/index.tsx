@@ -19,7 +19,9 @@ function Movie(props: { data: IMovie }): JSX.Element {
       <div className={styled.movie__content}>
         <span className={styled.movie__content__age}>{props.data.ageLimit}+</span>
         <div className={styled.movie__content__poster}>
-          <img src={require(`../../../images/movies/${props.data.image}`)} alt="movie" />
+          <Link to={`/detail/${props.data._id}`}>
+            <img src={require(`../../../images/movies/${props.data.image}`)} alt="movie" />
+          </Link>
         </div>
         <div className={styled.movie__content__icons}>
           {props.data.formats.d4 && (

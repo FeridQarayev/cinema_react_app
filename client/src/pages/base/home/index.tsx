@@ -21,6 +21,10 @@ import starsvg from '../../../svgs/star-solid.svg';
 import { ReactComponent as WatchSvg } from '../../../svgs/watch-more.svg';
 import styled from './home.module.scss';
 
+function getDateByDay(day: number): Date {
+  return new Date(new Date().setDate(new Date().getDate() + day));
+}
+
 function Home(): JSX.Element {
   const [movies, setMovies] = useState<IMovie[]>([]);
   useEffect(() => {
@@ -29,7 +33,7 @@ function Home(): JSX.Element {
         setMovies(res.data);
       })
       .then(() => {
-        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime).toLocaleDateString() < new Date().toLocaleDateString()));
+        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime).toLocaleDateString() < getDateByDay(1).toLocaleDateString()));
       });
   }, []);
   return (
