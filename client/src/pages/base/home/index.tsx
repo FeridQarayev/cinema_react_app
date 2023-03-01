@@ -24,9 +24,13 @@ import styled from './home.module.scss';
 function Home(): JSX.Element {
   const [movies, setMovies] = useState<IMovie[]>([]);
   useEffect(() => {
-    void movieGetAll().then((res) => {
-      setMovies(res.data);
-    });
+    void movieGetAll()
+      .then((res) => {
+        setMovies(res.data);
+      })
+      .then(() => {
+        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime).toLocaleDateString() < new Date().toLocaleDateString()));
+      });
   }, []);
   return (
     <div className={styled.home}>
