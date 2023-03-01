@@ -13,6 +13,7 @@ export default interface ISession {
   reserved: Array<{
     col: number;
     row: number;
+    _id: string;
   }>;
   __v: number;
 }

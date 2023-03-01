@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const salesSchema = new mongoose.Schema({
-  userId: { type: String },
+  userId: { type: String, default: "" },
   sessionId: { type: String },
   date: { type: String },
   movieDate: { type: String },

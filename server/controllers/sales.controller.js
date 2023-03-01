@@ -1,7 +1,7 @@
-const Hall = require("../models/hall.model");
+const SalesSchema = require("../schemas/sales.schema");
 const Session = require("../models/session.model");
 const Sales = require("../models/sales.model");
-const SalesSchema = require("../schemas/sales.schema");
+const mapping = require("../mappings/validate.map");
 
 exports.get = (req, res) => {
   Sales.find().exec((error, data) => {
@@ -36,11 +36,19 @@ exports.create = async (req, res) => {
 
   const newSale = await Sales.create({ ...req.body });
 
-  const oldSession = await Session.findByIdAndUpdate(sessionId, {
+  const resers = [];
+  places.map((place) => {
+    resers.push({
+      col: place.coll,
+      row: place.roww,
+      _id: undefined,
+    });
+  });
+  console.log(resers);
+
+  const oldSession = await Session.findOneAndUpdate(sessionId, {
     $push: {
-      reserved: {
-        ...places,
-      },
+      reserved: resers,
     },
   });
 

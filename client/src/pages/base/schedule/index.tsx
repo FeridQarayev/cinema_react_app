@@ -2,6 +2,7 @@ import { Box, FormControl, InputLabel, MenuItem, Modal } from '@mui/material';
 import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState, createElement } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import azImg from '../../../images/constant/ni_aze_white.png';
 import enImg from '../../../images/constant/ni_eng_white.png';
@@ -22,6 +23,7 @@ import type IDropLanguages from '../../../interfaces/droplanguages';
 import type IPlace from '../../../interfaces/place';
 import type ISession from '../../../interfaces/session';
 import { cinemaGetAll } from '../../../services/cinema';
+import { salesCreate } from '../../../services/sales';
 import { sessionGetAll } from '../../../services/session';
 import placeSvg from '../../../svgs/places_icon.svg';
 import styled from './schedule.module.scss';
@@ -69,7 +71,7 @@ function Schedule(): JSX.Element {
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
-  const [arr, setArr] = useState<IPlace>({ column: 0, row: 0, price: 0, reserved: [{ col: 0, row: 0 }] });
+  const [arr, setArr] = useState<IPlace>({ column: 0, row: 0, price: 0, reserved: [{ col: 0, row: 0, _id: '' }] });
   const [price, setPrice] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const [session, setSession] = useState<ISession>();
@@ -80,8 +82,8 @@ function Schedule(): JSX.Element {
   const [language, setLanguage] = useState('0');
   const [reserveds, setReserveds] = useState<
     Array<{
-      selectedCol: number;
-      selectedRow: number;
+      coll: number;
+      roww: number;
     }>
   >([]);
   const handleChangeDay = (event: SelectChangeEvent): void => {
@@ -134,6 +136,31 @@ function Schedule(): JSX.Element {
 
     price !== 0 ? buyBtn.current?.classList.add(styled.active) : buyBtn.current?.classList.remove(styled.active);
   }, [price, day, cinema, language]);
+
+  const compleateSale = (): void => {
+    if (session !== undefined) {
+      void salesCreate({
+        userId: '',
+        movie: session.movie.name,
+        sessionId: session._id,
+        date: new Date().toString(),
+        movieDate: session.date,
+        price,
+        language: session.language,
+        places: reserveds,
+      })
+        .then((res) => {
+          if (res.status === 201) {
+            toast.success(res.data.message);
+          } else toast.error(res.data.message);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    }
+    setOpen(false);
+  };
+
   const columns = useMemo<Array<MRT_ColumnDef<ISession>>>(
     () => [
       {
@@ -217,7 +244,7 @@ function Schedule(): JSX.Element {
         Cell: ({ cell }) => <Box component="span">{cell.getValue<number>()} AZN</Box>,
       },
       {
-        accessorFn: (row) => row.reserved,
+        accessorFn: (row) => row._id,
         muiTableHeadCellProps: {
           align: 'center',
         },
@@ -261,7 +288,7 @@ function Schedule(): JSX.Element {
                 };
               }}
             >
-              Places{cell.getValue<number>()}
+              Places
             </Box>
           </Box>
         ),
@@ -276,10 +303,10 @@ function Schedule(): JSX.Element {
     const selectedRow = parseInt(String(place.currentTarget.getAttribute('row')));
     place.currentTarget.classList.toggle(styled.modal__body__list__select);
     if (place.currentTarget.classList.value === styled.modal__body__list__select) {
-      setReserveds((rez) => [...rez, { selectedCol, selectedRow }]);
+      setReserveds((rez) => [...rez, { coll: selectedCol, roww: selectedRow }]);
       setPrice((prc) => placePrice + prc);
     } else {
-      setReserveds((rez) => rez.filter((r) => r.selectedCol !== selectedCol || r.selectedRow !== selectedRow));
+      setReserveds((rez) => rez.filter((r) => r.coll !== selectedCol || r.roww !== selectedRow));
       setPrice((prc) => prc - placePrice);
     }
   };
@@ -644,7 +671,9 @@ function Schedule(): JSX.Element {
                     </p>
                   </div>
                   <div ref={buyBtn} className={styled.modal__footer__container__bottom__btn}>
-                    <Link to={'/home'}>Tesdiqlemek</Link>
+                    <Link to={'/home'} onClick={compleateSale}>
+                      Tesdiqlemek
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -652,6 +681,7 @@ function Schedule(): JSX.Element {
           </div>
         </Box>
       </Modal>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
