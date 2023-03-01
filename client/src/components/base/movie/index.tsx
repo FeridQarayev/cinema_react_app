@@ -64,7 +64,7 @@ function Movie(props: { data: IMovie }): JSX.Element {
           <div className={styled.movie__body__content__btn}>
             <Link to={'#'}>
               <PlaySvg />
-              Trailer
+              Sessions
             </Link>
             <Link to={'#'}>
               <InfoSvg />
@@ -101,9 +101,9 @@ function Movie(props: { data: IMovie }): JSX.Element {
             <p>{props.data.ageLimit} +</p>
           </div>
           <div className={styled.movie__body__hover__btn}>
-            <Link to={'#'}>
+            <Link to={String(`/schedule/${props.data.name}`)}>
               <PlaySvg />
-              Trailer
+              Sessions
             </Link>
             <Link to={`/detail/${props.data._id}`}>
               <InfoSvg />

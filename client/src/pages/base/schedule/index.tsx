@@ -3,7 +3,7 @@ import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState, createElement } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import azImg from '../../../images/constant/ni_aze_white.png';
 import enImg from '../../../images/constant/ni_eng_white.png';
 import fourDxImg from '../../../images/constant/ni_fourdx_white.png';
@@ -69,6 +69,7 @@ const dropLanguages: IDropLanguages[] = [
 ];
 function Schedule(): JSX.Element {
   const navigate = useNavigate();
+  const { name } = useParams();
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
@@ -115,6 +116,7 @@ function Schedule(): JSX.Element {
         setSessions((mov) =>
           mov.filter(
             (row) =>
+              (name !== undefined && name !== null ? row.movie.name === name : true) &&
               new Date(row.date).toLocaleDateString() === day &&
               (cinema !== '0' ? row.hall.cinema._id === cinema : true) &&
               (language !== '0'

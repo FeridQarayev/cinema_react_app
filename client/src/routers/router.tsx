@@ -43,6 +43,10 @@ export const ROUTES = [
         element: <Schedule />,
       },
       {
+        path: 'schedule/:name',
+        element: <Schedule />,
+      },
+      {
         path: 'signup',
         element: <SignUp />,
       },

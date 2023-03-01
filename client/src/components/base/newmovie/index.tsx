@@ -78,7 +78,7 @@ function Movie(props: { data: IMovie }): JSX.Element {
           )}
         </div>
         <div className={styled.movie__content__down}>
-          <Link to={'home'}>SESSIONS</Link>
+          <Link to={String(`/schedule/${props.data.name}`)}>SESSIONS</Link>
         </div>
       </div>
     </div>
