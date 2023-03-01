@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { verifyAdmin } from '../../../services/verify.admin';
+import { verifyAdminWithToken } from '../../../services/verify.admin';
 import { verifyToken } from '../../../services/verify.toke';
 import styled from './navbar.module.scss';
 
@@ -16,7 +16,7 @@ function Navbar(): JSX.Element {
   const user = JSON.parse(String(localStorage.getItem('user')));
   useEffect(() => {
     if (user !== undefined && user !== null) {
-      void verifyAdmin(user._id)
+      void verifyAdminWithToken()
         .then((res) => {
           if (res.status === 200) setIsAdmin(true);
           else setIsAdmin(false);
@@ -33,7 +33,7 @@ function Navbar(): JSX.Element {
           setVerify(false);
         });
     }
-  }, []);
+  }, [user]);
   return (
     <Fragment>
       <header

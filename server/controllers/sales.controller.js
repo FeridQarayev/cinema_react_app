@@ -44,7 +44,6 @@ exports.create = async (req, res) => {
       _id: undefined,
     });
   });
-  console.log(resers);
 
   const oldSession = await Session.findOneAndUpdate(sessionId, {
     $push: {

@@ -3,7 +3,7 @@ import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import React, { useEffect, useRef, useMemo, useState, createElement } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import azImg from '../../../images/constant/ni_aze_white.png';
 import enImg from '../../../images/constant/ni_eng_white.png';
 import fourDxImg from '../../../images/constant/ni_fourdx_white.png';
@@ -68,6 +68,7 @@ const dropLanguages: IDropLanguages[] = [
   { id: 'en', name: 'English' },
 ];
 function Schedule(): JSX.Element {
+  const navigate = useNavigate();
   const container = useRef<HTMLDivElement>(null);
   const buyBtn = useRef<HTMLDivElement>(null);
   const divTags = useRef<HTMLDivElement[]>([]);
@@ -152,6 +153,7 @@ function Schedule(): JSX.Element {
         .then((res) => {
           if (res.status === 201) {
             toast.success(res.data.message);
+            navigate('/home');
           } else toast.error(res.data.message);
         })
         .catch((error) => {
@@ -671,9 +673,7 @@ function Schedule(): JSX.Element {
                     </p>
                   </div>
                   <div ref={buyBtn} className={styled.modal__footer__container__bottom__btn}>
-                    <Link to={'/home'} onClick={compleateSale}>
-                      Tesdiqlemek
-                    </Link>
+                    <a onClick={compleateSale}>Tesdiqlemek</a>
                   </div>
                 </div>
               </div>

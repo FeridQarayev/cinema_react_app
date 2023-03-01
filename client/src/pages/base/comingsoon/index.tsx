@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Movie from '../../../components/base/newmovie';
 import backImg from '../../../images/coming/jake-hills-194864.jpg';
-import avatarImg from '../../../images/movies/avatarthewayofwater700x1000.350x0.jpg';
-import planeImg from '../../../images/movies/krushenie700x1000-1.350x0.jpg';
-import quantumImg from '../../../images/movies/quantamania.350x0.jpg';
+import type IMovie from '../../../interfaces/movie';
+import { movieGetAll } from '../../../services/movie';
 import styled from './comingsoon.module.scss';
 
 function ComingSoon(): JSX.Element {
+  const [movies, setMovies] = useState<IMovie[]>([]);
+
+  useEffect(() => {
+    void movieGetAll().then((res) => {
+      setMovies(res.data);
+    });
+  }, []);
   return (
     <div className={styled.soon}>
       <section className={styled.soon__up}>
@@ -38,12 +44,9 @@ function ComingSoon(): JSX.Element {
           <div className={styled.soon__body__container__today}>
             <div className={styled.soon__body__container__today__middle}>
               <div className={styled.soon__body__container__today__middle__body}>
-                <Movie img={quantumImg} />
-                <Movie img={avatarImg} />
-                <Movie img={planeImg} />
-                <Movie img={avatarImg} />
-                <Movie img={planeImg} />
-                <Movie img={quantumImg} />
+                {movies.map((movie) => (
+                  <Movie key={movie._id} data={movie} />
+                ))}
               </div>
             </div>
           </div>
