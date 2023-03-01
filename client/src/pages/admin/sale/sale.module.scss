@@ -1,0 +1,52 @@
+.sale {
+  width: 100%;
+  min-height: 100vh;
+  transition: ease all 0.3s;
+  position: relative;
+  padding: 60px 10px 25px 305px;
+  background: #f8f8f8;
+  &__container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    &__title {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px px;
+      margin-left: -15px;
+      &__col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+        div {
+          background: #fff;
+          margin-top: 0;
+          margin-bottom: 30px;
+          padding: 25px 35px 22px 38px;
+          box-shadow: 1px 0 5px rgb(0 0 0 / 10%);
+          margin-left: -40px;
+          margin-right: -40px;
+          position: relative;
+          h2 {
+            font-size: 20px;
+            font-weight: 500;
+            color: #15283c;
+            line-height: 20px;
+            position: relative;
+          }
+        }
+      }
+    }
+    &__body {
+      margin-right: -15px;
+      margin-left: -15px;
+      width: 100%;
+    }
+  }
+}

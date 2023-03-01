@@ -3,6 +3,7 @@ import CinemaAdmin from '../pages/admin/cinema';
 import HallAdmin from '../pages/admin/hall';
 import HomeAdmin from '../pages/admin/home';
 import MovieAdmin from '../pages/admin/movie';
+import Sale from '../pages/admin/sale/intex';
 import SessionAdmin from '../pages/admin/session';
 import AboutUs from '../pages/base/aboutus';
 import BaseRoot from '../pages/base/BaseRoot';
@@ -88,6 +89,10 @@ export const ROUTES = [
       {
         path: 'session',
         element: <SessionAdmin />,
+      },
+      {
+        path: 'sale',
+        element: <Sale />,
       },
     ],
   },
