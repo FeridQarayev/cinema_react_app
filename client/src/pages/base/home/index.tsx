@@ -33,7 +33,7 @@ function Home(): JSX.Element {
         setMovies(res.data);
       })
       .then(() => {
-        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime).toLocaleDateString() < getDateByDay(1).toLocaleDateString()));
+        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime) < getDateByDay(1)));
       });
   }, []);
   return (

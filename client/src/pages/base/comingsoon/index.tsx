@@ -14,7 +14,7 @@ function ComingSoon(): JSX.Element {
         setMovies(res.data);
       })
       .then(() => {
-        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime).toLocaleDateString() > new Date().toLocaleDateString()));
+        setMovies((oldmovie) => oldmovie.filter((mov) => new Date(mov.sessionTime) > new Date()));
       });
   }, []);
   return (
