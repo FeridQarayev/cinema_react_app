@@ -1,0 +1,160 @@
+.orders {
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: #fff;
+  &__up {
+    zoom: 1;
+    padding: 80px 0;
+    max-width: 100vw;
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    color: #f7f7f7;
+    background: #131313;
+    overflow: hidden;
+    align-items: center;
+    &__back {
+      background-color: #392826;
+      animation: wvcbgzoomin 100s infinite linear 1s;
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      img {
+        // vertical-align: bottom;
+        max-width: 100%;
+        transition: opacity 0.2s ease;
+        object-fit: cover;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100% !important;
+        z-index: 0;
+        font-family: 'object-fit: cover;';
+        object-position: 50% 50%;
+      }
+    }
+    &__color {
+      background-color: #000000;
+      opacity: 0.6;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+    &__body {
+      align-self: stretch;
+      width: 92%;
+      margin: 0 auto;
+      max-width: 1140px;
+      position: relative;
+      &__content {
+        height: 100%;
+        width: 100% !important;
+        margin-left: 0 !important;
+        display: flex;
+        &__container {
+          height: 100%;
+          display: flex;
+          width: 100%;
+          vertical-align: middle;
+          &__col {
+            margin: 0 17.5px;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            align-self: center;
+            width: 100% !important;
+            position: static !important;
+            &__ef {
+              z-index: 0;
+              position: relative;
+              display: flex;
+              width: 100%;
+              &__inner {
+                display: flex;
+                width: 100%;
+                position: relative;
+                z-index: 5;
+                &__wrap {
+                  width: 100%;
+                  margin: 0 auto;
+                  div {
+                    margin-bottom: 0;
+                    h2 {
+                      font-family: Six Caps;
+                      font-size: 96px;
+                      font-weight: 400;
+                      text-align: center;
+                      line-height: 1.5;
+                      text-transform: uppercase;
+                      color: #fff;
+                      letter-spacing: 1px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 280px) {
+  .orders__up__body {
+    h2 {
+      font-size: 40px !important;
+    }
+  }
+}
+@media (min-width: 450px) {
+  .orders__up__body {
+    h2 {
+      font-size: 80px !important;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .orders__up__body {
+    h2 {
+      font-size: 80px !important;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .orders__up__body {
+    h2 {
+      font-size: 120px !important;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .soon {
+    margin-top: 50px;
+  }
+}
+
+@keyframes wvcbgzoomin {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

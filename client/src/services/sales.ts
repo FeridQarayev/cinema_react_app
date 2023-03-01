@@ -7,8 +7,8 @@ user === undefined && user === null && (user = { token: '', _id: '' });
 
 export const salesGetAll = async (): Promise<AxiosResponse<ISales[]>> => await axios.get(`${BASE_URL}/sales`);
 
-export const salesGetById = async (salesId: string): Promise<AxiosResponse<{ message: string; data: ISales }>> =>
-  await axios.post(`${BASE_URL}/sales/id`, { salesId });
+export const salesGetById = async (): Promise<AxiosResponse<{ message: string; data: ISales[] }>> =>
+  await axios.post(`${BASE_URL}/sales/id`, { userId: user._id });
 
 export const salesCreate = async (sales: {
   userId: string;

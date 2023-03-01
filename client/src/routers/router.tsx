@@ -9,6 +9,7 @@ import BaseRoot from '../pages/base/BaseRoot';
 import ComingSoon from '../pages/base/comingsoon';
 import Detail from '../pages/base/detail';
 import Home from '../pages/base/home';
+import Orders from '../pages/base/orders';
 import Schedule from '../pages/base/schedule';
 import SignIn from '../pages/base/signin';
 import SignUp from '../pages/base/signup';
@@ -45,6 +46,10 @@ export const ROUTES = [
       {
         path: 'schedule/:name',
         element: <Schedule />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />,
       },
       {
         path: 'signup',

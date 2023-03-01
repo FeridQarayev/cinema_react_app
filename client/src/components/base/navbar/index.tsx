@@ -27,10 +27,14 @@ function Navbar(): JSX.Element {
       void verifyToken(user.token)
         .then((res) => {
           if (res.status === 200) setVerify(true);
-          else setVerify(false);
+          else {
+            localStorage.removeItem('user');
+            setVerify(false);
+          }
         })
         .catch(() => {
           setVerify(false);
+          localStorage.removeItem('user');
         });
     }
   }, [user]);
@@ -61,6 +65,11 @@ function Navbar(): JSX.Element {
                     <li className={styled.header__container__body__menu__nav__list__ul__li}>
                       <Link to={'aboutus'}>About Us</Link>
                     </li>
+                    {verify && (
+                      <li className={styled.header__container__body__menu__nav__list__ul__li}>
+                        <Link to={'orders'}>My Orders</Link>
+                      </li>
+                    )}
                     {!verify && (
                       <li className={styled.header__container__body__menu__nav__list__ul__li}>
                         <Link to={'signup'}>Register</Link>
@@ -105,6 +114,11 @@ function Navbar(): JSX.Element {
             <li className={styled.mobile_bar__nav__ul__li}>
               <Link to={'aboutus'}>About Us</Link>
             </li>
+            {verify && (
+              <li className={styled.header__container__body__menu__nav__list__ul__li}>
+                <Link to={'orders'}>My Orders</Link>
+              </li>
+            )}
             {!verify && (
               <>
                 <li className={styled.mobile_bar__nav__ul__li}>
