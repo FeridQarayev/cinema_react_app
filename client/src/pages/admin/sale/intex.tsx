@@ -14,6 +14,7 @@ function Sale(): JSX.Element {
     });
   }, []);
 
+  const averageSalary = useMemo(() => sales.reduce((acc: number, curr: ISales) => acc + curr.price, 0), [sales]);
   const columns = useMemo<Array<MRT_ColumnDef<ISales>>>(
     () => [
       {
@@ -55,9 +56,22 @@ function Sale(): JSX.Element {
         },
         /* eslint-disable react/prop-types */
         Cell: ({ cell }) => <Box component="span">{cell.getValue<number>()} AZN</Box>,
+        Footer: () => (
+          <div>
+            Total Amount:
+            <Box color="warning.main">
+              {averageSalary?.toLocaleString?.('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })}
+            </Box>
+          </div>
+        ),
       },
     ],
-    []
+    [averageSalary]
   );
   return (
     <div className={styled.sale}>

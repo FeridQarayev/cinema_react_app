@@ -731,36 +731,36 @@
   cursor: pointer !important;
   pointer-events: all !important;
 }
-// @keyframes LeftTop {
-//   0% {
-//     transform: perspective(600px) translate3d(0px, 0px, 0px);
-//   }
-//   33% {
-//     transform: perspective(600px) translate3d(7.5px, 6px, 0px);
-//   }
-//   66% {
-//     transform: perspective(600px) translate3d(0.5px, 0px, 0px);
-//   }
-//   100% {
-//     transform: perspective(600px) translate3d(-7px, -6px, 0px);
-//   }
-// }
-// @keyframes opsenShowMiddle {
-//   from {
-//     bottom: -100%;
-//   }
-//   to {
-//     bottom: 0px;
-//   }
-// }
-// @keyframes openShowUpRight {
-//   from {
-//     top: -100%;
-//   }
-//   to {
-//     top: -55px;
-//   }
-// }
+@keyframes LeftTop {
+  0% {
+    transform: perspective(600px) translate3d(0px, 0px, 0px);
+  }
+  33% {
+    transform: perspective(600px) translate3d(7.5px, 6px, 0px);
+  }
+  66% {
+    transform: perspective(600px) translate3d(0.5px, 0px, 0px);
+  }
+  100% {
+    transform: perspective(600px) translate3d(-7px, -6px, 0px);
+  }
+}
+@keyframes opsenShowMiddle {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+@keyframes openShowUpRight {
+  from {
+    top: -100%;
+  }
+  to {
+    top: -55px;
+  }
+}
 @media (max-width: 769px) {
   .schedule {
     margin-top: 50px;
